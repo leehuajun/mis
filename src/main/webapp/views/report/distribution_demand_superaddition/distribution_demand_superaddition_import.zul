@@ -1,0 +1,116 @@
+<!-- 经销商追加表导入表 -->
+<window visible="@load(vm.showImportWindow)" width="600px" height="500px" sclass="dialog-window"
+        sizable="false" mode="modal" closable="true" style="background:d9d9d9"
+        onClose="@command('abort',event=event)">
+    <caption label="商家追加表" iconSclass="z-icon-windows"/>
+    <borderlayout hflex="1" vflex="1">
+        <north border="none">
+            <grid oddRowSclass="none" hflex="1" sclass="form-grid">
+                <columns>
+                    <column width="120px"></column>
+                    <column hflex="1"></column>
+                </columns>
+                <rows>
+                    <row>
+                        <button label="选择Excel文件..." hflex="1"
+                                sclass="btn-default"
+                                upload="true,maxsize=51200"
+                                onUpload="@command('doUploadFile',event=event)"/>
+                        <textbox hflex="1" value="@load(vm.uploadFilename)" readonly="true"/>
+                    </row>
+                </rows>
+            </grid>
+        </north>
+        <center sclass="c-center" hflex="1" vflex="1">
+            <vlayout width="100%" vflex="1">
+                <listbox hflex="true" vflex="true" model="@load(vm.importEntities)" mold="paging"
+                         pageSize="10">
+                    <listhead sizable="true">
+                        <listheader width="40px" label="行号" align="center"/>
+                        <listheader width="180px" label="ID" align="center"/>
+                        <listheader width="120px" label="年度" align="center"/>
+                        <listheader width="220px" label="月份" align="center"/>
+                        <listheader width="60px" label="周次" align="center"/>
+                        <listheader width="220px" label="经销商代码" align="center"/>
+                        <listheader width="100px" label="物料号" align="center"/>
+                        <listheader width="100px" label="车型" align="center"/>
+                        <listheader width="228px" label="颜色" align="center"/>
+                        <listheader width="100px" label="类型" align="center"/>
+                        <listheader width="100px" label="物料品种" align="center"/>
+                        <listheader width="80px" label="排放标准" align="center"/>
+                        <listheader width="80px" label="申报数" align="center"/>
+                        <listheader width="80px" label="满足数" align="center"/>
+                        <listheader width="80px" label="售达方" align="center"/>
+                        <listheader width="80px" label="送达方" align="center"/>
+                        <listheader width="80px" label="调整发起方" align="center"/>
+                        <listheader width="80px" label="申报原因" align="center"/>
+                        <listheader width="80px" label="申报备注" align="center"/>
+                        <listheader width="80px" label="平衡原因" align="center"/>
+                        <listheader width="80px" label="平衡备注" align="center"/>
+                        <listheader width="80px" label="是否瞒足" align="center"/>
+                        <listheader width="80px" label="状态" align="center"/>
+                        <listheader width="80px" label="平衡人" align="center"/>
+                        <listheader width="80px" label="平衡时间" align="center"/>
+                        <listheader width="80px" label="拆分后调整" align="center"/>
+                        <listheader width="80px" label="申请时间" align="center"/>
+                    </listhead>
+                    <template name="model">
+                        <listitem style="@load(vm.genStyle(each))">
+                            <listcell label="${forEachStatus.index+1}" sclass="label-index"/>
+                            <listcell label="@load(each.tid)"/>
+                            <listcell label="@load(each.year)"/>
+                            <listcell label="@load(each.month)"/>
+                            <listcell label="@load(each.cycle)"/>
+                            <listcell label="@load(each.distributorCode)"/>
+                            <listcell label="@load(each.vsn)"/>
+                            <listcell label="@load(each.vehicleModel)"/>
+                            <listcell label="@load(each.color)"/>
+                            <listcell label="@load(each.type)"/>
+
+                            <listcell label="@load(each.materialVarieties)"/>
+                            <listcell label="@load(each.emissionStandard)"/>
+
+                            <listcell label="@load(each.declareNumber)"/>
+
+                            <listcell label="@load(each.satisfyNumber)"/>
+
+                            <listcell label="@load(each.soldToParty)"/>
+
+                            <listcell label="@load(each.shipToParty)"/>
+
+                            <listcell label="@load(each.adjustment)"/>
+
+                            <listcell label="@load(each.declareReasons)"/>
+
+                            <listcell label="@load(each.declareNote)"/>
+
+                            <listcell label="@load(each.balanceReason)"/>
+
+                            <listcell label="@load(each.balanceNote)"/>
+
+                            <listcell label="@load(each.whetherSatisfy)"/>
+
+                            <listcell label="@load(each.status)"/>
+
+                            <listcell label="@load(each.balancePeople)"/>
+
+                            <listcell label="@load(each.equilibriumTime)"/>
+
+                            <listcell label="@load(each.splitAdjustment)"/>
+                            <listcell label="@load(each.applicationTime)"/>
+                        </listitem>
+                    </template>
+                </listbox>
+                <hlayout hflex="1">
+                    <div align="center" hflex="1" style="margin:10px">
+                        <button iconSclass="" sclass="btn-default " label="保存"
+                                onClick="@command('importData')"/>
+                        <space width="20px"/>
+                        <button iconSclass="" sclass="btn-danger" label="关闭"
+                                onClick="@command('abort',event=event)"/>
+                    </div>
+                </hlayout>
+            </vlayout>
+        </center>
+    </borderlayout>
+</window>

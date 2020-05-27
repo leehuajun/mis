@@ -1,0 +1,279 @@
+<!-- 客户信息卡 -->
+<borderlayout width="100%" height="100%"
+              viewModel="@id('vm') @init('com.sunjet.mis.vm.report.SolidPinVM')"
+              style="padding:0px;border:0px">
+    <center sclass="c-center">
+        <vlayout width="100%" height="100%" style="padding-bottom:0px">
+            <include src="/views/report/35_report/35_report_impot.zul"/>
+            <groupbox>
+                <grid oddRowSclass="none" sclass="form-grid" hflex="1">
+                    <columns>
+                        <column width="80px"></column>
+                        <column hflex="1"></column>
+                        <column width="80px"></column>
+                        <column hflex="1"></column>
+                        <column width="80px"></column>
+                        <column hflex="1"></column>
+                        <column width="60px"></column>
+                        <column hflex="1"></column>
+
+                    </columns>
+                    <rows>
+                        <row style="border:none;height:30px">
+                            <div hflex="1" align="center">
+                                <label value="车架号"/>
+                            </div>
+
+                            <textbox value="@bind(vm.solidPinEntity.vin)" hflex="1" tabindex="1"
+                                     readonly="@load(vm.isDistributor())"/>
+                            <div hflex="1" align="center">
+                                <label value="经销商名称"/>
+                            </div>
+                            <textbox value="@bind(vm.solidPinEntity.distributorName)" hflex="1" tabindex="1"
+                                     readonly="@load(vm.isDistributor())"/>
+                            <div hflex="1" align="center">
+                                <label value="经销商编号"/>
+                            </div>
+                            <textbox value="@bind(vm.solidPinEntity.distributorCode)" hflex="1" tabindex="1"
+                                     readonly="@load(vm.isDistributor())"/>
+                            <div hflex="1" align="center">
+                                <label value="VSN" hflex="1"/>
+                            </div>
+                            <textbox value="@bind(vm.solidPinEntity.vsn)" hflex="1" tabindex="1"></textbox>
+                        </row>
+                        <row style="border:none;height:30px">
+                            <!--<div hflex="1" align="center">
+                                <label value="客户名称"/>
+                            </div>
+                            <textbox value="@bind(vm.solidPinEntity.customerName)" hflex="1" tabindex="1"
+                                     readonly="@load(vm.isDistributor())"/>-->
+                            <label value="开票日期从"/>
+                            <datebox hflex="1" format="medium" value="@bind(vm.solidPinEntity.startDate)"
+                                     readonly="true"/>
+                            <label value="至"/>
+                            <datebox hflex="1" format="medium" value="@bind(vm.solidPinEntity.endDate)"
+                                     readonly="true"/>
+                        </row>
+                    </rows>
+                </grid>
+            </groupbox>
+            <include src="/views/commons/35list_report_toolbar.zul"/>
+            <listbox hflex="true" vflex="true" oddRowSclass="none"
+                     model="@load(vm.pageResult.rows)" emptyMessage="@load(vm.emptyMessage)">
+                <listhead sizable="true">
+                    <listheader width="40px" label="行号" align="center"/>
+                    <listheader width="200px" label="车架号" align="center"/>
+                    <listheader width="120px" label="经销商编号" align="center"/>
+                    <listheader width="220px" label="经销商简称" align="center"/>
+                    <listheader width="80px" label="客户编号" align="center"/>
+                    <listheader width="100px" label="销售员" align="center"/>
+                    <listheader width="100px" label="客户名称" align="center"/>
+                    <listheader width="100px" label="使用性质" align="center"/>
+                    <listheader width="120px" label="集团车" align="center"/>
+                    <listheader width="50px" label="车牌号" align="center"/>
+                    <listheader width="80px" label="出生年月日" align="center"/>
+                    <listheader width="80px" label="证件类型" align="center"/>
+                    <listheader width="80px" label="证件号" align="center"/>
+                    <listheader width="120px" label="所在省份" align="center"/>
+                    <listheader width="120px" label="所属城市" align="center"/>
+                    <listheader width="120px" label="所属地区" align="center"/>
+                    <listheader width="180px" label="客户性别" align="center"/>
+                    <listheader width="50px" label="行业" align="center"/>
+                    <listheader width="60px" label="职业" align="center"/>
+                    <listheader width="100px" label="文化程度" align="center"/>
+                    <listheader width="150px" label="个人收入水平" align="center"/>
+                    <listheader width="120px" label="家庭月收入水平" align="center"/>
+                    <listheader width="120px" label="是否愿意参加活动" align="center"/>
+                    <listheader width="100px" label="车辆使用场所" align="center"/>
+                    <listheader width="60px" label="车辆用途" align="center"/>
+                    <listheader width="180px" label="联系人" align="center"/>
+                    <listheader width="80px" label="座机" align="center"/>
+                    <listheader width="100px" label="手机" align="center"/>
+                    <listheader width="100px" label="实际地址" align="center"/>
+                    <listheader width="100px" label="邮编" align="center"/>
+                    <listheader width="100px" label="电子邮箱" align="center"/>
+                    <listheader width="100px" label="QQ" align="center"/>
+                    <listheader width="100px" label="微信" align="center"/>
+                    <listheader width="100px" label="身份证地址所在省份" align="center"/>
+                    <listheader width="100px" label="身份证地址所在城市" align="center"/>
+                    <listheader width="100px" label="身份证地址所在县区" align="center"/>
+                    <listheader width="100px" label="身份证地址" align="center"/>
+                    <listheader width="100px" label="物料号" align="center"/>
+                    <listheader width="100px" label="车系" align="center"/>
+                    <listheader width="100px" label="型号" align="center"/>
+                    <listheader width="100px" label="颜色" align="center"/>
+                    <listheader width="100px" label="发动机号" align="center"/>
+                    <listheader width="100px" label="合格证号" align="center"/>
+                    <listheader width="100px" label="制造日期" align="center"/>
+                    <listheader width="100px" label="基地代码" align="center"/>
+                    <listheader width="100px" label="车型代码" align="center"/>
+                    <listheader width="100px" label="建档时间" align="center"/>
+                    <listheader width="100px" label="交车日期" align="center"/>
+                    <listheader width="100px" label="开票日期" align="center"/>
+                    <listheader width="100px" label="统计日期" align="center"/>
+                    <listheader width="100px" label="开票价格" align="center"/>
+                    <listheader width="100px" label="付款方式一次性方式" align="center"/>
+                    <listheader width="100px" label="付款方式分期首付金额" align="center"/>
+                    <listheader width="100px" label="付款方式分期贷款金额" align="center"/>
+                    <listheader width="100px" label="付款方式分期贷款期限" align="center"/>
+                    <listheader width="100px" label="付款方式分期贷款利率" align="center"/>
+                    <listheader width="100px" label="购买类型" align="center"/>
+                    <listheader width="100px" label="增/换购前品牌车型" align="center"/>
+                    <listheader width="100px" label="渠道" align="center"/>
+                    <listheader width="100px" label="信息来源-介绍-姓名" align="center"/>
+                    <listheader width="100px" label="信息来源-介绍-手机" align="center"/>
+                    <listheader width="100px" label="适合拜访的时间地点" align="center"/>
+                    <listheader width="100px" label="用户兴趣" align="center"/>
+                    <listheader width="100px" label="家庭状况" align="center"/>
+                    <listheader width="100px" label="新车保险-交强险" align="center"/>
+                    <listheader width="100px" label="新车保险-商业险" align="center"/>
+                    <listheader width="100px" label="新车保险-承保公司" align="center"/>
+                    <listheader width="100px" label="新车保险-金额" align="center"/>
+                    <listheader width="100px" label="新车保险-其他" align="center"/>
+                    <listheader width="100px" label="顾客自费加装配件-品名1" align="center"/>
+                    <listheader width="100px" label="顾客自费加装配件-品名2" align="center"/>
+                    <listheader width="100px" label="介绍记录-顾客姓名1" align="center"/>
+                    <listheader width="100px" label="介绍记录-顾客姓名2" align="center"/>
+                    <listheader width="100px" label="介绍记录-顾客姓名3" align="center"/>
+                    <listheader width="100px" label="重要事项纪要" align="center"/>
+                    <listheader width="100px" label="最后修改时间" align="center"/>
+                    <listheader width="100px" label="创建方式" align="center"/>
+                    <listheader width="100px" label="提交档案方式" align="center"/>
+                    <listheader width="100px" label="经销商申请修改状态" align="center"/>
+                    <listheader width="100px" label="经销商申请修改人" align="center"/>
+                    <listheader width="100px" label="经销商申请修改时间" align="center"/>
+                    <listheader width="100px" label="申请修改内容" align="center"/>
+                    <listheader width="100px" label="状态" align="center"/>
+                    <listheader width="100px" label="经销商审核人" align="center"/>
+                    <listheader width="100px" label="经销商审核时间" align="center"/>
+                    <listheader width="100px" label="SGMW审核结果(0表示不通过，1表示通过)" align="center"/>
+                    <listheader width="100px" label="审核说明" align="center"/>
+                    <listheader width="100px" label="销售公司审核人" align="center"/>
+                    <listheader width="100px" label="销售公司审核时间" align="center"/>
+                    <listheader width="100px" label="客户类型" align="center"/>
+                    <listheader width="100px" label="厂发线索渠道" align="center"/>
+                    <listheader width="100px" label="厂发线索编号" align="center"/>
+                    <listheader width="100px" label="原厂发线索编号" align="center"/>
+                    <listheader width="100px" label="自建线索流水号" align="center"/>
+                    <listheader width="100px" label="线索数据来源" align="center"/>
+                    <listheader width="100px" label="用于用户数据中心接口的上传状态(1表示已上传，0表示未上传)" align="center"/>
+                    <listheader width="100px" label="用于用户数据中心接口的上传时间" align="center"/>
+                    <listheader width="100px" label="用于用户数据中心接口的上传提示信息" align="center"/>
+                </listhead>
+                <template name="model">
+                    <listitem>
+                        <listcell label="${forEachStatus.index+1}" sclass="label-index"/>
+                        <listcell label="@load(each.vin)"/>
+                        <listcell label="@load(each.distributorCode)"/>
+                        <listcell label="@load(each.distributorName)"/>
+                        <listcell label="@load(each.shopperCode)"/>
+                        <listcell label="@load(each.salesman)"/>
+                        <listcell label="@load(each.shopperName)"/>
+                        <listcell label="@load(each.usageMode)"/>
+                        <listcell label="@load(each.groupCar)"/>
+                        <listcell label="@load(each.licenseNumber)"/>
+                        <listcell label="@load(each.birthdayDate)"/>
+                        <listcell label="@load(each.certificateType)"/>
+                        <listcell label="@load(each.certificateCode)"/>
+                        <listcell label="@load(each.addressProvince)"/>
+                        <listcell label="@load(each.addressCity)"/>
+                        <listcell label="@load(each.addressRegion)"/>
+                        <listcell label="@load(each.yourgender)"/>
+                        <listcell label="@load(each.industry)"/>
+                        <listcell label="@load(each.vocation)"/>
+                        <listcell label="@load(each.culture)"/>
+                        <listcell label="@load(each.personalMonthlyIncome)"/>
+                        <listcell label="@load(each.familyMonthlyIncome)"/>
+                        <listcell label="@load(each.activity)"/>
+                        <listcell label="@load(each.placeOfUse)"/>
+                        <listcell label="@load(each.vehicularApplications)"/>
+                        <listcell label="@load(each.contacts)"/>
+                        <listcell label="@load(each.telephone)"/>
+                        <listcell label="@load(each.phone)"/>
+                        <listcell label="@load(each.actualAddress)"/>
+                        <listcell label="@load(each.postcode)"/>
+                        <listcell label="@load(each.email)"/>
+                        <listcell label="@load(each.qq)"/>
+                        <listcell label="@load(each.wechat)"/>
+                        <listcell label="@load(each.addressIdentityProvince)"/>
+                        <listcell label="@load(each.addressIdentityCity)"/>
+                        <listcell label="@load(each.addressIdentityCounty)"/>
+                        <listcell label="@load(each.addressIdentity)"/>
+                        <listcell label="@load(each.vsn)"/>
+                        <listcell label="@load(each.vehicleSeries)"/>
+                        <listcell label="@load(each.model)"/>
+                        <listcell label="@load(each.color)"/>
+                        <listcell label="@load(each.engineCode)"/>
+                        <listcell label="@load(each.qualifiedCode)"/>
+                        <listcell label="@load(each.manufacturingDate)"/>
+                        <listcell label="@load(each.baseCode)"/>
+                        <listcell label="@load(each.vehicleModel)"/>
+                        <listcell label="@load(each.inputtingTime)"/>
+                        <listcell label="@load(each.transactionVehicleDate)"/>
+                        <listcell label="@load(each.saleDate)"/>
+                        <listcell label="@load(each.statisticalDate)"/>
+                        <listcell>
+                            <decimalbox format=",##0.00" hflex="1" value="@load(each.price)" sclass="inner-editbox"
+                                        readonly="true"/>
+                        </listcell>
+                        <listcell label="@load(each.fullPayment)"/>
+                        <listcell label="@load(each.downPaymentAmount)"/>
+                        <listcell label="@load(each.loanAmount)"/>
+                        <listcell label="@load(each.loanPeriod)"/>
+                        <listcell label="@load(each.loanRate)"/>
+                        <listcell label="@load(each.purchasingTypes)"/>
+                        <listcell label="@load(each.addAnTrade)"/>
+                        <listcell label="@load(each.operations)"/>
+                        <listcell label="@load(each.sponsorsName)"/>
+                        <listcell label="@load(each.sponsorsNamePhone)"/>
+                        <listcell label="@load(each.visitTimeSite)"/>
+                        <listcell label="@load(each.interest)"/>
+                        <listcell label="@load(each.familyStatus)"/>
+                        <listcell label="@load(each.compulsoryInsurance)"/>
+                        <listcell label="@load(each.commercialInsurance)"/>
+                        <listcell label="@load(each.insuranceCarriers)"/>
+                        <listcell label="@load(each.insuranceAmount)"/>
+                        <listcell label="@load(each.insuranceOther)"/>
+                        <listcell label="@load(each.oneAdditionalAssembly)"/>
+                        <listcell label="@load(each.twoAdditionalAssembly)"/>
+                        <listcell label="@load(each.oneCustomer)"/>
+                        <listcell label="@load(each.twoCustomer)"/>
+                        <listcell label="@load(each.threeCustomer)"/>
+                        <listcell label="@load(each.importantNotes)"/>
+                        <listcell label="@load(each.finalModificationTime)"/>
+                        <listcell label="@load(each.creatingMode)"/>
+                        <listcell label="@load(each.fileSubmissionMethod)"/>
+                        <listcell label="@load(each.distributorStatus)"/>
+                        <listcell label="@load(each.distributorReviser)"/>
+                        <listcell label="@load(each.distributorModificationTime)"/>
+                        <listcell label="@load(each.modifyContent)"/>
+                        <listcell label="@load(each.status)"/>
+                        <listcell label="@load(each.distributorAuditor)"/>
+                        <listcell label="@load(each.distributorAuditTime)"/>
+                        <listcell label="@load(each.auditResult)"/>
+                        <listcell label="@load(each.auditSpecification)"/>
+                        <listcell label="@load(each.salesCompanyAuditor)"/>
+                        <listcell label="@load(each.auditTimeSalesCompany)"/>
+                        <listcell label="@load(each.customerType)"/>
+                        <listcell label="@load(each.factoryClueChannel)"/>
+                        <listcell label="@load(each.factoryClueCode)"/>
+                        <listcell label="@load(each.originalFactorySendsClueCode)"/>
+                        <listcell label="@load(each.clueRunningCode)"/>
+                        <listcell label="@load(each.clueDataSources)"/>
+                        <listcell label="@load(each.interfaceStatus)"/>
+                        <listcell label="@load(each.uploadTimeOfInterface)"/>
+                        <listcell label="@load(each.interfacePromptInformation)"/>
+                    </listitem>
+                </template>
+            </listbox>
+            <paging
+                    pageSize="@bind(vm.pageResult.pageSize)"
+                    totalSize="@bind(vm.pageResult.total)"
+                    pageIncrement="1"
+                    detailed="true"
+                    activePage="@bind(vm.pageResult.page)"
+                    onPaging="@command('gotoPageNo',e=event)"
+            />
+        </vlayout>
+    </center>
+</borderlayout>

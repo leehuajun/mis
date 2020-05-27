@@ -1,0 +1,98 @@
+@charset "utf-8";
+//必须设置了这个才能编译有中文的注释
+@import "mixin";
+@import "variables";
+
+
+
+//.ctoolbars {
+//  position: relative;
+//  border: none;
+//  margin-right: 0px;
+//}
+//
+//.ctoolbar {
+//  background-color: transparent;
+//  display: inline-block;
+//  margin: 0px 0px 0px 0px;
+//  padding: 0;
+//}
+
+.inner-button {
+  color: whitesmoke;
+  width: 18px !important;
+  height: 20px !important;
+  padding: 2px 2px !important;
+  font-size: 14px !important;
+  margin-left: 0px !important;
+}
+
+.z-button {
+  position: relative;
+  &[disabled] {
+    &:hover {
+      cursor: not-allowed !important;
+    }
+  }
+}
+
+.z-messagebox-button {
+  width: 120px !important;
+  height: 30px !important;
+  border-radius: 2px;
+  text-shadow: none;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+  color: #fff !important;
+  background: $default !important;
+  border-color: $default;
+  //margin-right: 10px;
+  width: 80%;
+  //padding-right: 10px;
+  margin-right: 5px;
+  margin-top: 10px;
+  box-shadow: 0 1px 1px -1px rgba(0, 0, 0, .2), 0 1px 1px 0 rgba(0, 0, 0, .14), 0 1px 2px 0 rgba(0, 0, 0, .12);
+}
+
+.z-messagebox-button:hover {
+  color: #ffffff !important;
+  background-color: darken($default, 10%) !important;
+  border-color: darken($default, 10%);
+}
+
+.z-messagebox-button:active {
+  color: #ffffff !important;
+  background-color: darken($default, 10%) !important;
+  border-color: darken($default, 10%);
+}
+
+//.z-messagebox .z-div{
+//    padding-right: 20px;
+//}
+
+//.z-messagebox .z-label {
+//    padding-left: 20px;
+//}
+
+.btn-default {
+  @include button-style($btn-default-color, $btn-default-bg, $btn-default-border);
+}
+
+.btn-success {
+  @include button-style($btn-success-color, $btn-success-bg, $btn-success-border);
+}
+
+.btn-danger {
+  @include button-style($btn-danger-color, $btn-danger-bg, $btn-danger-border);
+}
+
+.btn-warn {
+  @include button-style($btn-warn-color, $btn-warn-bg, $btn-warn-border);
+}
+
+.btn-md {
+  @include button-style($btn-md-color, $btn-md-bg, $btn-md-border);
+  //@include button-style($btn-md-color, $btn-md-bg, #fff);
+}

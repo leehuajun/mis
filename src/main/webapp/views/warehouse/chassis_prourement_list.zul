@@ -1,0 +1,88 @@
+<!-- 底盘采购计划-->
+<!--<window xmlns:w="client">-->
+<borderlayout width="100%" height="100%"
+              viewModel="@id('vm') @init('com.sunjet.mis.vm.warehouse.ChassisProurementVM')"
+              style="padding:0px;"
+>
+
+  <center  sclass="c-center">
+    <vlayout width="100%" height="100%" style="padding-bottom:0px">
+      <groupbox>
+        <grid oddRowSclass="none" sclass="form-grid" hflex="1">
+          <columns>
+            <column width="80px"></column>
+            <column hflex="1"></column>
+            <column width="80px"></column>
+            <column hflex="1"></column>
+            <column width="80px"></column>
+            <column hflex="1"></column>
+            <column width="60px"></column>
+            <column hflex="1"></column>
+          </columns>
+          <rows>
+            <row style="border:none;height:30px">
+              <div hflex="1" align="center">
+                <label value="车型" hflex="1"/>
+              </div>
+              <textbox value="@bind(vm.chassisProcurementEntity.vehicleModel)" hflex="1" tabindex="1"
+                       readonly="@load(vm.isDistributor())"/>
+
+              <div hflex="1" align="center">
+                <label value="品种" hflex="1"/>
+              </div>
+              <textbox value="@bind(vm.chassisProcurementEntity.variety)" hflex="1" tabindex="1"
+                       readonly="@load(vm.isDistributor())"/>
+              <div hflex="1" align="center">
+                <label value="批次号" hflex="1"/>
+              </div>
+              <textbox value="@bind(vm.chassisProcurementEntity.batchNumber)" hflex="1" tabindex="1"
+                       readonly="@load(vm.isDistributor())"/>
+            </row>
+          </rows>
+        </grid>
+      </groupbox>
+      <include src="/views/report/chassis_procurement/chassis_procurement_information.zul"/>
+
+      <include src="/views/commons/list_report_toolbar.zul"/>
+        <listbox hflex="true" vflex="true" oddRowSclass="none"
+                 model="@load(vm.pageResult.rows)" emptyMessage="@load(vm.emptyMessage)"
+        >
+        <listhead sizable="true">
+          <!--<listheader width="120px" label="经销商代码(SGMW)" align="center"/>-->
+          <listheader width="40px" label="行号" align="center"/>
+          <listheader width="60px" label="批次" align="center"/>
+          <listheader width="180px" label="车型" align="center"/>
+          <listheader width="100px" label="VSN" align="center"/>
+          <listheader width="40px" label="数量" align="center"/>
+            <listheader width="100px" label="品种" align="center"/>
+          <listheader width="100px" label="销售需求" align="center"/>
+          <listheader width="100px" label="配置" align="center"/>
+          <listheader width="200px" label="特殊要求" align="center"/>
+
+        </listhead>
+        <template name="model">
+          <listitem>
+            <listcell label="${forEachStatus.index+1}" sclass="label-index"/>
+            <listcell label="@load(each.batchNumber)" tooltiptext="@load(each.batchNumber)"/>
+            <listcell label="@load(each.vehicleModel)" tooltiptext="@load(each.vehicleModel)"/>
+            <listcell label="@load(each.vsn)" tooltiptext="@load(each.vsn)"/>
+            <listcell label="@load(each.amount)" tooltiptext="@load(each.amount)"/>
+              <listcell label="@load(each.variety)" tooltiptext="@load(each.variety)"/>
+            <listcell label="@load(each.salesDemand)" tooltiptext="@load(each.salesDemand)"/>
+            <listcell label="@load(each.allocation)" tooltiptext="@load(each.allocation)"/>
+            <listcell label="@load(each.specialRequirements)" tooltiptext="@load(each.specialRequirements)"/>
+
+          </listitem>
+        </template>
+      </listbox>
+      <paging
+              pageSize="@bind(vm.pageResult.pageSize)"
+              totalSize="@bind(vm.pageResult.total)"
+              pageIncrement="1"
+              detailed="true"
+              activePage="@bind(vm.pageResult.page)"
+              onPaging="@command('gotoPageNo',e=event)"
+      />
+    </vlayout>
+  </center>
+</borderlayout>

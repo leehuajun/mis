@@ -1,0 +1,30 @@
+spring:
+  jmx:
+    default-domain: mis
+  datasource:
+#    driver-class-name: com.mysql.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
+#    url: jdbc:mysql://192.168.1.50:3306/mis?useUnicode=true&serverTimezone=GMT%2B8&characterEncoding=UTF-8&useSSL=false
+    url: jdbc:mysql://localhost:3306/mis?useUnicode=true&serverTimezone=UTC&characterEncoding=UTF-8&useSSL=false
+#    url: jdbc:mysql://47.104.80.236:3306/mis?useUnicode=true&serverTimezone=GMT%2B8&characterEncoding=UTF-8&useSSL=false
+#    url: jdbc:mysql://localhost:3306/mis?useUnicode=true&serverTimezone=UTC&characterEncoding=UTF-8&useSSL=false
+#    url: jdbc:mysql://47.104.80.236:3306/mis?useUnicode=true&serverTimezone=GMT%2B8&characterEncoding=UTF-8&useSSL=false
+#    url: jdbc:mysql://localhost:3306/mis?useUnicode=true&serverTimezone=UTC&characterEncoding=UTF-8&useSSL=false
+    username: root
+    password: lzw719
+#    password: 123456
+  #    password: 585868588a
+#    password: WLwl50!Sunjet
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    naming:
+      physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect   #不加这句则默认为myisam引擎
+    properties:
+      hibernate:
+        enable_lazy_load_no_trans: true
+#zk:
+#  homepage: index
+#  springboot-packaging: war

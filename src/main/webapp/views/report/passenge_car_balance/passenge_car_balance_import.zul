@@ -1,0 +1,59 @@
+<!-- 客厢车月成品结余导入 -->
+<window visible="@load(vm.showImportWindow)" width="600px" height="500px" sclass="dialog-window"
+        sizable="false" mode="modal" closable="true" style="background:d9d9d9"
+        onClose="@command('abort',event=event)">
+    <!--onClose="self.visible = false;vm.showImportWindow = !vm.showImportWindow;event.stopPropagation();">-->
+    <caption label="客厢车月成品结余表" iconSclass="z-icon-windows"/>
+    <borderlayout hflex="1" vflex="1">
+        <north border="none">
+            <grid oddRowSclass="none" hflex="1" sclass="form-grid">
+                <columns>
+                    <column width="120px"></column>
+                    <column hflex="1"></column>
+                </columns>
+                <rows>
+                    <row>
+                        <button label="选择Excel文件..." hflex="1"
+                                sclass="btn-default"
+                                upload="true,maxsize=51200"
+                                onUpload="@command('doUploadFile',event=event)"/>
+                        <textbox hflex="1" value="@load(vm.uploadFilename)" readonly="true"/>
+                    </row>
+                </rows>
+            </grid>
+        </north>
+        <center sclass="c-center" hflex="1" vflex="1">
+            <vlayout width="100%" vflex="1">
+                <listbox hflex="true" vflex="true" model="@load(vm.importEntities)" mold="paging"
+                         pageSize="10">
+                    <listhead sizable="true">
+                        <listheader width="40px" label="行号" align="center"/>
+                        <listheader width="120px" label="时间" align="center"/>
+
+                        <listheader width="100px" label="非ABS-VSN" align="center"/>
+                        <listheader width="100px" label="ABS-VSN" align="center"/>
+                        <listheader width="228px" label="月底成品结余" align="center"/>
+                    </listhead>
+                    <template name="model">
+                        <listitem style="@load(vm.genStyle(each))">
+                            <listcell label="${forEachStatus.index+1}" sclass="label-index"/>
+                            <listcell label="@load(each.dateYearMonth)"/>
+                            <listcell label="@load(each.noabsvsn)"/>
+                            <listcell label="@load(each.absvsn)"/>
+                            <listcell label="@load(each.finishedBalance)"/>
+                        </listitem>
+                    </template>
+                </listbox>
+                <hlayout hflex="1">
+                    <div align="center" hflex="1" style="margin:10px">
+                        <button iconSclass="" sclass="btn-default " label="保存"
+                                onClick="@command('importData')"/>
+                        <space width="20px"/>
+                        <button iconSclass="" sclass="btn-danger" label="关闭"
+                                onClick="@command('abort',event=event)"/>
+                    </div>
+                </hlayout>
+            </vlayout>
+        </center>
+    </borderlayout>
+</window>

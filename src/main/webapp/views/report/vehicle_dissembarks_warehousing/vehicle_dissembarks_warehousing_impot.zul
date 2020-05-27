@@ -1,0 +1,74 @@
+    <!--&lt;!&ndash;车辆下线入库 生产入库数&ndash;&gt;-->
+<!--<window visible="@load(vm.showImportWindow)" width="600px" height="500px" sclass="dialog-window"-->
+        <!--sizable="false" mode="modal" closable="true" style="background:d9d9d9"-->
+        <!--onClose="@command('abort',event=event)">-->
+    <!--&lt;!&ndash;onClose="self.visible = false;vm.showImportWindow = !vm.showImportWindow;event.stopPropagation();">&ndash;&gt;-->
+    <!--<caption label="生产入库数" iconSclass="z-icon-windows"/>-->
+    <!--<borderlayout hflex="1" vflex="1">-->
+        <!--<north border="none">-->
+            <!--<grid oddRowSclass="none" hflex="1" sclass="form-grid">-->
+                <!--<columns>-->
+                    <!--<column width="120px"></column>-->
+                    <!--<column hflex="1"></column>-->
+                <!--</columns>-->
+                <!--<rows>-->
+                    <!--<row>-->
+                        <!--<button label="选择Excel文件..." hflex="1"-->
+                                <!--sclass="btn-default"-->
+                                <!--upload="true,maxsize=51200"-->
+                                <!--onUpload="@command('doUploadFile',event=event)"/>-->
+                        <!--<textbox hflex="1" value="@load(vm.uploadFilename)" readonly="true"/>-->
+                    <!--</row>-->
+                <!--</rows>-->
+            <!--</grid>-->
+        <!--</north>-->
+        <!--<center sclass="c-center" hflex="1" vflex="1">-->
+            <!--<vlayout width="100%" vflex="1">-->
+                <!--<listbox hflex="true" vflex="true" model="@load(vm.importEntities)" mold="paging"-->
+                         <!--pageSize="10">-->
+                    <!--<listhead sizable="true">-->
+                        <!--<listheader width="40px" label="行号" align="center"/>-->
+                        <!--<listheader width="180px" label="VSN" align="center"/>-->
+                        <!--<listheader width="120px" label="VIN"  align="center"/>-->
+                        <!--<listheader width="220px" label="库存状态" align="center"/>-->
+                        <!--<listheader width="60px" label="仓库区域" align="center"/>-->
+                        <!--<listheader width="220px" label="产品型号" align="center"/>-->
+                        <!--<listheader width="100px" label="产品名称" align="center"/>-->
+                        <!--<listheader width="100px" label="产品颜色" align="center"/>-->
+                        <!--<listheader width="228px" label="订单号" align="center"/>-->
+                        <!--<listheader width="100px" label="库位" align="center"/>-->
+                        <!--<listheader width="80px" label="车辆编号" align="center"/>-->
+                        <!--<listheader width="80px" label="入库日期" align="center"/>-->
+                        <!--<listheader width="80px" label="备注" align="center"/>-->
+                    <!--</listhead>-->
+                    <!--<template name="model">-->
+                        <!--<listitem style="@load(vm.genStyle(each))">-->
+                            <!--<listcell label="${forEachStatus.index+1}" sclass="label-index"/>-->
+                            <!--<listcell label="@load(each.vsn)"/>-->
+                            <!--<listcell label="@load(each.vin)"/>-->
+                            <!--<listcell label="@load(each.stockStatus)"/>-->
+                            <!--<listcell label="@load(each.warehouseArea)"/>-->
+                            <!--<listcell label="@load(each.vehicleModel)"/>-->
+                            <!--<listcell label="@load(each.vehicleName)"/>-->
+                            <!--<listcell label="@load(each.color)"/>-->
+                            <!--<listcell label="@load(each.orderId)"/>-->
+                            <!--<listcell label="@load(each.location)"/>-->
+                          <!--<listcell label="@load(each.vehicleNumber)"/>-->
+                            <!--<listcell label="@load(each.inboundDate)"/>-->
+                            <!--<listcell label="@load(each.note)"/>-->
+                        <!--</listitem>-->
+                    <!--</template>-->
+                <!--</listbox>-->
+                <!--<hlayout hflex="1">-->
+                    <!--<div align="center" hflex="1" style="margin:10px">-->
+                        <!--<button iconSclass="" sclass="btn-default " label="保存"-->
+                                <!--onClick="@command('importData')"/>-->
+                        <!--<space width="20px"/>-->
+                        <!--<button iconSclass="" sclass="btn-danger" label="关闭"-->
+                                <!--onClick="@command('abort',event=event)"/>-->
+                    <!--</div>-->
+                <!--</hlayout>-->
+            <!--</vlayout>-->
+        <!--</center>-->
+    <!--</borderlayout>-->
+<!--</window>-->

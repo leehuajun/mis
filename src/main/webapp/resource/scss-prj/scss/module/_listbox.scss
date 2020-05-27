@@ -1,0 +1,258 @@
+@charset "utf-8";
+//必须设置了这个才能编译有中文的注释
+@import "variables";
+
+.z-select {
+  font-family: Arial, Sans-serif;
+  font-size: 12px;
+  border-color: #e6e6e6;
+  background: #fafafa;
+  min-height: 24px;
+  height: 24px;
+}
+
+.z-listbox {
+  border-bottom: 1px solid rgb(207,207,207);
+  //border: 1px solid #ececec;
+  .z-listbox-header {
+    background: $default !important;
+
+    .z-auxhead {
+      min-height: 24px;
+      height: 24px;
+
+      .z-auxheader {
+        min-height: 24px;
+        height: 24px;
+
+        .z-auxheader-content {
+          font-weight: bold;
+          font-style: normal;
+          padding: 0px 2px;
+          line-height: 24px;
+          background: $default !important;
+          color: white;
+          font-weight: bold;
+          text-align: center;
+        }
+      }
+
+    }
+
+    .z-listhead {
+      .z-listheader {
+        .z-listheader-content {
+          position: relative;
+          line-height: 24px;
+          font-size: 12px;
+          //color: #333;
+          color: $font-reversed-color;
+          //background-color: lightgrey;
+          background-color: $default;
+          padding: 0 4px 0 4px;;
+          overflow: hidden;
+
+          .z-listheader-sorticon {
+            color: #FFFFFF;
+            font-weight: bold;
+            position: absolute;
+            top: -10px;
+            left: 50%;
+          }
+        }
+      }
+
+      .z-listhead-bar {
+        position: relative;
+        line-height: 24px;
+        //font-size: 12px;
+        //color: #333;
+        color: $font-reversed-color;
+        //background-color: lightgrey;
+        background-color: $default;
+        padding: 0 4px 0 4px;;
+        overflow: hidden;
+      }
+    }
+  }
+
+  .z-listbox-header-border {
+
+  }
+
+  .z-listbox-body {
+    background: whitesmoke;
+
+    .z-listitem {
+      background: whitesmoke;
+      border-bottom: 1px solid darken($border-color, 5%);
+      line-height: 26px !important;
+      height: 26px !important;
+      .z-listcell {
+        font-size: 10px;
+        //padding: 0 4px 0 4px;
+        //color: #333;
+        line-height: 26px !important;
+        height: 26px !important;
+        overflow: hidden;
+        padding: 0px 2px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        .z-listcell-content{
+          line-height: 26px !important;
+          height: 26px !important;
+          padding: 0px;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+        }
+      }
+      &:hover
+      .z-listcell {
+        @include transition(all 0.3s ease);
+        background: lighten($default, 5%);
+
+        .z-listcell-content {
+          color: whitesmoke !important;
+
+        }
+        & .z-menu-content {
+          padding-right: 10px;
+          color: $default;
+
+          @include transition(all 0.3s ease);
+          color: $font-reversed-color !important;
+          background: lighten($default, 5%) !important;
+
+
+          & .z-menu-icon {
+            @include transition(all 0.3s ease);
+            color: $font-reversed-color !important;
+          }
+          & .inner-editbox {
+            @include transition(all 0.3s ease);
+            color: $font-reversed-color !important;
+          }
+        }
+      }
+
+
+    }
+
+    .z-listitem-selected {
+      .z-listcell {
+        background: lighten($default, 3%) !important;
+        .z-listcell-content {
+          color: whitesmoke !important;
+        }
+        & .z-menu-content {
+          padding-right: 10px;
+          color: $default;
+
+          @include transition(all 0.3s ease);
+          color: $font-reversed-color !important;
+          background: lighten($default, 3%) !important;
+
+
+          & .z-menu-icon {
+            @include transition(all 0.3s ease);
+            color: $font-reversed-color !important;
+          }
+        }
+      }
+    }
+  }
+}
+
+//.z-listcell-content, .z-listgroup-content, .z-listgroupfoot-content, .z-listfooter-content {
+//  font-size: 10px;
+//  //padding: 0 4px 0 4px;
+//  color: #333;
+//  line-height: 24px !important;
+//  overflow: hidden;
+//  padding: 0px 2px;
+//  white-space: nowrap;
+//  text-overflow: ellipsis;
+//
+//
+//}
+
+.label-index {
+  .z-listcell-content, .z-listgroup-content, .z-listgroupfoot-content, .z-listfooter-content {
+    color: $default;
+    font-weight: bold;
+  }
+}
+
+.label-distinct {
+  .z-listcell-content, .z-listgroup-content, .z-listgroupfoot-content, .z-listfooter-content {
+    color: $default;
+    font-weight: bold;
+  }
+}
+
+.z-listheader-checkable, .z-listitem-checkable {
+  @include border-radius(4px);
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border: 1px solid #777;
+  background: #eee;
+  vertical-align: middle;
+}
+
+.z-listbox-odd.z-listitem {
+  //background: transparent none;
+  background: whitesmoke;
+}
+
+//.z-listitem {
+//  //background: transparent none;
+//  background: whitesmoke;
+//  border-bottom: 1px solid darken($border-color, 5%);
+//  height: 26px !important;
+//
+//  &:hover
+//  .z-listcell {
+//    @include transition(all 0.3s ease);
+//    background: lighten($default, 5%);
+//
+//    .z-listcell-content {
+//      color: whitesmoke !important;
+//    }
+//  }
+//}
+
+//.z-listitem-selected {
+//  .z-listcell {
+//    background: lighten($default,3%) !important;
+//    .z-listcell-content {
+//      color: whitesmoke !important;
+//    }
+//  }
+//}
+//.z-auxheader-content {
+//  /* font-size: 20px; */
+//  background: $default !important;
+//  color: white;
+//  font-weight: bold;
+//  text-align: center;
+//}
+//.c-listitem .c-listcell {
+//  background: whitesmoke !important;
+//  color: #080808 !important;
+//}
+
+
+.z-listbox-emptybody td {
+  text-align: left;
+}
+
+.z-grid-emptybody td {
+  text-align: left;
+}
+
+
+
+
+
+

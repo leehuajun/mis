@@ -1,0 +1,123 @@
+@charset "utf-8";
+//必须设置了这个才能编译有中文的注释
+
+@import "variables";
+
+.z-tabbox {
+  border: 0px solid $border-color;
+  @include border-radius(0px);
+  .z-tabpanel {
+    border: none;
+    //border-left: 1px solid $base_border_color;
+    overflow-y: scroll;
+    padding: 10px;
+    //padding-top: 10px;
+    //padding-left: 10px;
+    //padding-right: 10px;
+    //padding-bottom: 0px;
+    //padding: 0px;
+    margin: 0px 0px;
+    //
+    background-color: $tab-background-color;
+  }
+  .z-tabs {
+    border-bottom: 2px solid $default;
+    background-color: $tabs-background-color;
+    min-height: 32px;
+    height: 32px;
+    //&:first-child{
+    //  border-left: 1px solid $tabs-background-color;
+    //}
+    .z-tab {
+      border: none;
+      background-color: $tab-background-color;
+      //border-right: 1px solid #FFFFFF;
+      border-right: 1px solid $border-color;
+      padding: 1px 5px;
+      box-shadow:none;
+      @include border-radius(0px);
+
+      .z-tab-text {
+        //color: rgba(0,0,0,0.57);
+        //&:hover{
+        //  color: rgba(0,0,0,0.57);
+        //}
+        padding: 2px 8px 2px;
+        font-weight: bold;
+      }
+      .z-tab-button {
+        .z-tab-icon {
+          top: 45%;
+          width: 15px;
+          height: 15px;
+          //color: $default;
+          line-height: 15px;
+          @include border-radius(50%);
+          &:hover {
+            @include transition(all 0.3s ease);
+            background-color: $default;
+            color: $font-reversed-color;
+          }
+        }
+      }
+      &:first-child.z-tab-selected{
+        box-shadow: none;
+      }
+    }
+    .z-tab-selected {
+      background-color: #FFFFFF !important;
+      border-bottom: 2px solid $default;
+      box-shadow:none;
+      .z-tab-text {
+        color: $default;
+        &:hover {
+          @include transition(all 0.3s ease);
+          color: darken($default, 10%);
+        }
+      }
+      .z-tab-button {
+        .z-tab-icon {
+          //top: 40%;
+          //width: 15px;
+          //height: 15px;
+          color: $default;
+          //line-height: 15px;
+          //@include border-radius(50%);
+          &:hover {
+            @include transition(all 0.3s ease);
+            background-color: $default;
+            color: $font-reversed-color;
+          }
+        }
+      }
+    }
+  }
+
+  .z-toolbar.z-toolbar-tabs {
+    border-bottom: 2px solid $default;
+    //border-right: 5px solid $base_border_color;
+    background-color: $tabs-background-color !important;
+    min-height: 32px;
+    height: 32px;
+    padding: 0px 0px;
+    //background-color: rgb(245, 245, 245);
+  }
+
+  .z-tabbox-left-scroll {
+    min-height: 32px;
+    height: 32px;
+    border-bottom: 2px solid $default;
+    border-right: 1px solid $border-color;
+    @include border-radius(0px);
+    //background-color: $default;
+  }
+
+  .z-tabbox-right-scroll {
+    min-height: 32px;
+    height: 32px;
+    border-bottom: 2px solid $default;
+    border-left: 1px solid $border-color;
+    //background-color: $default;
+    @include border-radius(0px);
+  }
+}

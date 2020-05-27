@@ -1,0 +1,10 @@
+<menubar sclass="list-menubar">
+    <menu label="操作">
+        <menupopup>
+
+            <menuitem style="text-align:left" iconSclass="z-icon-times" label="删除"
+                      onClick="@command('confirmDeleteObject02',id=each.id)"
+                      if="${vm.permissionStatus.canDelete}"/>
+        </menupopup>
+    </menu>
+</menubar>

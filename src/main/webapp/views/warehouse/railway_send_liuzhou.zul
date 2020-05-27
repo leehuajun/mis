@@ -1,0 +1,90 @@
+<!-- 用户列表 -->
+<!--<window xmlns:w="client">-->
+<borderlayout width="100%" height="100%"
+              viewModel="@id('vm') @init('com.sunjet.mis.vm.warehouse.RailwaySendLIUZHOUVM')"
+              style="padding:0px;"
+>
+  <center  sclass="c-center">
+    <vlayout width="100%" height="100%" style="padding-bottom:0px">
+
+      <groupbox>
+        <grid oddRowSclass="none" sclass="form-grid" hflex="1">
+          <columns>
+            <column width="80px"></column>
+            <column hflex="1"></column>
+            <column width="80px"></column>
+            <column hflex="1"></column>
+            <column width="80px"></column>
+            <column hflex="1"></column>
+            <column width="60px"></column>
+            <column hflex="1"></column>
+          </columns>
+          <rows>
+            <row style="border:none;height:30px">
+              <div hflex="1" align="center">
+                <label value="VIN" hflex="1"/>
+              </div>
+              <textbox value="@bind(vm.railwaySendLIUZHOUEntity.vin)" hflex="1" tabindex="1"
+                       readonly="@load(vm.isDistributor())"/>
+
+              <div hflex="1" align="center">
+                <label value="品种" hflex="1"/>
+              </div>
+              <textbox value="@bind(vm.railwaySendLIUZHOUEntity.variety)" hflex="1" tabindex="1"
+                       readonly="@load(vm.isDistributor())"/>
+              <div hflex="1" align="center">
+                <label value="批次号" hflex="1"/>
+              </div>
+              <textbox value="@bind(vm.railwaySendLIUZHOUEntity.sharesProduceNumber)" hflex="1" tabindex="1"
+                       readonly="@load(vm.isDistributor())"/>
+            </row>
+          </rows>
+        </grid>
+      </groupbox>
+
+      <include src="/views/report/railway_send_liuzhou/railway_send_liuzhou_information.zul"/>
+      <include src="/views/commons/list_report_toolbar.zul"/>
+        <listbox hflex="true" vflex="true" oddRowSclass="none"
+                 model="@load(vm.pageResult.rows)" emptyMessage="@load(vm.emptyMessage)"
+        >
+        <listhead sizable="true">
+          <listheader width="40px" label="行号" align="center"/>
+          <listheader width="60px" label="经销商代码" align="center"/>
+          <listheader width="100px" label="VIN" align="center"/>
+          <listheader width="100px" label="VSN" align="center"/>
+          <listheader width="120px" label="发动机号" align="center"/>
+          <listheader width="50px" label="订单号" align="center"/>
+          <listheader width="80px" label="订单日期" align="center"/>
+          <listheader width="80px" label="出库日期" align="center"/>
+          <listheader width="80px" label="品种" align="center"/>
+          <listheader width="80px" label="生产批次" align="center"/>
+          <listheader width="80px" label="状态" align="center"/>
+        </listhead>
+        <template name="model">
+          <listitem>
+            <listcell label="${forEachStatus.index+1}" sclass="label-index"/>
+            <listcell label="@load(each.dealersCode)" tooltiptext="@load(each.dealersCode)"/>
+            <listcell label="@load(each.vin)" tooltiptext="@load(each.vin)"/>
+            <listcell label="@load(each.vsn)" tooltiptext="@load(each.vsn)"/>
+            <listcell label="@load(each.engineCode)" tooltiptext="@load(each.engineCode)"/>
+            <listcell label="@load(each.orderNumber)" tooltiptext="@load(each.orderNumber)"/>
+            <listcell label="@load(each.orderDate)" tooltiptext="@load(each.orderDate)"/>
+            <listcell label="@load(each.outboundDate)" tooltiptext="@load(each.outboundDate)"/>
+            <listcell label="@load(each.variety)" tooltiptext="@load(each.variety)"/>
+            <listcell label="@load(each.sharesProduceNumber)" tooltiptext="@load(each.sharesProduceNumber)"/>
+            <listcell label="@load(each.state)" tooltiptext="@load(each.state)"/>
+
+          </listitem>
+        </template>
+      </listbox>
+      <paging
+              pageSize="@bind(vm.pageResult.pageSize)"
+              totalSize="@bind(vm.pageResult.total)"
+              pageIncrement="1"
+              detailed="true"
+              activePage="@bind(vm.pageResult.page)"
+              onPaging="@command('gotoPageNo',e=event)"
+      />
+    </vlayout>
+  </center>
+</borderlayout>

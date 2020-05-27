@@ -1,0 +1,30 @@
+<div sclass="ctoolbars">
+  <div sclass="ctoolbar-left">
+    <hbox>
+      <button label="新增" sclass="btn-default" if="${vm.permissionStatus.canCreate}"
+              onClick="@command('openForm',id=null,url=null,title=null,readonly=false)"/>
+      <!--<button label="查询" sclass="btn-success" onClick="@command('showSearchWindow')"/>-->
+      <button label="刷新" sclass="btn-success" onClick="@command('refreshList')"/>
+      <button label="导入青岛底盘入库" sclass="btn-danger" onClick="@command('showImportWindow')"  if="${vm.permissionStatus.canImport}"/>
+      <button label="导入重庆入库" sclass="btn-danger" onClick="@command('showImportWindow')"  if="${vm.permissionStatus.canImport}"/>
+      <button label="导入柳州底盘入库" sclass="btn-danger" onClick="@command('showImportWindow')"  if="${vm.permissionStatus.canImport}"/>
+      <button label="下载模板" sclass="btn-success" onClick="@command('downloadTemplate')"
+              if="${vm.permissionStatus.canImport}"/>
+      <menubar width="100%" sclass="toolbar-menubar" if="${vm.permissionStatus.canExport}">
+        <menu label="导出">
+          <menupopup>
+            <menuitem iconSclass="z-icon-bolt" label="导出当前页"
+                      onClick="@command('export',type ='current')"/>
+            <menuitem iconSclass="z-icon-ban" label="导出所有" onClick="@command('export',type='all')"/>
+          </menupopup>
+        </menu>
+      </menubar>
+    </hbox>
+  </div>
+  <div sclass="ctoolbar-right">
+    <hbox>
+      <button label="重置" sclass="btn-default" onClick="@command('reset')"/>
+      <button label="查询" sclass="btn-default" onClick="@command('simpleSearch')"/>
+    </hbox>
+  </div>
+</div>

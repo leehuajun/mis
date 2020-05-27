@@ -1,0 +1,120 @@
+<!-- 用户项编辑页面 -->
+<window visible="@load(vm.showForm)" width="500px" height="500px" sclass="dialog-window"
+        sizable="false" mode="modal" closable="true" onClose="@command('abort',event=event)">
+  <!--onClose="self.visible = false;vm.showImportWindow = !vm.showImportWindow;event.stopPropagation();">-->
+  <caption label="编辑用户" iconSclass="z-icon-windows"/>
+  <borderlayout width="100%" height="100%">
+    <center sclass="form-center">
+      <vlayout hflex="1">
+        <grid oddRowSclass="none" hflex="1" sclass="form-grid" style="margin-right:20px">
+          <columns>
+            <column width="80px"></column>
+            <column hflex="1"></column>
+            <column width="80px"></column>
+            <column hflex="1"></column>
+          </columns>
+          <rows>
+            <row style="border:none;height:40px">
+              <label value="姓名" style="text-align:left;align:center;pack:left"/>
+              <textbox value="@bind(vm.selectedUser.name)"
+                       hflex="1" tabindex="2" readonly="@load(vm.readonly)"
+                       style="align:center;pack:left"
+                       placeholder="姓名不少于2个字"/>
+              <label value="登录名" style="text-align:left;align:center;pack:left"/>
+              <textbox value="@bind(vm.selectedUser.logId)"
+                       hflex="1" tabindex="3" readonly="@load(vm.readonly)"
+                       style="align:center;pack:left"
+                       placeholder="登录名不少于四个字"/>
+
+            </row>
+            <row style="border:none;height:40px">
+              <!--用户类型-->
+              <label value="用户类型" style="text-align:left;align:center;pack:left"/>
+              <listbox mold="select" hflex="1" tabindex="6"
+                       selectedItem="@bind(vm.selectedUser.userType)"
+                       onSelect="@command('checkUserType')">
+                <listitem label="内部用户" value="0"></listitem>
+                <listitem label="经销商" value="1"></listitem>
+              </listbox>
+
+            </row>
+            <row style="border:none;height:40px" visible="@load(!vm.readonly)">
+              <label value="密码" style="text-align:left;align:center;pack:left"/>
+              <textbox value="@bind(vm.selectedUser.password)"
+                       type="password"
+                       hflex="1" tabindex="4" style="align:center;pack:left"/>
+              <label value="密码确认" style="text-align:left;align:center;pack:left"/>
+              <textbox value="@bind(vm.passwordConfirm)" type="password"
+                       hflex="1" tabindex="5" style="align:center;pack:left"/>
+
+            </row>
+            <row style="border:none;height:40px" visible="@load(!vm.readonly)">
+              <cell colspan="4">
+                <label style="font-size:9px; color:red;"
+                       value="长度6-16位,应包含字母大、小写、数字或特殊字符（_!@#%）"></label>
+              </cell>
+            </row>
+            <row style="border:none;height:40px">
+              <label value="电话" style="text-align:left;align:center;pack:left"/>
+              <textbox value="@bind(vm.selectedUser.phone)"
+                       hflex="1" maxlength="15" tabindex="5" readonly="@load(vm.readonly)"
+                       style="align:center;pack:left"/>
+              <label value="E-mail" style="text-align:left;align:center;pack:left"/>
+              <textbox value="@bind(vm.selectedUser.email)"
+                       hflex="1" maxlength="35" tabindex="5" readonly="@load(vm.readonly)"
+                       style="align:center;pack:left"/>
+            </row>
+
+            <row style="border:none;height:40px">
+              <label value="状态:" style="text-align:left;align:center;pack:left"/>
+              <vlayout>
+                <checkbox label="启用" checked="@bind(vm.selectedUser.enabled)"
+                          disabled="@load(vm.readonly)"
+                          tabindex="9"/>
+              </vlayout>
+            </row>
+          </rows>
+        </grid>
+        <hlayout hflex="1" height="200px" style="background:#fff;padding:10px;">
+          <listbox vflex="1" hflex="1" disabled="@load(vm.readonly)"
+                   model="@load(vm.orgs)"
+                   selectedItems="@bind(vm.selectedUser.orgs)"
+                   checkmark="@load(!vm.readonly)"
+                   multiple="true">
+            <listhead>
+              <listheader label="组织"></listheader>
+            </listhead>
+            <template name="model">
+              <listitem label="@load(each.name)" value="@load(each)" checkable="@load(!vm.readonly)">
+                <listcell label="@load(each.name)"/>
+              </listitem>
+            </template>
+          </listbox>
+          <listbox vflex="1" hflex="1" disabled="@load(vm.readonly)"
+                   model="@load(vm.roles)"
+                   selectedItems="@bind(vm.selectedUser.roles)"
+                   checkmark="@load(!vm.readonly)"
+                   multiple="true">
+            <listhead>
+              <listheader label="角色"></listheader>
+            </listhead>
+            <template name="model">
+              <listitem label="@load(each.name)" value="@load(each)" checkable="@load(!vm.readonly)">
+                <listcell label="@load(each.name)"/>
+              </listitem>
+            </template>
+          </listbox>
+        </hlayout>
+        <hlayout hflex="1" height="60px">
+          <div align="center" hflex="1" style="margin:10px">
+            <button iconSclass="" sclass="btn-default " tabindex="5" label="保存" disabled="@load(vm.readonly)"
+                    onClick="@command('submit')"/>
+            <space width="20px"/>
+            <button iconSclass="" sclass="btn-danger" label="关闭" tabindex="6"
+                    onClick="@command('abort',event=event)"/>
+          </div>
+        </hlayout>
+      </vlayout>
+    </center>
+  </borderlayout>
+</window>

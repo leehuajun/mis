@@ -1,0 +1,103 @@
+<!-- 底盘库 -->
+<!--<window xmlns:w="client">-->
+<borderlayout width="100%" height="100%"
+              viewModel="@id('vm') @init('com.sunjet.mis.vm.warehouse.ChassisInventoryListVM')"
+              style="padding:0px;"
+>
+  <center  sclass="c-center">
+    <vlayout width="100%" height="100%" style="padding-bottom:0px">
+      <include src="/views/report/chassis_inventory/qingdao_Inventory_information.zul"/>
+      <groupbox>
+        <grid oddRowSclass="none" sclass="form-grid" hflex="1">
+          <columns>
+            <column width="80px"></column>
+            <column hflex="1"></column>
+            <column width="80px"></column>
+            <column hflex="1"></column>
+            <column width="80px"></column>
+            <column hflex="1"></column>
+            <column width="60px"></column>
+            <column hflex="1"></column>
+            <column width="30px"></column>
+            <column width="50px"></column>
+            <column width="30px"></column>
+            <column width="40px"></column>
+          </columns>
+          <rows>
+            <row style="border:none;height:30px">
+
+              <div hflex="1" align="center">
+                <label value="VSN" hflex="1"/>
+              </div>
+              <textbox value="@bind(vm.chassisInventoryEntity.vsn)" hflex="1" tabindex="1"
+                       readonly="@load(vm.isDistributor())"/>
+              <div hflex="1" align="center">
+                <label value="VIN" hflex="1"/>
+              </div>
+              <textbox value="@bind(vm.chassisInventoryEntity.vin)" hflex="1" tabindex="1"
+                       readonly="@load(vm.isDistributor())"/>
+
+              <div hflex="1" align="center">
+                <label value="生产批次" hflex="1"/>
+              </div>
+              <textbox value="@bind(vm.chassisInventoryEntity.batchNumber)" hflex="1" tabindex="1"
+                       readonly="@load(vm.isDistributor())"/>
+              <div hflex="1" align="center">
+                <label value="车型代码" hflex="1"/>
+              </div>
+              <textbox value="@bind(vm.chassisInventoryEntity.vehicleModel)" hflex="1" tabindex="1"
+                       readonly="@load(vm.isDistributor())"/>
+
+            </row>
+          </rows>
+        </grid>
+      </groupbox>
+      <include src="/views/commons/chassis_inventory_toolbar.zul"/>
+        <listbox hflex="true" vflex="true" oddRowSclass="none"
+                 model="@load(vm.pageResult.rows)" emptyMessage="@load(vm.emptyMessage)"
+        >
+        <listhead sizable="true">
+          <!--<listheader width="120px" label="经销商代码(SGMW)" align="center"/>-->
+          <listheader width="40px" label="行号" align="center"/>
+          <listheader width="150px" label="订单号" align="center"/>
+          <listheader width="150px" label="VIN" align="center"/>
+          <listheader width="100px" label="VSN" align="center"/>
+          <listheader width="120px" label="发动机号" align="center"/>
+          <listheader width="150px" label="发运日期" align="center"/>
+          <listheader width="180px" label="生产批次" align="center"/>
+          <listheader width="80px" label="颜色" align="center"/>
+          <listheader width="80px" label="合格证号" align="center"/>
+          <listheader width="80px" label="基地代码" align="center"/>
+          <listheader width="80px" label="制造日期" align="center"/>
+          <listheader width="120px" label="车型代码" align="center"/>
+          <listheader width="80px" label="数据来源" align="center"/>
+        </listhead>
+        <template name="model">
+          <listitem>
+            <listcell label="${forEachStatus.index+1}" sclass="label-index"/>
+            <listcell label="@load(each.orderId)" tooltiptext="@load(each.orderId)"/>
+            <listcell label="@load(each.vin)" tooltiptext="@load(each.vin)"/>
+            <listcell label="@load(each.vsn)" tooltiptext="@load(each.vsn)"/>
+            <listcell label="@load(each.engineCode)" tooltiptext="@load(each.engineCode)"/>
+            <listcell label="@load(each.shipmentData)" tooltiptext="@load(each.shipmentData)"/>
+            <listcell label="@load(each.batchNumber)" tooltiptext="@load(each.batchNumber)"/>
+            <listcell label="@load(each.color)" tooltiptext="@load(each.color)"/>
+            <listcell label="@load(each.qualifiedCertificate)" tooltiptext="@load(each.qualifiedCertificate)"/>
+            <listcell label="@load(each.baseCode)" tooltiptext="@load(each.baseCode)"/>
+            <listcell label="@load(each.makeData)" tooltiptext="@load(each.makeData)"/>
+            <listcell label="@load(each.vehicleModel)" tooltiptext="@load(each.vehicleModel)"/>
+            <listcell label="@load(each.dataSource)" tooltiptext="@load(each.dataSource)"/>
+          </listitem>
+        </template>
+      </listbox>
+      <paging
+              pageSize="@bind(vm.pageResult.pageSize)"
+              totalSize="@bind(vm.pageResult.total)"
+              pageIncrement="1"
+              detailed="true"
+              activePage="@bind(vm.pageResult.page)"
+              onPaging="@command('gotoPageNo',e=event)"
+      />
+    </vlayout>
+  </center>
+</borderlayout>

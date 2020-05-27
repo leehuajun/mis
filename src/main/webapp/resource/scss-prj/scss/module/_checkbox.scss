@@ -1,0 +1,20 @@
+@charset "utf-8";
+//必须设置了这个才能编译有中文的注释
+@import "variables";
+
+input[type="checkbox"]:checked {
+  //-webkit-appearance:none;
+  //background-color: $default;
+  background: $default !important;
+  color: #fff;
+}
+input[type="checkbox"]:hover {
+  border: 1px solid $default !important;
+}
+
+input[type="radio"], input[type="checkbox"] {
+  margin: 0 4px !important;
+  width: 16px;
+  height: 16px;
+  //@include border-radius(8px);
+}

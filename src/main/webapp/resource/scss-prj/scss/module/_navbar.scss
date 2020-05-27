@@ -1,0 +1,150 @@
+@charset "utf-8";
+//必须设置了这个才能编译有中文的注释
+@import "variables";
+
+.navbar {
+  background-color: $navbar-background-color;
+  margin: 0px 0px;
+  padding: 0px 0px;
+  border: 0px;
+  //border-bottom: 1px solid darken($navbar-background-color,3%);
+  min-height: 40px;
+  height: 40px !important;
+  @include border-radius(0px);
+  //box-shadow:0 1px 1px 0 rgba(0,0,0,.3);
+  & .navbar-brand {
+    float: left;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 40px;
+    height: 40px !important;
+    padding: 5px 10px;
+    color: $font-reversed-color;
+    width: 300px;
+    text-shadow: 2px 2px 4px #000000;
+  }
+}
+
+.navbar-menubar {
+  padding: 0px;
+  //border: none;
+  @include border-radius(0px);
+
+  & .username-ellipsis {
+    &.z-menu {
+      width: 100px;
+    }
+    & .z-menu-text {
+      max-width: 60px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      vertical-align: middle;
+    }
+  }
+
+  & .z-menuitem {
+    //background-color: transparent;
+    //border: none;
+    > .z-menuitem-content {
+      line-height: 40px;
+      height: 40px;
+      padding: 0px 6px 0px;
+      @include border-radius(0px);
+      background-color: $default !important;
+      & i {
+        color: $font-reversed-color;
+        vertical-align: middle;
+      }
+
+      & .z-menu-text, .z-menuitem-text {
+        text-align: center;
+        color: $font-reversed-color;
+        text-shadow: none;
+      }
+
+      &:hover {
+        //color: rgba(0, 0, 0, 0.57);
+        background: darken($navbar-background-color, 3%) !important;
+        @include transition(all 0.5s ease);
+      }
+
+      &:active {
+        //color: rgba(0, 0, 0, 0.57);
+        background: darken($navbar-background-color, 5%) !important;
+        @include transition(all 0.5s ease);
+      }
+
+      &:focus {
+        //color: rgba(0, 0, 0, 0.57);
+        background: darken($navbar-background-color, 5%) !important;
+        @include transition(all 0.5s ease);
+      }
+
+      &:visited {
+        //color: rgba(0, 0, 0, 0.57);
+        background: $navbar-background-color !important;
+        @include transition(all 0.5s ease);
+      }
+    }
+
+  }
+  & .z-menu {
+    > .z-menu-content {
+      line-height: 40px;
+      height: 40px;
+      padding: 0px 6px 0px;
+      & i {
+        color: $font-reversed-color;
+        vertical-align: middle;
+      }
+
+      & .z-menu-text, .z-menuitem-text {
+        text-align: center;
+        color: $font-reversed-color;
+        text-shadow: none;
+      }
+
+      &:hover {
+        @include transition(all 0.5s ease);
+        background: darken($navbar-background-color, 3%) !important;
+      }
+
+      &:active {
+        @include transition(all 0.5s ease);
+        background: darken($navbar-background-color, 5%) !important;
+      }
+
+      &:focus {
+        @include transition(all 0.5s ease);
+        background: darken($navbar-background-color, 5%) !important;
+      }
+
+      &:visited {
+        @include transition(all 0.5s ease);
+        background: $navbar-background-color !important;
+      }
+    }
+
+  }
+  & .z-menu-selected {
+    > .z-menu-content {
+      background: $navbar-background-color !important;
+    }
+  }
+
+  & .z-menu .z-menu-icon, .z-menuitem .z-menu-icon {
+    top: 2px;
+  }
+
+  & ul {
+    @include border-radius(0px);
+    & > li {
+      margin: 0px 0px;
+      line-height: 40px;
+      height: 40px;
+      border-left: 1px solid darken($navbar-background-color, 3%);
+      background-color: $navbar-background-color;
+      @include border-radius(0px);
+    }
+  }
+}

@@ -1,0 +1,63 @@
+<!-- 资源项编辑页面 -->
+<window visible="@load(vm.showForm)" width="500px" height="300px" sclass="dialog-window"
+        sizable="false" mode="modal" closable="true" onClose="@command('abort',event=event)">
+  <!--onClose="self.visible = false;vm.showImportWindow = !vm.showImportWindow;event.stopPropagation();">-->
+  <caption label="编辑资源" iconSclass="z-icon-windows"/>
+  <borderlayout width="100%" height="100%">
+    <center sclass="form-center" vflex="1" hflex="1" style="border-bottom:0px">
+      <vlayout vflex="1">
+        <!--<hlayout hflex="1" vflex="1">-->
+          <groupbox vflex="1" hflex="2">
+            <grid oddRowSclass="none" sclass="form-grid">
+              <columns>
+                <column width="60px"></column>
+                <column hflex="1" align="left"></column>
+              </columns>
+              <rows>
+                <row style="border:none;height:50px">
+                  <label value="资源名称" style="text-align:left;align:center;pack:left"/>
+                  <textbox hflex="1" value="@bind(vm.selectedResource.name)"
+                           tabindex="1" readonly="@load(vm.readonly)"
+                           style="align:center;pack:left"/>
+                </row>
+                <row style="border:none;height:50px">
+                  <label value="资源代码" style="text-align:left;align:center;pack:left"/>
+                  <textbox hflex="1" value="@bind(vm.selectedResource.code)"
+                           tabindex="2" readonly="@load(vm.readonly)"
+                           style="align:center;pack:left"/>
+                </row>
+                <row style="border:none;height:50px">
+                  <label value="状态" style="text-align:left;align:center;pack:left"/>
+                  <checkbox label="启用" checked="@bind(vm.selectedResource.enabled)" tabindex="4" disabled="@load(vm.readonly)"/>
+                </row>
+              </rows>
+            </grid>
+          </groupbox>
+          <!--<listbox vflex="1" hflex="1"  disabled="@load(vm.readonly)"-->
+                   <!--model="@load(vm.operations)"-->
+                   <!--selectedItems="@bind(vm.selectedResource.operations)"-->
+                   <!--checkmark="@load(!vm.readonly)"-->
+                   <!--multiple="true">-->
+            <!--<listhead>-->
+              <!--<listheader label="操作"></listheader>-->
+            <!--</listhead>-->
+            <!--<template name="model">-->
+              <!--<listitem label="@load(each.name)" value="@load(each)" checkable="@load(!vm.readonly)">-->
+                <!--<listcell label="@load(each.name)"/>-->
+              <!--</listitem>-->
+            <!--</template>-->
+          <!--</listbox>-->
+        <!--</hlayout>-->
+        <hlayout height="50px">
+          <div align="center" hflex="1" style="margin:10px">
+            <button iconSclass="" sclass="btn-default " tabindex="5" label="保存" disabled="@load(vm.readonly)"
+                    onClick="@command('submit')"/>
+            <space width="20px"/>
+            <button iconSclass="" sclass="btn-danger" label="关闭" tabindex="6"
+                    onClick="@command('abort',event=event)"/>
+          </div>
+        </hlayout>
+      </vlayout>
+    </center>
+  </borderlayout>
+</window>

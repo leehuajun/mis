@@ -1,0 +1,23 @@
+<menubar sclass="list-menubar">
+    <menu label="操作">
+        <menupopup>
+            <menuitem style="text-align:left" iconSclass="z-icon-file-text-o"
+                      label="新增" sclass="btn-default" if="${vm.permissionStatus.canCreate}"
+                    onClick="@command('openAddictionary',id=null,url=null,title=null,readonly=false)"/>
+            <!-- <menuitem style="text-align:left" iconSclass="z-icon-key" label="修改密码"
+                       onClick="@command('changePassword',objId=each.id)"
+                       if="${vm.permissionStatus.canModify}"/>-->
+            <menuitem style="text-align:left" iconSclass="z-icon-file-text-o" label="详情"
+                      onClick="@command('openForm',id=each.id,url=vm.formUrl,title=vm.title,readonly=true)"
+                      if="${vm.permissionStatus.canSearch}"/>
+            <menuitem style="text-align:left" iconSclass="z-icon-edit" label="修改"
+                      onClick="@command('openForm',id=each.id,url=vm.formUrl,title=vm.title,readonly=false)"
+                      if="${vm.permissionStatus.canModify}"/>
+            <!--<menuseparator />-->
+            <!--<menuitem iconSclass="z-icon-times munuitem-delete" label="删除"  onClick='alert(self.label)'  />-->
+            <menuitem style="text-align:left" iconSclass="z-icon-times" label="删除"
+                      onClick="@command('confirmDeleteObject01',id=each.id)"
+                      if="${vm.permissionStatus.canDelete}"/>
+        </menupopup>
+    </menu>
+</menubar>

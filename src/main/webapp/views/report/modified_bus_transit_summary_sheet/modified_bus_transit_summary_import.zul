@@ -1,0 +1,128 @@
+<window visible="@load(vm.showImportWindow)" width="600px" height="500px" sclass="dialog-window"
+        sizable="false" mode="modal" closable="true" style="background:d9d9d9"
+        onClose="@command('abort',event=event)">
+    <caption label="改装车在途报表" iconSclass="z-icon-windows"/>
+    <borderlayout hflex="1" vflex="1">
+        <north border="none">
+            <grid oddRowSclass="none" hflex="1" sclass="form-grid">
+                <columns>
+                    <column width="120px"></column>
+                    <column hflex="1"></column>
+                </columns>
+                <rows>
+                    <row>
+                        <button label="选择Excel文件..." hflex="1"
+                                sclass="btn-default"
+                                upload="true,maxsize=51200"
+                                onUpload="@command('doUploadFile',event=event)"/>
+                        <textbox hflex="1" value="@load(vm.uploadFilename)" readonly="true"/>
+                    </row>
+                </rows>
+            </grid>
+        </north>
+        <center sclass="c-center" hflex="1" vflex="1">
+            <vlayout width="100%" vflex="1">
+                <listbox hflex="true" vflex="true" model="@load(vm.importEntities)" mold="paging"
+                         pageSize="10">
+                    <listhead sizable="true">
+                        <listheader width="40px" label="行号" align="center"/>
+                        <listheader width="100px" label="类别" align="center"/>
+                        <listheader width="120px" label="区域" align="center"/>
+                        <listheader width="120px" label="负责人" align="center"/>
+                        <listheader width="60px" label="发运单号" align="center"/>
+                        <listheader width="100px" label="发运日期" align="center"/>
+                        <listheader width="100px" label="月份" align="center"/>
+                        <listheader width="100px" label="省份" align="center"/>
+                        <listheader width="100px" label="客户名称" align="center"/>
+                        <listheader width="120px" label="客户地址" align="center"/>
+                        <listheader width="50px" label="承运商名称" align="center"/>
+                        <listheader width="50px" label="运输方式" align="center"/>
+                        <listheader width="80px" label="线路" align="center"/>
+                        <listheader width="80px" label="送达地" align="center"/>
+                        <listheader width="80px" label="发运台数" align="center"/>
+                        <listheader width="120px" label="VIN" align="center"/>
+                        <listheader width="120px" label="VSN" align="center"/>
+                        <listheader width="120px" label="车型型号" align="center"/>
+                        <listheader width="120px" label="车辆名称" align="center"/>
+                        <listheader width="120px" label="车库名称" align="center"/>
+                        <listheader width="120px" label="开票日期" align="center"/>
+                        <listheader width="120px" label="运单日期" align="center"/>
+                        <listheader width="120px" label="出库日期" align="center"/>
+                        <listheader width="120px" label="起运日期" align="center"/>
+                        <listheader width="120px" label="要求送达期限" align="center"/>
+                        <listheader width="120px" label="状态" align="center"/>
+                        <listheader width="120px" label="当前地址" align="center"/>
+                        <listheader width="120px" label="预计送达日期" align="center"/>
+                        <listheader width="120px" label="车队提交日期" align="center"/>
+                        <listheader width="120px" label="是否超时起运" align="center"/>
+                        <listheader width="120px" label="预警级别" align="center"/>
+                        <listheader width="120px" label="超时未起运标注" align="center"/>
+                        <listheader width="120px" label="是否按时出库" align="center"/>
+                        <listheader width="120px" label="是否验收" align="center"/>
+                        <listheader width="120px" label="是否按时送达" align="center"/>
+                        <listheader width="120px" label="在库天数" align="center"/>
+                        <listheader width="120px" label="超出规定天数送达" align="center"/>
+                        <listheader width="120px" label="公里数" align="center"/>
+                        <listheader width="120px" label="调拨日期" align="center"/>
+                        <listheader width="120px" label="验收日期" align="center"/>
+                        <listheader width="120px" label="验收月" align="center"/>
+                    </listhead>
+                    <template name="model">
+                        <listitem style="@load(vm.genStyle(each))">
+                            <listcell label="${forEachStatus.index+1}" sclass="label-index"/>
+                            <listcell label="@load(each.vehicleCategory)"/>
+                            <listcell label="@load(each.region)"/>
+                            <listcell label="@load(each.functionary)"/>
+                            <listcell label="@load(each.shippingOrderCode)"/>
+                            <listcell label="@load(each.shipDate)"/>
+                            <listcell label="@load(each.month)"/>
+                            <listcell label="@load(each.province)"/>
+                            <listcell label="@load(each.distributorName)"/>
+                            <listcell label="@load(each.distributorAddress)"/>
+                            <listcell label="@load(each.carrierName)"/>
+                            <listcell label="@load(each.transportTypes)"/>
+                            <listcell label="@load(each.haulingTrack)"/>
+                            <listcell label="@load(each.destination)"/>
+                            <listcell label="@load(each.shipmentNumber)"/>
+                            <listcell label="@load(each.vin)"/>
+                            <listcell label="@load(each.vsn)"/>
+                            <listcell label="@load(each.model)"/>
+                            <listcell label="@load(each.vehicleName)"/>
+                            <listcell label="@load(each.ReservoirAreaName)"/>
+                            <listcell label="@load(each.invoiceTime)"/>
+                            <listcell label="@load(each.waybillDate)"/>
+                            <listcell label="@load(each.outdateDate)"/>
+                            <listcell label="@load(each.sailDepartDate)"/>
+                            <listcell label="@load(each.deadline)"/>
+                            <listcell label="@load(each.status)"/>
+                            <listcell label="@load(each.currentAddress)"/>
+                            <listcell label="@load(each.estimatedDateOfService)"/>
+                            <listcell label="@load(each.acceptanceDate)"/>
+                            <listcell label="@load(each.overtimeShipment)"/>
+                            <listcell label="@load(each.warningLevel)"/>
+                            <listcell label="@load(each.overtimeWithoutDepartureMarking)"/>
+                            <listcell label="@load(each.outgoingOnTime)"/>
+                            <listcell label="@load(each.acceptance)"/>
+                            <listcell label="@load(each.deliverOnTime)"/>
+                            <listcell label="@load(each.numberOfDaysInLibrary)"/>
+                            <listcell label="@load(each.excessNumber)"/>
+                            <listcell label="@load(each.km)"/>
+                            <listcell label="@load(each.allocationDate)"/>
+                            <listcell label="@load(each.acceptanceDate)"/>
+                            <listcell label="@load(each.acceptanceMonth)"/>
+                        </listitem>
+                    </template>
+                </listbox>
+                <hlayout hflex="1">
+                    <div align="center" hflex="1" style="margin:10px">
+                        <button iconSclass="" sclass="btn-default " label="保存"
+                                onClick="@command('importData')"/>
+                        <space width="20px"/>
+                        <button iconSclass="" sclass="btn-danger" label="关闭"
+                                onClick="@command('abort',event=event)"/>
+                    </div>
+                </hlayout>
+            </vlayout>
+        </center>
+    </borderlayout>
+</window>

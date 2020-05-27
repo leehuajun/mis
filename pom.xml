@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.sunjet</groupId>
+  <artifactId>mis</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>war</packaging>
+
+  <name>mis</name>
+  <description>三捷科技MIS</description>
+
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>2.1.1.RELEASE</version>
+    <relativePath/> <!-- lookup parent from repository -->
+  </parent>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <java.version>1.8</java.version>
+    <!--<zk.version>8.6.0.1</zk.version>-->
+    <zk.version>8.0.2.2</zk.version>
+    <shiro.version>1.4.0</shiro.version>
+    <!--<zkspringboot.version>1.0.3</zkspringboot.version>-->
+  </properties>
+
+  <repositories>
+    <repository>
+      <id>ZK CE</id>
+      <name>ZK CE Repository</name>
+      <url>https://mavensync.zkoss.org/maven2</url>
+    </repository>
+<!--    <repository>-->
+<!--      <id>Nuiton</id>-->
+<!--      <name>Nuiton Repository</name>-->
+<!--      <url>http://maven.nuiton.org/release/</url>-->
+<!--    </repository>-->
+<!--    <repository>-->
+<!--      <id>wso2</id>-->
+<!--      <name>wso2 repo</name>-->
+<!--      <url>http://dist.wso2.org/maven2/</url>-->
+<!--    </repository>-->
+<!--    <repository>-->
+<!--      <id>ebi</id>-->
+<!--      <name>ebi</name>-->
+<!--      <url>http://www.ebi.ac.uk/intact/maven/nexus/content/repositories/ebi-repo/</url>-->
+<!--    </repository>-->
+  </repositories>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-jpa</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <optional>true</optional>
+    </dependency>
+
+    <!-- ZK Start -->
+    <!--<dependency>-->
+    <!--<groupId>org.zkoss.zkspringboot</groupId>-->
+    <!--<artifactId>zkspringboot-starter</artifactId>-->
+    <!--<version>${zkspringboot.version}</version>-->
+    <!--<type>pom</type>-->
+    <!--</dependency>-->
+    <!--<dependency>-->
+    <!--<groupId>javax.servlet</groupId>-->
+    <!--<artifactId>javax.servlet-api</artifactId>-->
+    <!--<version>3.1.0</version>-->
+    <!--<scope>provided</scope>-->
+    <!--</dependency>-->
+
+    <dependency>
+      <groupId>org.zkoss.zk</groupId>
+      <artifactId>zkplus</artifactId>
+      <version>${zk.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.zkoss.zk</groupId>
+      <artifactId>zhtml</artifactId>
+      <version>${zk.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.zkoss.zk</groupId>
+      <artifactId>zkbind</artifactId>
+      <version>${zk.version}</version>
+    </dependency>
+    <!--<dependency>-->
+      <!--<groupId>org.zkoss.theme</groupId>-->
+      <!--<artifactId>iceblue_c</artifactId>-->
+      <!--<version>${zk.version}</version>-->
+    <!--</dependency>-->
+    <dependency>
+      <groupId>org.zkoss.zk</groupId>
+      <artifactId>zul</artifactId>
+      <version>${zk.version}</version>
+      <exclusions>
+        <exclusion>
+          <artifactId>slf4j-jdk14</artifactId>
+          <groupId>org.slf4j</groupId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <!-- ZK End -->
+
+    <dependency>
+      <groupId>org.apache.shiro</groupId>
+      <artifactId>shiro-core</artifactId>
+      <version>${shiro.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.shiro</groupId>
+      <artifactId>shiro-web</artifactId>
+      <version>${shiro.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.shiro</groupId>
+      <artifactId>shiro-ehcache</artifactId>
+      <version>${shiro.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.shiro</groupId>
+      <artifactId>shiro-spring</artifactId>
+      <version>${shiro.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>commons-logging</groupId>
+      <artifactId>commons-logging</artifactId>
+      <version>1.1.1</version>
+    </dependency>
+    <!--<dependency>-->
+    <!--<groupId>commons-io</groupId>-->
+    <!--<artifactId>commons-io</artifactId>-->
+    <!--<version>1.3.1</version>-->
+    <!--</dependency>-->
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+      <version>3.8.1</version>
+    </dependency>
+
+
+    <!-- 添加 apache commons 包-->
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+      <version>3.4</version>
+    </dependency>
+    <!--<dependency>-->
+      <!--<groupId>commons-collections</groupId>-->
+      <!--<artifactId>commons-collections</artifactId>-->
+      <!--<version>3.2.1</version>-->
+    <!--</dependency>-->
+    <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+      <version>2.4</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-csv</artifactId>
+      <version>1.6</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-collections4</artifactId>
+      <version>4.1</version>
+    </dependency>
+    <!--解析文件的编码-->
+    <!--<dependency>-->
+      <!--<groupId>antlr</groupId>-->
+      <!--<artifactId>antlr</artifactId>-->
+      <!--<version>2.7.7</version>-->
+    <!--</dependency>-->
+    <!--<dependency>-->
+      <!--<groupId>org.mozilla.intl</groupId>-->
+      <!--<artifactId>chardet</artifactId>-->
+      <!--<version>1.0</version>-->
+
+    <!--</dependency>-->
+    <!--<dependency>-->
+      <!--<groupId>net.sourceforge.cpdetector</groupId>-->
+      <!--<artifactId>cpdetector</artifactId>-->
+      <!--<version>1.0.7</version>-->
+    <!--</dependency>-->
+
+
+
+    <!--JPA-spec  数据查询 -->
+    <dependency>
+      <groupId>com.github.wenhao</groupId>
+      <artifactId>jpa-spec</artifactId>
+      <version>3.2.3</version>
+    </dependency>
+
+
+    <!--poi-->
+    <dependency>
+      <groupId>org.apache.poi</groupId>
+      <artifactId>poi</artifactId>
+      <version>3.17</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.poi</groupId>
+      <artifactId>poi-ooxml</artifactId>
+      <version>3.17</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml-schemas -->
+    <dependency>
+      <groupId>org.apache.poi</groupId>
+      <artifactId>poi-ooxml-schemas</artifactId>
+      <version>3.17</version>
+    </dependency>
+
+    <!--<dependency>-->
+    <!--<groupId>com.deepoove</groupId>-->
+    <!--<artifactId>poi-tl</artifactId>-->
+    <!--<version>1.2.0</version>-->
+    <!--<exclusions>-->
+    <!--<exclusion>-->
+    <!--<groupId>log4j</groupId>-->
+    <!--<artifactId>log4j</artifactId>-->
+    <!--</exclusion>-->
+    <!--<exclusion>-->
+    <!--<groupId>org.slf4j</groupId>-->
+    <!--<artifactId>slf4j-log4j12</artifactId>-->
+    <!--</exclusion>-->
+    <!--</exclusions>-->
+    <!--</dependency>-->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-tomcat</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+      </plugin>
+    </plugins>
+  </build>
+
+
+</project>

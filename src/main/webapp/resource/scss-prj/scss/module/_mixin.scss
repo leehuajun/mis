@@ -1,0 +1,70 @@
+@charset "utf-8";
+//必须设置了这个才能编译有中文的注释
+
+@mixin button-style($color,$bg,$border) {
+  //margin-right: 1px;
+
+  //-webkit-transition: all 0.5s ease;
+  //-moz-transition: all 0.5s ease;
+  //-o-transition: all 0.5s ease;
+  //transition: all 0.5s ease;
+  @include transition(all 0.5s ease);
+  color: $color;
+  //font-weight: bold;
+  background: $bg !important;
+  border-color: $border;
+  //border-left: 1px solid #fff;
+  //box-shadow: 1px 1px 0px #ECECEC;
+  //box-shadow:0 2px 3px 0 rgba(0,0,0,.3);
+  //box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12);
+  //box-shadow: 0 1px 1px -1px rgba(0, 0, 0, .2), 0 1px 1px 0 rgba(0, 0, 0, .14), 0 1px 1px 0 rgba(0, 0, 0, .12);
+  border-radius: 0px;
+  //height: 25px;
+  text-shadow: none;
+  //text-shadow: 0px 0px 0px #000000;
+
+  &:focus {
+    color: $color;
+    background-color: $bg !important;
+    border-color: $border;
+  }
+  &:hover {
+    color: $color;
+    background-color: darken($bg, 10%) !important;
+    border-color: darken($border, 10%);
+  }
+  &.open {
+    color: $color;
+    background-color: darken($bg, 10%) !important;
+    border-color: darken($border, 10%);
+  }
+  &:active {
+    color: $color;
+    background-color: darken($bg, 20%) !important;
+    border-color: darken($border, 20%);
+  }
+  //&[disabled]{
+  //  color:$btn-disabled-color !important;
+  //  background-color: $btn-disabled-bg !important;
+  //  border-color: $btn-disabled-border !important;
+  //  &:focus{
+  //    background-color: $btn-disabled-bg !important;
+  //    border-color: $btn-disabled-border !important;
+  //  }
+  //  &:hover{
+  //    background-color: $btn-disabled-bg !important;
+  //    border-color: $btn-disabled-border !important;
+  //  }
+  //  &.open{
+  //    background-color: $btn-disabled-bg !important;
+  //    border-color: $btn-disabled-border !important;
+  //  }
+  //}
+}
+
+// 设置区域padding属性
+@mixin region-padding($border,$pading_top,$padding_right,$padding_bottom,$padding_left) {
+  border: $border;
+  padding: $pading_top $padding_right $padding_bottom $padding_left;
+  //margin: 0 $margin_right 0 $margin_left;
+}

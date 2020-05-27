@@ -1,0 +1,54 @@
+@charset "utf-8";
+//必须设置了这个才能编译有中文的注释
+@import "compass/css3";
+
+//$font-size-m: 12px;
+//$font-size-s: 11px;
+//$default: #1c999f; //rgb(78,116,149);
+
+//$default: rgb(68,97,212); //rgb(78,116,149);
+//$default: rgb(54,106,211); //rgb(78,116,149);
+//$default: rgb(168, 120, 14); //rgb(78,116,149);
+//$default: rgb(134, 9, 211); //rgb(78,116,149);
+//$default: rgb(60, 63, 65); //rgb(78,116,149);
+$default: rgb(2, 109, 3); //rgb(78,116,149);
+//$default: rgb(2, 148, 3); //rgb(78,116,149);
+
+
+// 默认字体颜色
+$font-color: darken($default, 20%);
+// 反转字体颜色
+$font-reversed-color: #ffffff;
+
+$border-color: #d9d9d9;
+$background-color: lighten($border-color, 3%);
+
+//$default: #0093f9; //rgb(78,116,149);
+//$default: rgb(42,128,175); //rgb(78,116,149);
+//$default: rgb(33,95,124); //rgb(78,116,149);
+$navbar-background-color: $default;
+$navbar-color: #ffffff;
+$navbar-line-height: 40px;
+
+$btn-default-color: #ffffff;
+$btn-default-bg: #428bca;
+$btn-default-border: $btn-default-bg;
+
+$btn-danger-color: #ffffff;
+$btn-danger-bg: #d9534f;
+$btn-danger-border: $btn-danger-bg;
+
+$btn-success-color: #ffffff;
+$btn-success-bg: #5cb85c;
+$btn-success-border: $btn-success-bg;
+
+$btn-warn-color: #FFFFFF;
+$btn-warn-bg: #ff9600;
+$btn-warn-border: $btn-warn-bg;
+
+$btn-md-color: #ffffff;
+$btn-md-bg: #3f51b5;
+$btn-md-border: $btn-md-bg;
+
+$tabs-background-color: $background-color;
+$tab-background-color: lighten($background-color, 2%);

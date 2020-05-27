@@ -1,0 +1,164 @@
+<!--角色项编辑页面 -->
+<window visible="@load(vm.showForm)" width="650px" height="530px" sclass="dialog-window"
+        sizable="false" mode="modal" closable="true" onClose="@command('abort',event=event)">
+  <!--onClose="self.visible = false;vm.showImportWindow = !vm.showImportWindow;event.stopPropagation();">-->
+  <caption label="编辑角色" iconSclass="z-icon-windows"/>
+  <borderlayout width="100%" height="100%">
+    <center sclass="form-center" style="border:0px solid #cfcfcf">
+      <vlayout height="100%" style="background:#fff;padding:10px;">
+        <groupbox style="border:0px">
+          <grid oddRowSclass="none" sclass="form-grid">
+            <columns>
+              <column width="50px" align="center"></column>
+              <column hflex="1" align="center"></column>
+              <column width="50px" align="center"></column>
+              <column hflex="1" align="center"></column>
+              <column width="70px" align="center"></column>
+              <column hflex="1" align="center"></column>
+              <column width="80px" align="center"></column>
+            </columns>
+            <rows>
+              <row>
+                <label hflex="1" value="名称" style="color:rgb(78,116,149);font-weight:700"/>
+                <textbox hflex="1" constraint="no empty" value="@bind(vm.selectedRole.name)"
+                         tabindex="1" readonly="@load(vm.readonly)"/>
+                <label hflex="1"  value="编码" style="color:rgb(78,116,149);font-weight:700"/>
+                <textbox hflex="1" constraint="no empty" value="@bind(vm.selectedRole.code)"
+                         tabindex="1" readonly="@load(vm.readonly)"/>
+                <label hflex="1" value="所属组织" style="color:rgb(78,116,149);font-weight:700"/>
+                <listbox vflex="1" hflex="1" disabled="@load(vm.readonly)"
+                         model="@load(vm.orgs)" mold="select"
+                         selectedItem="@bind(vm.selectedRole.org)">
+                  <template name="model">
+                    <listitem label="@load(each.name)" value="@load(each)"/>
+                  </template>
+                </listbox>
+                <checkbox hflex="1" checked="@bind(vm.selectedRole.enabled)" label="启用" tabindex="4" disabled="@load(vm.readonly)"/>
+              </row>
+            </rows>
+          </grid>
+        </groupbox>
+
+        <tabbox hflex="true" vflex="true" style="background:#fff;padding:0px;border:1px solid #cfcfcf">
+          <tabs>
+            <tab label="用户选择"/>
+            <tab label="权限设置"/>
+          </tabs>
+          <tabpanels>
+            <!--绑定用户-->
+            <tabpanel style="padding:0px;overflow:hidden">
+              <hlayout hflex="true" vflex="true" style="padding:0px;">
+                <listbox hflex="true" vflex="true" mold="paging" pageSize="10"
+                         model="@load(vm.selectedRole.users)">
+                  <auxhead>
+                    <auxheader colspan="1">
+                      <label style="font-weight:bold;">已选用户</label>
+                    </auxheader>
+                    <auxheader colspan="1">
+                      <textbox hflex="1" placeholder="输入关键字搜索" sclass="inner-textbox"/>
+                    </auxheader>
+                  </auxhead>
+                  <listhead>
+                    <listheader label="姓名"></listheader>
+                    <listheader label="登录名"></listheader>
+                  </listhead>
+                  <template name="model">
+                    <listitem label="@load(each.name)" value="@load(each)">
+                      <listcell label="@load(each.name)"/>
+                      <listcell label="@load(each.logId)"/>
+                    </listitem>
+                  </template>
+                </listbox>
+
+                <listbox hflex="true" vflex="true"
+                         model="@load(vm.filterUsers)" mold="paging" pageSize="10"
+                         selectedItems="@bind(vm.selectedRole.users)"
+                         checkmark="true"
+                         multiple="true">
+                  <auxhead>
+                    <auxheader colspan="1">
+                      <label style="font-weight:bold;">可选用户</label>
+                    </auxheader>
+                    <auxheader colspan="1">
+                      <textbox hflex="1" placeholder="输入关键字搜索"  sclass="inner-textbox" value="@bind(vm.user_key)"
+                      onChanging="@command('searchUsers',v=event.value)"/>
+                      <!--onChanging="@command('textChangingHandler',v=event.value)"-->
+                    </auxheader>
+                  </auxhead>
+                  <listhead>
+                    <listheader label="姓名" hflex="2"></listheader>
+                    <listheader label="登录名" hflex="1"></listheader>
+                  </listhead>
+                  <template name="model">
+                    <listitem label="@load(each.name)" value="@load(each)">
+                      <listcell label="@load(each.name)"/>
+                      <listcell label="@load(each.logId)"/>
+                    </listitem>
+                  </template>
+                </listbox>
+              </hlayout>
+            </tabpanel>
+            <!--绑定权限-->
+            <tabpanel style="padding:0px;overflow:hidden">
+              <hlayout hflex="true" vflex="true" style="padding:0px;">
+                <grid hflex="true" vflex="true" sclass="list-grid"
+                      model="@load(vm.userPermissions)">
+                  <auxhead sclass="category-center">
+                    <auxheader colspan="2" rowspan="1" >
+                      <label style="font-weight:bold;">已选权限</label>
+                    </auxheader>
+                  </auxhead>
+                  <columns sizable="true">
+                    <column label="资源名称" width="100px"></column>
+                    <column label="访问权限" hflex="1"></column>
+                  </columns>
+                  <template name="model" var="data">
+                    <row>
+                      <label value="@load(data.key)" style="color:rgb(78,116,149);font-weight:700"/>
+                      <label value="@load(data.value)"/>
+                    </row>
+                  </template>
+                </grid>
+                <!-- 资源列表 -->
+                <listbox width="120px" vflex="true"
+                         model="@load(vm.allPermissions)">
+                  <listhead>
+                    <listheader label="资源名称"></listheader>
+                  </listhead>
+                  <template name="model">
+                    <listitem label="@load(each.key)" value="@load(each.key)" onClick="@command('selectResource',model=each.key)"/>
+                  </template>
+                </listbox>
+                <!-- 操作列表 -->
+                <listbox width="80px" vflex="true"
+                         model="@load(vm.allPermissions.get(vm.selectedResource))"
+                         selectedItems="@bind(vm.selectedRole.permissions)"
+                         onSelect="@command('checkPermissions')"
+                         checkmark="true"
+                         multiple="true">
+                  <listhead>
+                    <listheader label="操作名称"></listheader>
+                  </listhead>
+                  <template name="model">
+                    <listitem label="@load(each.operation.name)" value="@load(each)">
+                    </listitem>
+                  </template>
+                </listbox>
+              </hlayout>
+            </tabpanel>
+          </tabpanels>
+        </tabbox>
+
+        <hlayout hflex="1" height="40px">
+          <div align="center" hflex="1" style="margin:10px">
+            <button iconSclass="" sclass="btn-default " tabindex="5" label="保存" disabled="@load(vm.readonly)"
+                    onClick="@command('submit')"/>
+            <space width="20px"/>
+            <button iconSclass="" sclass="btn-danger" label="关闭" tabindex="6"
+                    onClick="@command('abort',event=event)"/>
+          </div>
+        </hlayout>
+      </vlayout>
+    </center>
+  </borderlayout>
+</window>

@@ -1,0 +1,42 @@
+@charset "utf-8";
+//必须设置了这个才能编译有中文的注释
+@import "variables";
+
+.z-textbox {
+  @include border-radius(2px);
+}
+
+.inner-editbox {
+  padding: 2px 5px;
+  text-align: right;
+  border: none;
+  @include border-radius(2px);
+  background: transparent;
+
+  &[readonly] {
+    background: transparent;
+  }
+}
+
+.inner-datetimebox-input {
+  & .z-datebox-input {
+    text-align: center;
+    border: none;
+    padding: 0;
+    margin: 0;
+    @include border-radius(0px);
+    background: transparent;
+
+    &[readonly] {
+      background: transparent;
+    }
+  }
+}
+
+.inner-textbox {
+  min-height: 18px;
+  height: 20px;
+  font-size: 9px;
+  padding: 0px 5px;
+  border-radius: 2px;
+}

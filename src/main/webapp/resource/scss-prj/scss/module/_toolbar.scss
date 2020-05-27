@@ -1,0 +1,91 @@
+@charset "utf-8";
+//必须设置了这个才能编译有中文的注释
+@import "variables";
+
+.ctoolbars {
+  position: relative;
+  border: none;
+  margin-right: 0px;
+  background-color: $tab-background-color;
+
+  overflow: hidden;
+  height: auto;
+  padding: 10px 0 5px 0;
+
+  & > .ctoolbar-left {
+    background-color: transparent;
+    display: inline-block;
+    margin: 0px 0px 0px 0px;
+    padding: 0;
+
+    // 下面是消除inline-block内元素之间的间距
+    //font-size: 0px;
+    //&>.z-button{
+    //  font-size: 12px;
+    //}
+  }
+
+
+  & > .ctoolbar-right {
+    background-color: transparent;
+    display: inline-block;
+    margin: 0px 0px 0px 0px;
+    padding: 0;
+    float: right;
+    // 下面是消除inline-block内元素之间的间距
+    //font-size: 0px;
+    //&>.z-button{
+    //  font-size: 12px;
+    //}
+
+    .z-hbox th, .z-vbox th, .z-hbox td, .z-vbox td {
+      padding: 0;
+      background-clip: padding-box;
+      text-align: center;
+      vertical-align: middle;
+    }
+
+    //& .nav-search {
+    //  position: absolute;
+    //  top: 0px;
+    //  right: 0px;
+    //  .z-bandbox-input {
+    //    font-family: 'Helvetica Neue",Helvetica,Arial,sans-serif';
+    //    //color: $gray;
+    //    width: 160px;
+    //    padding-right: 6px;
+    //    padding-left: 24px;
+    //  }
+    //  .z-bandbox-button {
+    //    position: absolute;
+    //    top: 1px;
+    //    bottom: 1px;
+    //    left: 3px;
+    //    min-width: 19px;
+    //    filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+    //    padding: 0;
+    //    background: transparent none;
+    //    border: 0;
+    //    &:hover, &:focus, &:active {
+    //      background-color: transparent;
+    //      border: 0;
+    //    }
+    //    [class*="z-icon-"] {
+    //      color: $btn-default-color;
+    //
+    //    }
+    //  }
+    //}
+  }
+  & .z-hlayout-inner {
+    padding-right: 2px !important;
+
+    &:last-child {
+      padding-right: 0px !important;
+    }
+  }
+  //& .z-hlayout-inner:last-child {
+  //  border-top: 0px solid #f5f5f5 !important;
+  //}
+
+}

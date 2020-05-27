@@ -1,0 +1,81 @@
+<!-- 系统配置对话框 -->
+<window visible="@load(vm.showForm)" width="500px" height="280px" sclass="dialog-window"
+        sizable="false" mode="modal" closable="true" onClose="@command('abort',event=event)">
+  <!--onClose="self.visible = false;vm.showImportWindow = !vm.showImportWindow;event.stopPropagation();">-->
+  <caption label="编辑操作" iconSclass="z-icon-windows"/>
+  <borderlayout width="100%" height="100%">
+    <center sclass="form-center" style="border:0px">
+      <vlayout>
+        <!--<div sclass="include">-->
+        <!--<button label="保存" iconSclass="@load(iconVariable.icon_save)" style="width:80px;height:25px;"-->
+        <!--tabindex="7"-->
+        <!--sclass="btn-default " onClick="@command('submit')"/>-->
+        <!--</div>-->
+        <grid oddRowSclass="none" hflex="1" sclass="form-grid"
+              style="margin:20px">
+          <columns>
+            <column width="80px"></column>
+            <column hflex="1"></column>
+            <column width="80"></column>
+          </columns>
+          <rows style="line-height:40px">
+            <row>
+              <label value="操作编码"/>
+              <textbox value="@bind(vm.selectedOperation.code)"
+                       width="100%" tabindex="1" readonly="@load(vm.readonly)"/>
+              <div hflex="1" align="left">
+                <label value="*必填字段" style="color:red"/>
+              </div>
+            </row>
+            <row style="border:none;height:50px">
+              <label value="操作名称"/>
+              <textbox value="@bind(vm.selectedOperation.name)"
+                       width="100%" tabindex="2" readonly="@load(vm.readonly)"/>
+              <div hflex="1" align="left">
+                <label value="*必填字段" style="color:red"/>
+              </div>
+            </row>
+            <row style="border:none;height:50px">
+              <label value="序号"/>
+              <textbox value="@bind(vm.selectedOperation.seq)"
+                       width="100%" tabindex="2" readonly="@load(vm.readonly)"/>
+              <div hflex="1" align="left">
+                <label value="*必填字段,只能是数字" style="color:red"/>
+              </div>
+            </row>
+            <!--<row style="border:none;height:50px">-->
+              <!--<label value="序号"/>-->
+              <!--<listbox hflex="1" tabindex="3" disabled="@load(vm.readonly)"-->
+                       <!--mold="select"-->
+                       <!--selectedItem="@bind(vm.selectedOperation.parent)" model="@load(vm.parentOrgs)">-->
+                <!--<template name="model">-->
+                  <!--<listitem label="@load(each.name)" value="@load(each)"-->
+                            <!--selected="@load(each.id eq vm.selectedOrg.seq)"/>-->
+                <!--</template>-->
+              <!--</listbox>-->
+              <!--<div hflex="1" align="left">-->
+                <!--<label value="*必填字段" style="color:red"/>-->
+              <!--</div>-->
+            <!--</row>-->
+            <row style="border:none;height:50px">
+              <label value="状态"/>
+              <checkbox label="启用" checked="@bind(vm.selectedOperation.enabled)" tabindex="4" disabled="@load(vm.readonly)"/>
+              <div hflex="1" align="left">
+                <label value="*必填字段" style="color:red"/>
+              </div>
+            </row>
+          </rows>
+        </grid>
+        <hlayout hflex="1">
+          <div align="center" hflex="1" style="margin:10px">
+            <button iconSclass="" sclass="btn-default " tabindex="5" label="保存" disabled="@load(vm.readonly)"
+                    onClick="@command('submit')"/>
+            <space width="20px"/>
+            <button iconSclass="" sclass="btn-danger" label="关闭" tabindex="6"
+                    onClick="@command('abort',event=event)"/>
+          </div>
+        </hlayout>
+      </vlayout>
+    </center>
+  </borderlayout>
+</window>

@@ -1,0 +1,92 @@
+<!--
+基础管理 >>维修项目及定时金额表单
+-->
+<!--<window title="维修项目编辑" border="normal" width="500px" height="350px"-->
+<!--sizable="false"-->
+<!--style="margin:20px;padding-top:0px;padding-left:0px;" position="@load(vm.window_position)" closable="true"-->
+<!--onClose="spaceOwner.detach();"-->
+<!--viewModel="@id('vm') @init('com.sunjet.frontend.vm.basic.MaintainFormVM')"-->
+<!--validationMessages="@id('vmsgs')">-->
+<window visible="@load(vm.showSearchWindow)" width="400px" height="300px" sclass="dialog-window"
+        sizable="false" mode="modal" closable="true" style="background:d9d9d9"
+        onClose="@command('abortSearch',event=event)">
+  <!--onClose="self.visible = false;vm.showImportWindow = !vm.showImportWindow;event.stopPropagation();">-->
+  <caption label="查询参数设置" iconSclass="z-icon-windows"/>
+  <borderlayout hflex="1" vflex="1">
+    <center sclass="c-center" hflex="1" vflex="1">
+        <grid oddRowSclass="none" sclass="form-grid" vflex="1" hflex="1">
+          <columns>
+            <column width="120px"></column>
+            <column hflex="1"></column>
+          </columns>
+          <rows>
+            <row style="border:none;height:30px">
+              <label value="SGMW编码"></label>
+              <div width="80%">
+                <textbox value="" hflex="1" tabindex="1" readonly="true"></textbox>
+              </div>
+            </row>
+            <row style="border:none;height:30px">
+              <label value="客户编码"></label>
+              <div width="80%">
+                <textbox value="" hflex="1" tabindex="1" readonly="true"></textbox>
+              </div>
+            </row>
+            <row style="border:none;height:30px">
+              <label value="客户名称"></label>
+              <div width="80%">
+                <textbox value="" hflex="1" tabindex="1" readonly="true"></textbox>
+              </div>
+            </row>
+            <row style="border:none;height:30px">
+              <label value="年度"></label>
+              <div width="80%">
+                <listbox mold="select" hflex="1"/>
+              </div>
+            </row>
+            <row style="border:none;height:30px">
+              <label value="月份" hflex="1"></label>
+              <div width="80%">
+                <listbox mold="select" hflex="1"/>
+              </div>
+            </row>
+            <row style="border:none;height:30px">
+              <label value="月份" hflex="1"></label>
+              <div width="80%">
+                <listbox mold="select" hflex="1"/>
+              </div>
+            </row>
+            <row style="border:none;height:30px">
+              <label value="月份" hflex="1"></label>
+              <div width="80%">
+                <listbox mold="select" hflex="1"/>
+              </div>
+            </row>
+            <row style="border:none;height:30px">
+              <label value="月份" hflex="1"></label>
+              <div width="80%">
+                <listbox mold="select" hflex="1"/>
+              </div>
+            </row>
+            <row style="border:none;height:30px">
+              <label value="月份" hflex="1"></label>
+              <div width="80%">
+                <listbox mold="select" hflex="1"/>
+              </div>
+            </row>
+          </rows>
+        </grid>
+    </center>
+    <south height="40px" style="border:none">
+      <hlayout hflex="1" vflex="1">
+        <div align="center" hflex="1" style="margin:10px">
+          <button iconSclass="" sclass="btn-default " label="查询"
+                  onClick="@command('search')"/>
+          <space width="20px"/>
+          <button iconSclass="" sclass="btn-danger" label="关闭"
+                  onClick="@command('abortSearch',event=event)"/>
+        </div>
+      </hlayout>
+    </south>
+  </borderlayout>
+</window>

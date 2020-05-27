@@ -1,0 +1,149 @@
+<!-- 用户列表 -->
+<borderlayout width="100%" height="100%"
+              viewModel="@id('vm') @init('com.sunjet.mis.vm.report.AllotVehicleVM')"
+              style="padding:0px;border:0px"
+>
+  <center sclass="c-center">
+    <vlayout width="100%" height="100%" style="padding-bottom:0px">
+
+      <include src="/views/report/allot_vehicle/allot_vehicle_import.zul"/>
+      <!--<include src="/views/report/allot_vehicle/allot_vehicle_search.zul"/>-->
+      <groupbox>
+        <grid oddRowSclass="none" sclass="form-grid" hflex="1">
+          <columns>
+            <column width="80px"></column>
+            <column hflex="1"></column>
+            <column width="80px"></column>
+            <column hflex="1"></column>
+            <column width="80px"></column>
+            <column hflex="1"></column>
+            <column width="60px"></column>
+            <column hflex="1"></column>
+            <column width="60px"></column>
+            <column hflex="1"></column>
+          </columns>
+          <rows>
+            <row style="border:none;height:30px">
+              <div hflex="1" align="center">
+                <label value="SGMW编码"/>
+              </div>
+              <textbox value="@bind(vm.allotVehicleEntity.sgmwCode)" hflex="1" tabindex="1"
+                       readonly="@load(vm.isDistributor())"/>
+              <div hflex="1" align="center">
+                <label value="客户编码"/>
+              </div>
+              <textbox value="@bind(vm.allotVehicleEntity.distributorCode)" hflex="1" tabindex="1"
+                       readonly="@load(vm.isDistributor())"/>
+              <div hflex="1" align="center">
+                <label value="客户名称"/>
+              </div>
+              <textbox value="@bind(vm.allotVehicleEntity.distributorName)" hflex="1" tabindex="1"
+                       readonly="@load(vm.isDistributor())"/>
+              <div hflex="1" align="center">
+                <label value="VIN"/>
+              </div>
+              <textbox value="@bind(vm.allotVehicleEntity.vin)" hflex="1" tabindex="1"></textbox>
+              <div hflex="1" align="center">
+                <label value="VSN" hflex="1"/>
+              </div>
+              <textbox value="@bind(vm.allotVehicleEntity.vsn)" hflex="1" tabindex="1"></textbox>
+            </row>
+          </rows>
+        </grid>
+      </groupbox>
+      <include src="/views/commons/list_report_toolbar.zul"/>
+      <listbox hflex="true" vflex="true" oddRowSclass="none"
+               model="@load(vm.pageResult.rows)" emptyMessage="@load(vm.emptyMessage)"
+      >
+        <listhead sizable="true">
+          <listheader width="40px" label="行号" align="center"/>
+          <listheader width="100px" label="开票审核状态" sort="auto(auditStatus)" align="center"/>
+          <listheader width="120px" label="U9返回信息" sort="auto(u9Result)" align="center"/>
+          <listheader width="120px" label="配车单号" sort="auto(allotNo)" align="center"/>
+          <listheader width="60px" label="配车员" align="center"/>
+          <listheader width="100px" label="特殊需求单号" align="center"/>
+          <listheader width="100px" label="客户编码(工业)" align="center"/>
+          <listheader width="100px" label="客户编码(SGMW)" align="center"/>
+          <listheader width="120px" label="客户名称" align="center"/>
+          <listheader width="50px" label="配车量" align="center"/>
+          <listheader width="80px" label="销售A价" align="center"/>
+          <listheader width="80px" label="增减后价" align="center"/>
+          <listheader width="80px" label="合同单价" align="center"/>
+          <listheader width="120px" label="VIN" align="center"/>
+          <listheader width="120px" label="VSN" align="center"/>
+          <listheader width="120px" label="车辆型号" align="center"/>
+          <listheader width="180px" label="车辆名称" align="center"/>
+          <listheader width="50px" label="颜色" align="center"/>
+          <listheader width="60px" label="仓库名称" align="center"/>
+          <listheader width="100px" label="库位" align="center"/>
+          <listheader width="150px" label="入库时间" align="center"/>
+          <listheader width="120px" label="单据日期" align="center"/>
+          <listheader width="120px" label="销售订单号" align="center"/>
+          <listheader width="100px" label="配车用途" align="center"/>
+          <listheader width="60px" label="省份" align="center"/>
+          <listheader width="180px" label="客户地址" align="center"/>
+          <listheader width="80px" label="客户联系人" align="center"/>
+          <listheader width="100px" label="联系方式" align="center"/>
+        </listhead>
+        <template name="model">
+          <listitem>
+            <listcell label="${forEachStatus.index+1}" sclass="label-index"/>
+            <listcell label="@load(each.auditStatus)"/>
+            <listcell label="@load(each.u9Result)"/>
+            <listcell label="@load(each.allotNo)"/>
+            <listcell label="@load(each.allotOperator)"/>
+            <listcell label="@load(each.specialRequestNo)"/>
+            <listcell label="@load(each.distributorCode)"/>
+            <listcell label="@load(each.sgmwCode)"/>
+            <listcell label="@load(each.distributorName)"/>
+            <listcell label="@load(each.allotCount)"/>
+            <!--<listcell>-->
+            <!--<intbox hflex="1" value="@load(each.allotCount)" sclass="inner-editbox" readonly="true"/>-->
+            <!--</listcell>-->
+            <listcell>
+              <decimalbox format=",##0.00" hflex="1" value="@load(each.price)" sclass="inner-editbox" readonly="true"/>
+            </listcell>
+            <listcell>
+              <decimalbox format=",##0.00" hflex="1" value="@load(each.adjustedPrice)" sclass="inner-editbox"
+                          readonly="true"/>
+            </listcell>
+            <listcell>
+              <decimalbox format=",##0.00" hflex="1" value="@load(each.contractPrice)" sclass="inner-editbox"
+                          readonly="true"/>
+            </listcell>
+            <listcell label="@load(each.vin)"/>
+            <listcell label="@load(each.vsn)"/>
+            <listcell label="@load(each.vehicleModel)"/>
+            <listcell label="@load(each.vehicleName)"/>
+            <listcell label="@load(each.color)"/>
+            <listcell label="@load(each.storage)"/>
+            <listcell label="@load(each.storageLocation)"/>
+            <listcell>
+              <datebox format="yyyy-MM-dd hh:mm:ss" hflex="1" value="@load(each.entryTime)" readonly="true"
+                       buttonVisible="false" sclass="inner-datetimebox-input"/>
+            </listcell>
+            <listcell>
+              <datebox format="yyyy-MM-dd" hflex="1" value="@load(each.invoiceDate)" readonly="true"
+                       buttonVisible="false"
+                       sclass="inner-datetimebox-input"/>
+            </listcell>
+            <listcell label="@load(each.orderNo)"/>
+            <listcell label="@load(each.allotUsage)"/>
+            <listcell label="@load(each.province)"/>
+            <listcell label="@load(each.distributorAddress)"/>
+            <listcell label="@load(each.distributorContact)"/>
+            <listcell label="@load(each.contactPhone)"/>
+          </listitem>
+        </template>
+      </listbox>
+      <paging
+              pageSize="@bind(vm.pageResult.pageSize)"
+              totalSize="@bind(vm.pageResult.total)"
+              pageIncrement="1"
+              detailed="true"
+              activePage="@bind(vm.pageResult.page)"
+              onPaging="@command('gotoPageNo',e=event)"
+      />
+    </vlayout>
+  </center>
+</borderlayout>

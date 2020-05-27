@@ -1,0 +1,118 @@
+<!-- 35天实销 -->
+<borderlayout width="100%" height="100%"
+              viewModel="@id('vm') @init('com.sunjet.mis.vm.report.SolidPinReportVm')"
+              style="padding:0px;border:0px">
+    <center sclass="c-center">
+        <vlayout width="100%" height="100%" style="padding-bottom:0px">
+          <!--  <include src="/views/report/35_report/35_report_impot.zul"/>-->
+            <groupbox>
+                <grid oddRowSclass="none" sclass="form-grid" hflex="1">
+                    <columns>
+                        <column width="80px"></column>
+                        <column hflex="1"></column>
+                        <column width="80px"></column>
+                        <column hflex="1"></column>
+                        <column width="80px"></column>
+                        <column hflex="1"></column>
+                        <column width="60px"></column>
+                        <column hflex="1"></column>
+                        <column width="60px"></column>
+                        <column hflex="1"></column>
+                    </columns>
+                    <rows>
+                        <row style="border:none;height:30px">
+                            <div hflex="1" align="center">
+                                <label value="车架号"/>
+                            </div>
+
+                            <textbox value="@bind(vm.solidPinReportView.vin)" hflex="1" tabindex="1"
+                                     readonly="@load(vm.isDistributor())"/>
+                            <div hflex="1" align="center">
+                                <label value="经销商名称"/>
+                            </div>
+                            <textbox value="@bind(vm.solidPinReportView.distributorName)" hflex="1" tabindex="1"
+                                     readonly="@load(vm.isDistributor())"/>
+                            <div hflex="1" align="center">
+                                <label value="经销商编号"/>
+                            </div>
+                            <textbox value="@bind(vm.solidPinReportView.distributorCode)" hflex="1" tabindex="1"
+                                     readonly="@load(vm.isDistributor())"/>
+                            <div hflex="1" align="center">
+                                <label value="VSN" hflex="1"/>
+                            </div>
+                            <textbox value="@bind(vm.solidPinReportView.vsn)" hflex="1" tabindex="1"></textbox>
+                            <div hflex="1" align="center">
+                                <label value="客户名称"/>
+                            </div>
+                            <textbox value="@bind(vm.solidPinReportView.customerName)" hflex="1" tabindex="1"
+                                     readonly="@load(vm.isDistributor())"/>
+                        </row>
+                        <row style="border:none;height:30px">
+
+                            <label value="销售日期从"/>
+                            <datebox hflex="1" format="medium" value="@bind(vm.solidPinReportView.startDate)"
+                                     readonly="true"/>
+                            <label value="至"/>
+                            <datebox hflex="1" format="medium" value="@bind(vm.solidPinReportView.endDate)"
+                                     readonly="true"/>
+                        </row>
+                    </rows>
+                </grid>
+            </groupbox>
+            <include src="/views/commons/35list_report_toolbar.zul"/>
+            <listbox hflex="true" vflex="true" oddRowSclass="none"
+                     model="@load(vm.pageResult.rows)" emptyMessage="@load(vm.emptyMessage)">
+                <listhead sizable="true">
+                    <listheader width="40px" label="行号" align="center"/>
+                    <listheader width="180px" label="车架号" align="center"/>
+                    <listheader width="120px" label="销售日期" align="center"/>
+                    <listheader width="220px" label="经销商名称" align="center"/>
+                    <listheader width="120px" label="单据日期" align="center"/>
+                    <listheader width="220px" label="客户名称" align="center"/>
+                    <listheader width="140px" label="VSN" align="center"/>
+                    <listheader width="80px" label="客户省份" align="center"/>
+                    <listheader width="160px" label="车辆型号" align="center"/>
+                    <listheader width="100px" label="经销商号" align="center"/>
+                    <listheader width="70px" label="一级代码" align="center"/>
+                    <listheader width="80px" label="车型" align="center"/>
+                    <listheader width="70px" label="开票代码" align="center"/>
+                    <listheader width="60px" label="所属区域" align="center"/>
+                </listhead>
+                <template name="model">
+                    <listitem>
+                        <listcell label="${forEachStatus.index+1}" sclass="label-index"/>
+                        <listcell label="@load(each.vin)"/>
+                        <listcell label="@load(each.invoiceDate)"/>
+
+                        <listcell label="@load(each.distributorName)"/>
+
+                        <listcell label="@load(each.billDate)"/>
+
+                        <listcell label="@load(each.customerName)"/>
+
+                        <listcell label="@load(each.vsn)"/>
+                        <listcell label="@load(each.customerProvinces)"/>
+
+                        <listcell label="@load(each.model)"/>
+
+                        <listcell label="@load(each.distributorCode)"/>
+                        <listcell label="@load(each.onecode)"/>
+
+                        <listcell label="@load(each.name)"/>
+
+                        <listcell label="@load(each.distributorCode)"/>
+                        <listcell label="@load(each.regionName)"/>
+                    </listitem>
+                </template>
+            </listbox>
+            <paging
+                    pageSize="@bind(vm.pageResult.pageSize)"
+                    totalSize="@bind(vm.pageResult.total)"
+                    pageIncrement="1"
+                    detailed="true"
+                    activePage="@bind(vm.pageResult.page)"
+                    onPaging="@command('gotoPageNo',e=event)"
+            />
+        </vlayout>
+    </center>
+</borderlayout>

@@ -1,0 +1,118 @@
+<!--
+基础管理 >>配件合作商指标管理 列表
+-->
+<borderlayout width="100%" height="100%" apply="org.zkoss.bind.BindComposer"
+              viewModel="@id('vm') @init('com.sunjet.mis.vm.basic.distributor_target.SalesTargetListVm')">
+
+  <north sclass="c-north">
+    <vlayout>
+      <grid oddRowSclass="none" hflex="1" sclass="form-grid">
+        <columns>
+          <column width="70px"></column>
+          <column hflex="1"></column>
+          <column width="70px"></column>
+          <column hflex="1"></column>
+          <column width="50px"></column>
+          <column hflex="1"></column>
+          <column width="30px"></column>
+          <column hflex="1"></column>
+        </columns>
+        <rows>
+          <row>
+            <label value="合作商编码"/>
+            <textbox value="@bind(vm.salesTargetEntity.code)" hflex="1" tabindex="1"/>
+            <label value="合作商名称"/>
+            <textbox value="@bind(vm.salesTargetEntity.name)" hflex="1" tabindex="1"/>
+            <label value="省份"/>
+            <listbox hflex="1"
+                     mold="select"
+                     model="@load(vm.provinceEntities)"
+                     selectedItem="@load(vm.selectProvince)"
+                     onSelect="@command('selectProvince',event=event)">
+              <template name="model">
+                <listitem left="1" label="@load(each.name)" value="@load(each)"
+                          selected="@load(each.name eq vm.selectProvince.name?true:false)"></listitem>
+              </template>
+            </listbox>
+           <!-- <label value="市"/>
+            <listbox hflex="1"
+                     mold="select"
+                     model="@load(vm.cityEntities)"
+                     selectedItem="@load(vm.selectedCity)"
+                     onSelect="@command('selectedCity',event=event)">
+              <template name="model">
+                <listitem left="1" label="@load(each.name)" value="@load(each)"
+                          selected="@load(each.name eq vm.selectedCity.name?true:false)">
+                </listitem>
+              </template>
+            </listbox>-->
+          </row>
+
+          <row>
+            <label value="组织"/>
+            <listbox hflex="1"
+                     mold="select"
+                     model="@load(vm.organizationEntities)"
+                     selectedItem="@load(vm.selectOrganization)"
+                     onSelect="@command('selectOrganiza',event=event)">
+              <template name="model">
+                <listitem left="1" label="@load(each.name)" value="@load(each)"
+                          selected="@load(each.name eq vm.selectOrganization.name?true:false)"></listitem>
+              </template>
+            </listbox>
+          </row>
+        </rows>
+      </grid>
+    </vlayout>
+  </north>
+  <center sclass="c-center">
+    <vlayout width="100%" height="100%">
+      <div sclass="include">
+        <include src="/views/commons/list_report_toolbar.zul"/>
+      </div>
+      <grid hflex="true" vflex="true" sclass="list-grid" oddRowSclass="none"
+            model="@load(vm.pageResult.rows)">
+        <columns sizable="true">
+          <column width="30px" label="行号" align="center"></column>
+        <!--  <column width="40px" label="状态" align="center"></column>-->
+          <column width="80px" label="经销商编码" align="center"></column>
+          <column hflex="1" label="经销商名称" align="center"></column>
+          <column width="60px" label="省份" align="center"></column>
+         <!-- <column width="60px" label="城市" align="center"></column>
+          <column width="60px" label="县/区" align="center"></column>-->
+      <!--    <column width="120px" label="准入日期" align="center"></column>-->
+          <column width="100px" label="电话" align="center"></column>
+          <column width="100px" label="法人" align="center"></column>
+        <!--  <column width="100px" label="店长" align="center"></column>-->
+        </columns>
+        <template name="model">
+          <row onDoubleClick="@command('openForm',url=vm.formUrl,objId=each.objId,title=vm.title)">
+            <label value="${forEachStatus.index+1}" sclass="label-index"/>
+            <!--<label hflex="1" value="@load(each.enabled eq true ? '启用':'禁用' )"
+                   style="@load(each.enabled eq true ? 'color:green':'color:red' )"/>-->
+            <label value="@load(each.code)" tooltiptext="@load(each.code)"/>
+            <div align="left" tooltiptext="@load(each.name)">
+              <label value="@load(each.name)"/>
+            </div>
+            <label value="@load(each.province.name)" tooltiptext="@load(each.province.name)"/>
+           <!-- <label value="@load(each.cityName)" tooltiptext="@load(each.cityName)"/>
+            <label value="@load(each.countyName)" tooltiptext="@load(each.countyName)"/>-->
+           <!-- <label value="@load(each.modifiedTime)" tooltiptext="@load(each.modifiedTime)"/>-->
+            <label value="@load(each.phone)" tooltiptext="@load(each.phone)"/>
+            <label value="@load(each.linkman)" tooltiptext="@load(each.linkman)"/>
+           <!-- <label value="@load(each.shopManager)" tooltiptext="@load(each.shopManager)"/>-->
+          </row>
+        </template>
+      </grid>
+      <paging
+              pageSize="@bind(vm.pageResult.pageSize)"
+              totalSize="@bind(vm.pageResult.total)"
+              pageIncrement="1"
+              detailed="true"
+              activePage="@bind(vm.pageResult.page)"
+              onPaging="@command('gotoPageNo',e=event)"
+              style="border:0px"
+      />
+    </vlayout>
+  </center>
+</borderlayout>

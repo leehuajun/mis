@@ -1,0 +1,83 @@
+<!-- 客厢车 车系 产地 vsn 的匹配表 -->
+
+<borderlayout width="100%" height="100%"
+              apply="org.zkoss.bind.BindComposer"
+              viewModel="@id('vm') @init('com.sunjet.mis.vm.basic.TruckSvarietyProvenanc.PassengerCompartmenProvenancCarSeriesMV')"
+              style="background-color:tr;padding:0px;"
+>
+    <center sclass="c-center">
+        <vlayout width="100%" height="100%" style="padding-bottom:0px">
+            <include
+                    src="/views/basic/passenger_compartmen_provenanc_car_series/add_passenger_compartmen_provenanc_car_series_form.zul"/>
+            <include
+                    src="/views/basic/passenger_compartmen_provenanc_car_series/passenger_compartmen_provenanc_car_series_impot.zul"/>
+         <!--   <include src="/views/commons/list_toolbar.zul"/>-->
+            <groupbox>
+                <grid oddRowSclass="none" sclass="form-grid" hflex="1">
+                    <columns>
+                        <column width="80px"></column>
+                        <column hflex="1"></column>
+                        <column width="80px"></column>
+                        <column hflex="1"></column>
+                        <column width="80px"></column>
+                        <column hflex="1"></column>
+                        <column width="60px"></column>
+                        <column hflex="1"></column>
+                        <column width="60px"></column>
+                        <column hflex="1"></column>
+                    </columns>
+                    <rows>
+                        <row style="border:none;height:30px">
+                            <div hflex="1" align="center">
+                                <label value="ABS-VSN"/>
+                            </div>
+
+                            <textbox value="@bind(vm.passengerCompartmenProvenancCarSeriesEntity.absvsn)" hflex="1" tabindex="1"
+                                     readonly="@load(vm.isDistributor())"/>
+                            <div hflex="1" align="center">
+                                <label value="产地"/>
+                            </div>
+                            <textbox value="@bind(vm.passengerCompartmenProvenancCarSeriesEntity.production)" hflex="1" tabindex="1"
+                                     readonly="@load(vm.isDistributor())"/>
+                        </row>
+
+                    </rows>
+                </grid>
+            </groupbox>
+            <include src="/views/commons/list_report_toolbar.zul"/>
+
+            <listbox hflex="true" vflex="true" oddRowSclass="true"
+                     model="@load(vm.pageResult.rows)" emptyMessage="@load(vm.emptyMessage)">
+                <listhead sizable="true">
+                    <listheader width="40px" label="行号" align="center"/>
+                    <listheader width="180px" label="ABS-VSN" align="center"/>
+                    <listheader width="120px" label="产品类别" align="center"/>
+                    <listheader width="120px" label="产品名称" align="center"/>
+                    <listheader width="220px" label="基地" align="center"/>
+                    <listheader width="66px" label="操作" align="center"/>
+                </listhead>
+                <template name="model">
+                    <listitem>
+                        <listcell label="${forEachStatus.index+1}" sclass="label-index"/>
+                        <listcell label="@load(each.absvsn)"/>
+                        <listcell label="@load(each.productCategory)"/>
+                        <listcell label="@load(each.productName)"/>
+                        <listcell label="@load(each.production)"/>
+                        <listcell>
+                            <include src="/views/commons/list_menubar.zul" style="background:transparent"/>
+                        </listcell>
+                    </listitem>
+                </template>
+            </listbox>
+            <paging
+                    pageSize="@bind(vm.pageResult.pageSize)"
+                    totalSize="@bind(vm.pageResult.total)"
+                    pageIncrement="1"
+                    detailed="true"
+                    activePage="@bind(vm.pageResult.page)"
+                    onPaging="@command('gotoPageNo',e=event)"
+                    style="border:0px"
+            />
+        </vlayout>
+    </center>
+</borderlayout>

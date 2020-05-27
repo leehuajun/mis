@@ -1,0 +1,15 @@
+<menubar sclass="list-menubar">
+  <menu label="操作">
+    <menupopup sclass="closemenu">
+      <menuitem style="text-align:left" iconSclass="z-icon-file-text-o" label="查看"
+                onClick="@command('openForm',id=each.data.id,url=vm.formUrl,title=vm.title,readonly=true)"
+                if="${vm.permissionStatus.canSearch}"/>
+      <menuitem style="text-align:left" iconSclass="z-icon-edit" label="修改"
+                onClick="@command('openForm',id=each.data.id,url=vm.formUrl,title=vm.title)"
+                if="${vm.permissionStatus.canModify}"/>
+      <menuitem style="text-align:left" iconSclass="z-icon-times" label="删除"
+                onClick="@command('confirmDeleteObject',id=each.data.id)"
+                if="${vm.permissionStatus.canDelete}"/>
+    </menupopup>
+  </menu>
+</menubar>

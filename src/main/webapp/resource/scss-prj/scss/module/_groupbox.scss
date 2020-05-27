@@ -1,0 +1,18 @@
+@charset "utf-8";
+//必须设置了这个才能编译有中文的注释
+@import "variables";
+
+.z-groupbox-notitle .z-groupbox-content {
+   border-top: 0px solid #cfcfcf;
+}
+.z-groupbox-content {
+  border: 0px solid #cfcfcf;
+  background: #fff;
+  border: none !important;
+  padding: 10px;
+  @include border-radius(5px);
+}
+.z-groupbox > .z-groupbox-header {
+  border: none;
+  background: #fff;
+}

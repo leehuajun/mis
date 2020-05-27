@@ -1,0 +1,18 @@
+<!-- 页面左边导航栏 -->
+<vlayout vflex="1" sclass="sidebar-v">
+  <!--"z-tree","z-dottree","z-filetree","z-vfiletree"-->
+  <tree id="menuTree"
+        model="@load(vm.treeModel)"
+        zclass="z-tree"
+        sclass="sidebar">
+    <template name="model">
+      <treeitem onClick="@command('openTab',e=event)">
+        <treerow style="${each.childCount>0 ? 'background-color:none' : 'background-color:#fff'}">
+        <!--<treerow>-->
+          <treecell label="${each.data.name}" iconSclass="${each.data.icon}" tooltiptext="${each.data.name}">
+          </treecell>
+        </treerow>
+      </treeitem>
+    </template>
+  </tree>
+</vlayout>

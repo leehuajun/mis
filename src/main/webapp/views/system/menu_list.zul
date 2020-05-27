@@ -1,0 +1,41 @@
+<!-- 菜单管理 -->
+<borderlayout width="100%" height="100%"
+              apply="org.zkoss.bind.BindComposer"
+              viewModel="@id('vm') @init('com.sunjet.mis.vm.system.MenuListVM')">
+  <center hflex="true" vflex="true" sclass="form-center">
+    <!--<vlayout width="100%" height="100%">-->
+    <!--<vlayout style="background:#FFF;height:100%;overflow-y:auto;border:0px solid black;">-->
+    <!--"z-tree","z-dottree","z-filetree","z-vfiletree"-->
+    <vlayout width="100%" height="100%">
+      <include src="/views/system/menu_form.zul"/>
+      <include sclass="include" src="/views/commons/list_toolbar.zul"/>
+      <tree
+            model="@bind(vm.treeModel)">
+        <treecols>
+          <treecol width="200px" label="名称"/>
+          <!--<treecol width="40px" label="图标"/>-->
+          <treecol width="60px" label="排序号" align="center"/>
+          <treecol hflex="1" label="URL"/>
+          <treecol width="200px" label="权限要求" align="center"/>
+          <treecol width="80px" label="状态" align="center"/>
+          <treecol width="66px" label="操作" align="center"/>
+        </treecols>
+        <template name="model">
+          <treeitem open="true" value="@load(each.data)">
+            <treerow style="height:24px;border-bottom:1px solid rgb(248,248,248)">
+              <treecell label="@load(each.data.name)" iconSclass="@load(each.data.icon)"/>
+              <treecell label="@load(each.data.seq)"/>
+              <treecell label="@load(each.data.url)"/>
+              <treecell label="@load(each.data.permission)"/>
+              <treecell label="@load(each.data.enabled eq true ? '启用':'禁用' )"
+                        style="@load(each.data.enabled eq true ? 'color:green;font-weight:700':'color:red;font-weight:700' )"/>
+              <treecell>
+                <include src="/views/commons/tree_menubar.zul" style="background:transparent"/>
+              </treecell>
+            </treerow>
+          </treeitem>
+        </template>
+      </tree>
+    </vlayout>
+  </center>
+</borderlayout>

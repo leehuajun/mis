@@ -1,0 +1,36 @@
+<!-- 页头导航栏 -->
+<div width="100%">
+  <!-- Brand Logo -->
+  <!--<image src="@load(vm.app_logo)" sclass="navbar-logo"/>-->
+  <!--<label value="@load(vm.app_name)" sclass="pull-left navbar-brand"/>-->
+  <!-- Navbar -->
+  <hlayout sclass="pull-left">
+    <div width="2px"/>
+    <image src="resource/images/logo/wuling-logo.png" width="40px" height="38px"/>
+    <!--<div style="width:40px;height:35px;background: url(resource/images/logo/wuling-logo.png) center;background-repeat: no-repeat"></div>-->
+    <div width="10px"/>
+    <label sclass="navbar-brand"
+           style="font-size: 16px;font-weight:bold;line-height: 32px;color: #fff;text-shadow: 2px 2px 4px #000000;"
+           value="广西汽车集团 - 整车销售订单跟踪系统"></label>
+  </hlayout>
+  <hlayout sclass="pull-right" spacing="0">
+    <timer repeats="true" running="true" delay="60000" onTimer="@command('renewal')"/>
+    <menubar width="100%" sclass="navbar-menubar">
+      <menuitem iconSclass="z-icon-home" label="首页" onClick="@command('showIndex')"/>
+      <!--<menuitem iconSclass="z-icon-tasks" label="消息通知" onClick="@command('enterMessageList')"/>-->
+      <!--<menuitem iconSclass="z-icon-tasks" label="待办任务" onClick="@command('enterTaskList')"/>-->
+      <!--<menuitem iconSclass="z-icon-envelope" label="通知公告" onClick="@command('enterNoticeList')"/>-->
+      <menu iconSclass="z-icon-user" label="@load(vm.activeUser.username)" sclass="username-ellipsis"
+            tooltiptext="@load(vm.activeUser.username)">
+        <menupopup sclass="navbar-menupopup">
+          <!--<menuitem iconSclass="z-icon-exchange" label="切换组织"-->
+                    <!--onClick="@command('switchOrg')"/>-->
+          <!--<menuitem iconSclass="z-icon-lock" label="修改密码"-->
+                    <!--onClick="@command('changePassword"/>-->
+          <menuitem iconSclass="z-icon-sign-out" label="注销"
+                    onClick="@command('logout')"/>
+        </menupopup>
+      </menu>
+    </menubar>
+  </hlayout>
+</div>

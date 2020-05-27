@@ -1,0 +1,14 @@
+<!-- 图标列表 -->
+<window width="100%"
+        apply="org.zkoss.bind.BindComposer"
+        viewModel="@id('vm') @init('com.sunjet.mis.vm.system.IconListVM')">
+<div sclass="gallery">
+  <!--<forEach begin="1" end="12">-->
+  <div sclass="imageDiv" forEach="${vm.icons}" align="center" style="padding:10px">
+    <vlayout style="text-align:center">
+      <span class="${each.name} custom-icon-item"/>
+      <label value="${each.name}"/>
+    </vlayout>
+  </div>
+</div>
+</window>

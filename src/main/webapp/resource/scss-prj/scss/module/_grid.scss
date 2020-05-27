@@ -1,0 +1,365 @@
+@charset "utf-8";
+//必须设置了这个才能编译有中文的注释
+@import "variables";
+
+$list-row-border: #f2f2f2;
+.list-grid {
+  border: none;
+  .z-grid-header-border {
+    border: 1px solid $default;
+    border-bottom: 0px solid $default !important;
+    //border-top: 0px solid $default !important;
+    //border-left: 1px solid $default;
+    //border-right: 1px solid $default;
+  }
+  .z-grid-header {
+    background: $default;
+    //border-bottom: 0px solid darken($border-color,10%);
+    .z-auxhead {
+      //border-bottom: 0px solid darken($border-color,10%);
+      .z-auxheader {
+        background: $default;
+        border-left: 1px solid darken($border-color, 10%);
+        border-bottom: 1px solid darken($border-color, 10%);
+
+        &:first-child {
+          border-left: 1px solid $default;
+        }
+        //&:last-child{
+        //  border-right: 1px solid $default;
+        //}
+        .z-auxheader-content {
+          color: $font-reversed-color;
+          font-weight: bold;
+          padding: 2px 2px;
+          text-align: center;
+          //.z-row-content {
+          //  padding: 2px 2px;
+          //}
+          //&:active {
+          //  background: darken($default, 10);
+          //}
+        }
+      }
+      .z-auxhead-bar {
+        border-left: 0px solid darken($border-color, 10%);
+        border-bottom: 0px solid darken($border-color, 10%);
+        border-right: 1px solid $default;
+        background: $default;
+      }
+    }
+
+    .z-columns {
+      //border-bottom: 0px solid darken($border-color,10%);
+      .z-column {
+        background: $default;
+        border-left: 1px solid darken($border-color, 10%);
+        //border-bottom: 0px solid darken($border-color,10%);
+
+        &:first-child {
+          border-left: 1px solid $default;
+        }
+        //&:last-child{
+        //  border-right: 1px solid $default;
+        //}
+        .z-column-content {
+          color: $font-reversed-color;
+          font-weight: bold;
+          padding: 2px 2px;
+          //text-align: center;
+          //.z-row-content {
+          //  padding: 2px 2px;
+          //}
+          &:active {
+            background: darken($default, 10);
+          }
+        }
+      }
+      .z-columns-bar {
+        border-left: 0px solid darken($border-color, 10%);
+        border-bottom: 0px solid darken($border-color, 10%);
+        border-right: 1px solid $default;
+        background: $default;
+      }
+
+      .z-column-sort .z-column-sorticon {
+        color: $font-reversed-color;
+        font-size: 20px;
+        //top: 2px;
+        //left: 90%;
+
+        //&:active {
+        //  background: darken($default, 10);
+        //}
+      }
+    }
+  }
+
+  .z-grid-body {
+    background: whitesmoke;
+    .z-rows {
+      .z-row {
+        border-bottom: 1px solid white;
+        .z-cell {
+          padding: 2px 2px;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+        }
+        .z-row-content {
+          padding: 2px 2px;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          //background: whitesmoke;
+
+          .z-label {
+            white-space: nowrap;
+            text-overflow: ellipsis;
+          }
+        }
+        &:hover {
+          .z-row-inner, .z-cell {
+            @include transition(all 0.3s ease);
+            background: rgba($default, .3) !important;
+          }
+        }
+        //&:active{
+        //  .z-row-inner, .z-cell {
+        //    background: rgba($default, .3) !important;
+        //  }
+        //}
+        .z-row-inner {
+          border-top: 0px solid $list-row-border;
+          border-bottom: 1px solid $list-row-border;
+        }
+      }
+      .z-row-selected {
+        .z-row-inner, .z-cell {
+          @include transition(all 0.3s ease);
+          background: rgba($default, .3) !important;
+        }
+      }
+    }
+    .z-grid-emptybody {
+      .z-grid-emptybody-content {
+        //text-align: center;
+      }
+    }
+  }
+
+  .label-index {
+    color: $default;
+    font-weight: bold;
+  }
+  .label-distinct {
+    color: $default;
+    font-weight: bold;
+  }
+}
+
+.form-grid {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  //overflow-x: hidden;
+  //overflow-y: scroll;
+  .z-grid-header-border {
+    border-bottom: none;
+    margin-top: -1px;
+    position: relative;
+  }
+  &.z-grid {
+    border: none;
+  }
+
+  .z-grid-body {
+    overflow-x: hidden !important;
+  }
+  .z-row {
+    background-image: none;
+    border: none;
+    padding: 0 5px;
+    margin: 0px;
+    height: 30px !important;
+    > {
+      .z-row-inner {
+        background-image: none;
+        border: none;
+        padding: 0;
+        margin: 0;
+        height: 30px !important;
+        border-bottom: 0px solid $list-row-border;
+        > .z-row-content {
+          background-image: none;
+          border: none;
+          padding: 0px;
+        }
+        &:hover, > .z-row-content:hover {
+          background-image: none;
+          border: none;
+        }
+      }
+      .z-cell {
+        background-image: none;
+        border: none;
+        padding: 0px;
+        &:hover {
+          background-image: none;
+          border: none;
+        }
+      }
+    }
+    &:hover > .z-row-inner, > .z-cell > .z-label:hover {
+      position: relative;
+      cursor: auto;
+      background-color: #FFFFFF;
+      border-bottom: none;
+    }
+
+    &:hover >, &.z-grid-odd:hover > {
+      .z-row-inner {
+        position: relative;
+        cursor: auto;
+        background-color: #FFFFFF;
+        color: $font-color;
+        border-bottom: none;
+      }
+      .z-cell {
+        position: relative;
+        cursor: auto;
+        background-color: #FFFFFF;
+        color: $font-color;
+        border-bottom: none;
+        > .z-label {
+          position: relative;
+          cursor: auto;
+          background-color: #FFFFFF;
+          color: $font-color;
+          border: none;
+        }
+      }
+    }
+  }
+}
+
+.icon-grid {
+  border: none;
+  .z-grid-header-border {
+    border: 1px solid $default;
+    border-bottom: 0px solid $default !important;
+    //border-top: 0px solid $default !important;
+    //border-left: 1px solid $default;
+    //border-right: 1px solid $default;
+  }
+  .z-grid-header {
+    background: $default;
+    //border-bottom: 0px solid darken($border-color,10%);
+    .z-auxhead {
+      //border-bottom: 0px solid darken($border-color,10%);
+      .z-auxheader {
+        background: $default;
+        border-left: 1px solid darken($border-color, 10%);
+        border-bottom: 1px solid darken($border-color, 10%);
+
+        &:first-child {
+          border-left: 1px solid $default;
+        }
+        //&:last-child{
+        //  border-right: 1px solid $default;
+        //}
+        .z-auxheader-content {
+          color: $font-reversed-color;
+          font-weight: bold;
+          padding: 2px 2px;
+          text-align: center;
+          //.z-row-content {
+          //  padding: 2px 2px;
+          //}
+          //&:active {
+          //  background: darken($default, 10);
+          //}
+        }
+      }
+      .z-auxhead-bar {
+        border-left: 0px solid darken($border-color, 10%);
+        border-bottom: 0px solid darken($border-color, 10%);
+        border-right: 1px solid $default;
+        background: $default;
+      }
+    }
+
+    .z-columns {
+      //border-bottom: 0px solid darken($border-color,10%);
+      .z-column {
+        background: $default;
+        border-left: 1px solid darken($border-color, 10%);
+        //border-bottom: 0px solid darken($border-color,10%);
+
+        &:first-child {
+          border-left: 1px solid $default;
+        }
+        //&:last-child{
+        //  border-right: 1px solid $default;
+        //}
+        .z-column-content {
+          color: $font-reversed-color;
+          font-weight: bold;
+          padding: 2px 2px;
+          //text-align: center;
+          //.z-row-content {
+          //  padding: 2px 2px;
+          //}
+          &:active {
+            background: darken($default, 10);
+          }
+        }
+      }
+      .z-columns-bar {
+        border-left: 0px solid darken($border-color, 10%);
+        border-bottom: 0px solid darken($border-color, 10%);
+        border-right: 1px solid $default;
+        background: $default;
+      }
+
+      .z-column-sort .z-column-sorticon {
+        color: $font-reversed-color;
+        font-size: 20px;
+        //top: 2px;
+        //left: 90%;
+
+        //&:active {
+        //  background: darken($default, 10);
+        //}
+      }
+    }
+  }
+
+  .z-grid-body {
+    .z-rows {
+      .z-row {
+        .z-cell {
+          padding: 2px 2px;
+        }
+        .z-row-content {
+          padding: 2px 2px;
+        }
+        &:hover {
+          .z-row-inner, .z-cell {
+            background-color: rgba($default, .3);
+          }
+        }
+        .z-row-inner {
+          border-top: 0px solid $list-row-border;
+          border-bottom: 1px solid $list-row-border;
+        }
+      }
+    }
+    .z-grid-emptybody {
+      .z-grid-emptybody-content {
+        //text-align: center;
+      }
+    }
+  }
+}
+
+
+
+

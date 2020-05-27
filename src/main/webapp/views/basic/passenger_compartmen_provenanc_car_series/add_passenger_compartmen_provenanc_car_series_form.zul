@@ -1,0 +1,58 @@
+<!-- 添加客厢车 车系 产地 vsn 的匹配表 -->
+<window visible="@load(vm.showForm)" width="500px" height="350px" sclass="dialog-window"
+        sizable="false" mode="modal" closable="true" onClose="@command('abort',event=event)">
+    <caption label="客厢车车系产地" iconSclass="z-icon-windows"/>
+    <borderlayout width="100%" height="100%">
+        <center sclass="form-center" vflex="1" hflex="1" style="border-bottom:0px">
+            <vlayout vflex="1">
+
+                <groupbox vflex="1" hflex="2">
+                    <grid oddRowSclass="none" sclass="form-grid">
+                        <columns>
+                            <column width="60px"></column>
+                            <column hflex="1" align="left"></column>
+                        </columns>
+                        <rows>
+                            <row style="border:none;height:50px">
+                                <label value="ABS-VSN" style="text-align:left;align:center;pack:left"/>
+                                <textbox hflex="1" value="@bind(vm.selectedPassengerCompartmenProvenancCarSeriesEntity.absvsn)"
+                                         tabindex="1" readonly="@load(vm.readonly)"
+                                         style="align:center;pack:left"/>
+                            </row>
+
+                            <row style="border:none;height:50px">
+                                <label value="产品类别" style="text-align:left;align:center;pack:left"/>
+                                <textbox hflex="1" value="@bind(vm.selectedPassengerCompartmenProvenancCarSeriesEntity.productCategory)"
+                                         tabindex="2" readonly="@load(vm.readonly)"
+                                         style="align:center;pack:left"/>
+                            </row>
+                            <row style="border:none;height:50px">
+                                <label value="产品名称" style="text-align:left;align:center;pack:left"/>
+                                <textbox hflex="1" value="@bind(vm.selectedPassengerCompartmenProvenancCarSeriesEntity.productName)"
+                                         tabindex="2" readonly="@load(vm.readonly)"
+                                         style="align:center;pack:left"/>
+                            </row>
+                            <row style="border:none;height:50px">
+                                <label value="基地" style="text-align:left;align:center;pack:left"/>
+                                <textbox hflex="1" value="@bind(vm.selectedPassengerCompartmenProvenancCarSeriesEntity.production)"
+                                         tabindex="2" readonly="@load(vm.readonly)"
+                                         style="align:center;pack:left"/>
+                            </row>
+
+                        </rows>
+                    </grid>
+                </groupbox>
+                <hlayout height="50px">
+                    <div align="center" hflex="1" style="margin:10px">
+                        <button iconSclass="" sclass="btn-default " tabindex="5" label="保存"
+                                disabled="@load(vm.readonly)"
+                                onClick="@command('submit')"/>
+                        <space width="20px"/>
+                        <button iconSclass="" sclass="btn-danger" label="关闭" tabindex="6"
+                                onClick="@command('abort',event=event)"/>
+                    </div>
+                </hlayout>
+            </vlayout>
+        </center>
+    </borderlayout>
+</window>

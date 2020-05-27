@@ -1,0 +1,126 @@
+<!-- 订单计划管理-销售计划 -->
+<!--<window xmlns:w="client">-->
+<borderlayout width="100%" height="100%"
+              viewModel="@id('vm') @init('com.sunjet.mis.vm.report.PlanVM')"
+              style="padding:0px;"
+>
+  <center  sclass="c-center">
+    <vlayout width="100%" height="100%" style="padding-bottom:0px">
+      <groupbox>
+        <grid oddRowSclass="none" sclass="form-grid" hflex="1">
+          <columns>
+            <column width="80px"></column>
+            <column hflex="1"></column>
+            <column width="80px"></column>
+            <column hflex="1"></column>
+            <column width="80px"></column>
+            <column hflex="1"></column>
+            <column width="60px"></column>
+            <column hflex="1"></column>
+          </columns>
+          <rows>
+            <row style="border:none;height:30px">
+              <div hflex="1" align="center">
+                <label value="SGMW编码"/>
+              </div>
+              <textbox value="@bind(vm.planEntity.sgmwCode)" hflex="1" tabindex="1"
+                       readonly="@load(vm.isDistributor())"/>
+              <div hflex="1" align="center">
+                <label value="客户编码"/>
+              </div>
+              <textbox value="@bind(vm.planEntity.distributorCode)" hflex="1" tabindex="1"
+                       readonly="@load(vm.isDistributor())"/>
+              <div hflex="1" align="center">
+                <label value="客户名称"/>
+              </div>
+              <textbox value="@bind(vm.planEntity.distributorName)" hflex="1" tabindex="1"
+                       readonly="@load(vm.isDistributor())"/>
+              <div hflex="1" align="center">
+                <label value="VSN" hflex="1"/>
+              </div>
+              <textbox value="@bind(vm.planEntity.vsn)" hflex="1" tabindex="1"
+                       readonly="@load(vm.isDistributor())"/>
+            </row>
+          </rows>
+        </grid>
+      </groupbox>
+      <include src="/views/commons/list_report_toolbar.zul"/>
+      <include src="/views/report/plan/plan_import.zul"/>
+      <listbox hflex="true" vflex="true" oddRowSclass="none"
+               model="@load(vm.pageResult.rows)" emptyMessage="@load(vm.emptyMessage)"
+      >
+        <auxhead>
+          <auxheader label="--" colspan="1" align="center"/>
+          <auxheader label="申报时间" colspan="2" align="center"/>
+          <auxheader label="经销商信息" colspan="5" align="center"/>
+          <auxheader label="详细申报信息" colspan="11" align="center"/>
+          <auxheader label="周满足计划" colspan="6" align="center"/>
+        </auxhead>
+        <listhead sizable="true">
+          <listheader width="40px" label="行号" align="center"/>
+          <listheader width="120px" label="年度" sort="auto(year)" align="center"/>
+          <listheader width="120px" label="月份" sort="auto(year)" align="center"/>
+          <listheader width="100px" label="经销商代码(工业)" sort="auto(distributorCode)" align="center"/>
+          <listheader width="100px" label="经销商代码(SGMW)" sort="auto(sgmwCode)" align="center"/>
+          <listheader width="120px" label="经销商名称" align="center"/>
+          <listheader width="120px" label="省份" align="center"/>
+          <listheader width="120px" label="区域" align="center"/>
+          <listheader width="120px" label="申报类型" align="center"/>
+          <listheader width="120px" label="类型" align="center"/>
+          <listheader width="120px" label="物料号" align="center"/>
+          <listheader width="120px" label="型号" align="center"/>
+          <listheader width="120px" label="车型" align="center"/>
+          <listheader width="120px" label="品种代码" align="center"/>
+          <listheader width="120px" label="颜色" align="center"/>
+          <listheader width="120px" label="排放标准" align="center"/>
+          <listheader width="120px" label="经销商申报数量" align="center"/>
+          <listheader width="120px" label="全月满足数" align="center"/>
+          <listheader width="120px" label="不满足原因" align="center"/>
+          <listheader width="120px" label="第一周" align="center"/>
+          <listheader width="120px" label="第二周" align="center"/>
+          <listheader width="120px" label="第三周" align="center"/>
+          <listheader width="120px" label="第四周" align="center"/>
+          <listheader width="120px" label="第五周" align="center"/>
+          <listheader width="120px" label="第六周" align="center"/>
+        </listhead>
+        <template name="model">
+          <listitem>
+            <listcell label="${forEachStatus.index+1}" sclass="label-index"/>
+            <listcell label="@load(each.year)"/>
+            <listcell label="@load(each.month)"/>
+            <listcell label="@load(each.distributorCode)" tooltiptext="@load(each.distributorCode)"/>
+            <listcell label="@load(each.sgmwCode)" tooltiptext="@load(each.sgmwCode)"/>
+            <listcell label="@load(each.distributorName)"/>
+            <listcell label="@load(each.province)"/>
+            <listcell label="@load(each.region)"/>
+            <listcell label="@load(each.planType)"/>
+            <listcell label="@load(each.type)"/>
+            <listcell label="@load(each.vsn)"/>
+            <listcell label="@load(each.model)"/>
+            <listcell label="@load(each.vehicleModel)"/>
+            <listcell label="@load(each.brandCode)"/>
+            <listcell label="@load(each.color)"/>
+            <listcell label="@load(each.effluent)"/>
+            <listcell label="@load(each.requiredAmount)"/>
+            <listcell label="@load(each.agreedAmount)"/>
+            <listcell label="@load(each.reason)"/>
+            <listcell label="@load(each.firstWeekAmount)"/>
+            <listcell label="@load(each.secondWeekAmount)"/>
+            <listcell label="@load(each.thirdWeekAmount)"/>
+            <listcell label="@load(each.fourthWeekAmount)"/>
+            <listcell label="@load(each.fifthWeekAmount)"/>
+            <listcell label="@load(each.sixthWeekAmount)"/>
+          </listitem>
+        </template>
+      </listbox>
+      <paging
+              pageSize="@bind(vm.pageResult.pageSize)"
+              totalSize="@bind(vm.pageResult.total)"
+              pageIncrement="1"
+              detailed="true"
+              activePage="@bind(vm.pageResult.page)"
+              onPaging="@command('gotoPageNo',e=event)"
+      />
+    </vlayout>
+  </center>
+</borderlayout>

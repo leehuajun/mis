@@ -1,0 +1,45 @@
+<!-- 系统配置 -->
+<borderlayout width="100%" height="100%"
+              viewModel="@id('vm') @init('com.sunjet.mis.vm.system.ConfigListVM')">
+  <center sclass="c-center">
+    <vlayout width="100%" height="100%">
+      <include src="/views/system/config_form.zul"/>
+      <include src="/views/commons/list_toolbar.zul"/>
+      <listbox hflex="true" vflex="true" oddRowSclass="true"
+            model="@load(vm.pageResult.rows)" emptyMessage="@load(vm.emptyMessage)"
+      >
+        <listhead sizable="true">
+          <listheader width="40px" label="行号" align="center"/>
+          <listheader width="100px" label="参数名称" align="center"/>
+          <listheader width="100px" label="当前值" align="center"/>
+          <listheader width="100px" label="初始值" align="center"/>
+          <listheader hflex="1" label="描述" align="center"/>
+          <listheader width="80px" label="所属组织" align="center"/>
+          <listheader width="66px" label="操作" align="center"/>
+        </listhead>
+        <template name="model">
+          <listitem>
+            <listcell label="${forEachStatus.index+1}" sclass="label-index"/>
+              <listcell label="@bind(each.key)" style="text-align:left"/>
+              <listcell label="@bind(each.value)" style="text-align:left"/>
+              <listcell label="@bind(each.initialValue)" style="text-align:left"/>
+              <listcell label="@bind(each.comment)" style="text-align:left"/>
+              <listcell label="@bind(each.org)" style="text-align:left"/>
+            <listcell>
+              <include src="/views/commons/list_menubar.zul" style="background:transparent"/>
+            </listcell>
+          </listitem>
+        </template>
+      </listbox>
+      <paging
+              pageSize="@bind(vm.pageResult.pageSize)"
+              totalSize="@bind(vm.pageResult.total)"
+              pageIncrement="1"
+              detailed="true"
+              activePage="@bind(vm.pageResult.page)"
+              onPaging="@command('gotoPageNo',e=event)"
+              style="border:0px"
+      />
+    </vlayout>
+  </center>
+</borderlayout>

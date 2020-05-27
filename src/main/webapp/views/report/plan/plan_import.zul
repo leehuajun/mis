@@ -1,0 +1,122 @@
+<!--
+基础管理 >>维修项目及定时金额表单
+-->
+<!--<window title="维修项目编辑" border="normal" width="500px" height="350px"-->
+<!--sizable="false"-->
+<!--style="margin:20px;padding-top:0px;padding-left:0px;" position="@load(vm.window_position)" closable="true"-->
+<!--onClose="spaceOwner.detach();"-->
+<!--viewModel="@id('vm') @init('com.sunjet.frontend.vm.basic.MaintainFormVM')"-->
+<!--validationMessages="@id('vmsgs')">-->
+<window visible="@load(vm.showImportWindow)" width="600px" height="500px" sclass="dialog-window"
+        sizable="false" mode="modal" closable="true" style="background:d9d9d9"
+        onClose="@command('abort',event=event)">
+  <!--onClose="self.visible = false;vm.showImportWindow = !vm.showImportWindow;event.stopPropagation();">-->
+  <caption label="导入计划执行数据" iconSclass="z-icon-windows"/>
+  <borderlayout hflex="1" vflex="1">
+    <north border="none">
+      <grid oddRowSclass="none" hflex="1" sclass="form-grid">
+        <columns>
+          <column width="120px"></column>
+          <column hflex="1"></column>
+        </columns>
+        <rows>
+          <row>
+            <button label="选择Excel文件..." hflex="1"
+                    sclass="btn-default"
+                    upload="true,maxsize=51200"
+                    onUpload="@command('doUploadFile',event=event)"/>
+            <textbox hflex="1" value="@load(vm.uploadFilename)" readonly="true"/>
+          </row>
+        </rows>
+      </grid>
+    </north>
+    <center sclass="c-center" hflex="1" vflex="1">
+      <vlayout width="100%" vflex="1">
+        <!--<div sclass="include">-->
+        <!--<div sclass="ctoolbars" xmlns="http://www.zkoss.org/2005/zul">-->
+        <!--<div sclass="ctoolbar-left">-->
+        <!--<button iconSclass="" sclass="btn-default " label="导入"-->
+        <!--onClick="@command('importData')"/>-->
+        <!--</div>-->
+        <!--<div sclass="ctoolbar-right" style="float:right">-->
+        <!--&lt;!&ndash;<button iconSclass="@load(iconVariable.icon_search)" sclass="btn-default"&ndash;&gt;-->
+        <!--&lt;!&ndash;label="查询"&ndash;&gt;-->
+        <!--&lt;!&ndash;onClick="@command('refreshData')"></button>&ndash;&gt;-->
+        <!--<button iconSclass="@load(iconVariable.icon_refresh)" sclass="btn-default"-->
+        <!--label="重置"-->
+        <!--onClick="@command('reset')"></button>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</div>-->
+        <listbox hflex="true" vflex="true" model="@load(vm.importEntities)" mold="paging"
+              pageSize="10">
+          <listhead sizable="true">
+            <listheader width="40px" label="行号" align="center"/>
+            <listheader width="100px" label="年度" sort="auto(year)" align="center"/>
+            <listheader width="100px" label="月份" sort="auto(month)" align="center"/>
+            <listheader width="100px" label="经销商代码" sort="auto(distributorCode)" align="center"/>
+            <listheader width="100px" label="经销商代码(sgmw)" sort="auto(sgmwCode)" align="center"/>
+            <listheader width="80px" label="经销商名称" align="center"/>
+            <listheader width="80px" label="省份" align="center"/>
+            <listheader width="80px" label="区域" align="center"/>
+            <listheader width="120px" label="申报类型" align="center"/>
+            <listheader width="120px" label="类型" align="center"/>
+            <listheader width="120px" label="物料号" align="center"/>
+            <listheader width="120px" label="型号" align="center"/>
+            <listheader width="120px" label="车型" align="center"/>
+            <listheader width="60px" label="品种代码" align="center"/>
+            <listheader width="160px" label="颜色" align="center"/>
+            <listheader width="160px" label="排放标准" align="center"/>
+            <listheader width="120px" label="经销商申报数" align="center"/>
+            <listheader width="120px" label="全月满足数" align="center"/>
+            <listheader width="120px" label="不满足原因" align="center"/>
+            <listheader width="120px" label="第1周满足计划" align="center"/>
+            <listheader width="120px" label="第2周满足计划" align="center"/>
+            <listheader width="120px" label="第3周满足计划" align="center"/>
+            <listheader width="120px" label="第4周满足计划" align="center"/>
+            <listheader width="120px" label="第5周满足计划" align="center"/>
+            <listheader width="120px" label="第6周满足计划" align="center"/>
+          </listhead>
+          <template name="model">
+            <listitem  style="@load(vm.genStyle(each))">
+              <listcell label="${forEachStatus.index+1}" sclass="label-index"/>
+              <listcell label="@load(each.year)" tooltiptext="@load(each.year)"/>
+              <listcell label="@load(each.month)" tooltiptext="@load(each.month)"/>
+              <listcell label="@load(each.distributorCode)" tooltiptext="@load(each.distributorCode)"/>
+              <listcell label="@load(each.sgmwCode)" tooltiptext="@load(each.sgmwCode)"/>
+              <listcell label="@load(each.distributorName)" tooltiptext="@load(each.distributorName)"/>
+              <listcell label="@load(each.province)" tooltiptext="@load(each.province)"/>
+              <listcell label="@load(each.region)" tooltiptext="@load(each.region)"/>
+              <listcell label="@load(each.planType)" tooltiptext="@load(each.planType)"/>
+              <listcell label="@load(each.type)" tooltiptext="@load(each.type)"/>
+              <listcell label="@load(each.vsn)" tooltiptext="@load(each.vsn)"/>
+              <listcell label="@load(each.model)" tooltiptext="@load(each.model)"/>
+              <listcell label="@load(each.vehicleModel)" tooltiptext="@load(each.vehicleModel)"/>
+              <listcell label="@load(each.brandCode)" tooltiptext="@load(each.brandCode)"/>
+              <listcell label="@load(each.color)" tooltiptext="@load(each.color)"/>
+              <listcell label="@load(each.effluent)" tooltiptext="@load(each.effluent)"/>
+              <listcell label="@load(each.requiredAmount)" tooltiptext="@load(each.requiredAmount)"/>
+              <listcell label="@load(each.agreedAmount)" tooltiptext="@load(each.agreedAmount)"/>
+              <listcell label="@load(each.reason)" tooltiptext="@load(each.reason)"/>
+              <listcell label="@load(each.firstWeekAmount)" tooltiptext="@load(each.firstWeekAmount)"/>
+              <listcell label="@load(each.secondWeekAmount)" tooltiptext="@load(each.secondWeekAmount)"/>
+              <listcell label="@load(each.thirdWeekAmount)" tooltiptext="@load(each.thirdWeekAmount)"/>
+              <listcell label="@load(each.fourthWeekAmount)" tooltiptext="@load(each.fourthWeekAmount)"/>
+              <listcell label="@load(each.fifthWeekAmount)" tooltiptext="@load(each.fifthWeekAmount)"/>
+              <listcell label="@load(each.sixthWeekAmount)" tooltiptext="@load(each.sixthWeekAmount)"/>
+            </listitem>
+          </template>
+        </listbox>
+        <hlayout hflex="1">
+          <div align="center" hflex="1" style="margin:10px">
+            <button iconSclass="" sclass="btn-default " label="保存"
+                    onClick="@command('importData')"/>
+            <space width="20px"/>
+            <button iconSclass="" sclass="btn-danger" label="关闭"
+                    onClick="@command('abort',event=event)"/>
+          </div>
+        </hlayout>
+      </vlayout>
+    </center>
+  </borderlayout>
+</window>

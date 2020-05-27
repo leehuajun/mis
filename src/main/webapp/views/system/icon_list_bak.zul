@@ -1,0 +1,26 @@
+<!-- 图标列表 -->
+<window width="100%"
+        apply="org.zkoss.bind.BindComposer"
+        viewModel="@id('vm') @init('com.sunjet.mis.module.system.vm.IconListVM')">
+  <grid model="@load(vm.categories)" sclass="icon-grid">
+    <template name="model" var="category">
+      <row>
+        <vlayout>
+          <hlayout onClick="@command('updateCategoryStatus',category=category)">
+            <span sclass="label-index" class="@load(vm.categoryStatusMap.get(category) ? 'z-icon-angle-down':'z-icon-angle-right')" onClick="@command('updateCategoryStatus',category=category)"/>
+            <!--<button sclass="btn-default" label="@load(vm.categoryStatusMap.get(category)?'显示':'隐藏')" iconSclass="@load(vm.categoryStatusMap.get(category) ? 'z-icon-angle-down':'z-icon-angle-right')" onClick="@command('updateCategoryStatus',category=category)"/>-->
+            <label sclass="label-index" value="@load(category)" onClick="@command('updateCategoryStatus',category=category)"/>
+          </hlayout>
+          <div sclass="gallery" visible="@load(vm.categoryStatusMap.get(category))" style="background:white">
+            <div sclass="imageDiv" forEach="${vm.iconMap.get(category)}" align="center">
+              <vlayout style="text-align:center">
+                <span class="${each.name} custom-icon-item"/>
+                <label value="${each.name}"/>
+              </vlayout>
+            </div>
+          </div>
+        </vlayout>
+      </row>
+    </template>
+  </grid>
+</window>

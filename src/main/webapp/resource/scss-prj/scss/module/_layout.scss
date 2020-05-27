@@ -1,0 +1,56 @@
+@charset "utf-8";
+//必须设置了这个才能编译有中文的注释
+@import "variables";
+
+body {
+  margin: 0;
+  padding: 0 0;
+}
+
+//.z-west-header {
+//  border-bottom: 2px solid $base_border_color;
+//  background-color: $tab-background-color;
+//}
+
+.z-north-body, .z-south-body, .z-west-body, .z-center-body, .z-east-body {
+  margin: 0;
+  padding: 0 0;
+}
+.z-north {
+  background-color: $border-color;
+}
+.z-west {
+  border-top: 0px;
+  border-right: 0px solid $border-color;
+  //border-right: 1px solid $base_border_color;
+  //border-left: 6px solid $base_border_color;
+  //border-bottom: 6px solid $base_border_color;
+}
+
+.c-center{
+  border-bottom: 0px !important;
+  background-color: lighten($border-color,5%);
+}
+.z-center {
+  border-top: 0px;
+  border-right: 0px;
+  border-left: 0px;
+  //border-bottom: 6px solid $base_border_color;
+}
+
+.z-east-splitter, .z-west-splitter, .z-north-splitter, .z-south-splitter {
+  width: 0px;
+  height: 5px;
+  background-color: $border-color;
+  position: absolute;
+  overflow: hidden;
+  cursor: ew-resize;
+  &:hover {
+    background-color: $border-color;
+    //color: $tab-selected-icon-hover-color;
+  }
+}
+
+.z-vlayout-inner {
+  padding-bottom: 0px !important;
+}

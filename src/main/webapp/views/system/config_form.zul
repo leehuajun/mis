@@ -1,0 +1,51 @@
+<window visible="@load(vm.showForm)" width="500px" height="300px" sclass="dialog-window"
+        sizable="false" mode="modal" closable="true" onClose="@command('abort',event=event)">
+  <!--onClose="self.visible = false;vm.showImportWindow = !vm.showImportWindow;event.stopPropagation();">-->
+  <caption label="参数设置" iconSclass="z-icon-windows"/>
+  <borderlayout width="100%" height="100%">
+    <center sclass="form-center">
+      <vlayout style="height:100%">
+        <groupbox>
+          <grid oddRowSclass="none" height="100%" style="height:100%;background:#fff;">
+            <columns>
+              <column width="80px"></column>
+              <column hflex="1"></column>
+            </columns>
+            <rows style="line-height:40px">
+              <row style="border:none;height:40px">
+                <label value="参数名称"/>
+                <textbox value="@bind(vm.selectedConfig.key)"
+                         width="100%" tabindex="1" readonly="@load(vm.readonly)"/>
+              </row>
+              <row style="border:none;height:40px">
+                <label value="当前值"/>
+                <textbox value="@bind(vm.selectedConfig.value)"
+                         width="100%" tabindex="2"/>
+              </row>
+              <row style="border:none;height:40px">
+                <label value="所属组织"/>
+                <!--<textbox disabled="true" value="@bind(vm.configEntity.org)"-->
+                         <!--width="100%" tabindex="2"/>-->
+              </row>
+              <row>
+                <label value="描述"/>
+                <textbox value="@bind(vm.selectedConfig.comment)"
+                         width="100%" tabindex="2"/>
+              </row>
+
+            </rows>
+          </grid>
+        </groupbox>
+        <hlayout hflex="1" height="40px">
+          <div align="center" hflex="1" style="margin:10px">
+            <button iconSclass="" sclass="btn-default " tabindex="5" label="保存" disabled="@load(vm.readonly)"
+                    onClick="@command('submit')"/>
+            <space width="20px"/>
+            <button iconSclass="" sclass="btn-danger" label="关闭" tabindex="6"
+                    onClick="@command('abort',event=event)"/>
+          </div>
+        </hlayout>
+      </vlayout>
+    </center>
+  </borderlayout>
+</window>

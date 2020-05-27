@@ -1,0 +1,84 @@
+<window visible="@load(vm.showForm)" width="500px" height="650px" sclass="dialog-window"
+        sizable="false" mode="modal" closable="true" onClose="@command('abort',event=event)">
+  <!--onClose="self.visible = false;vm.showImportWindow = !vm.showImportWindow;event.stopPropagation();">-->
+  <caption label="经销商设置" iconSclass="z-icon-windows"/>
+  <borderlayout width="100%" height="100%">
+    <center sclass="form-center">
+      <vlayout style="height:100%">
+        <groupbox>
+          <grid oddRowSclass="none" height="100%" style="height:100%;background:#fff;">
+            <columns>
+              <column width="80px"></column>
+              <column hflex="1"></column>
+            </columns>
+            <rows style="line-height:40px">
+              <row style="border:none;height:40px">
+                <label value="编码"/>
+                <textbox value="@bind(vm.selectedDistributor.code)"
+                         width="100%" tabindex="1" readonly="@load(vm.readonly)"/>
+              </row>
+              <row style="border:none;height:40px">
+                <label value="名称"/>
+                <textbox value="@bind(vm.selectedDistributor.name)"
+                         width="100%" tabindex="1" readonly="@load(vm.readonly)"/>
+              </row>
+              <row style="border:none;height:40px">
+                <label value="SGMW的经销商编码"/>
+                <textbox value="@bind(vm.selectedDistributor.sgmwCode)"
+                         width="100%" tabindex="1" readonly="@load(vm.readonly)"/>
+              </row>
+              <row style="border:none;height:40px">
+                <label value="等级"/>
+                <textbox value="@bind(vm.selectedDistributor.level)"
+                         width="100%" tabindex="1" readonly="@load(vm.readonly)"/>
+              </row>
+              <row style="border:none;height:40px">
+                <label value="法人"/>
+                <textbox value="@bind(vm.selectedDistributor.linkman)"
+                         width="100%" tabindex="1" readonly="@load(vm.readonly)"/>
+              </row>
+              <row style="border:none;height:40px">
+                <label value="移动电话"/>
+                <textbox value="@bind(vm.selectedDistributor.mobile)"
+                         width="100%" tabindex="1" readonly="@load(vm.readonly)"/>
+              </row>
+              <row style="border:none;height:40px">
+                <label value="固定电话"/>
+                <textbox value="@bind(vm.selectedDistributor.phone)"
+                         width="100%" tabindex="1" readonly="@load(vm.readonly)"/>
+              </row>
+              <row style="border:none;height:40px">
+                <label value="邮箱"/>
+                <textbox value="@bind(vm.selectedDistributor.email)"
+                         width="100%" tabindex="1" readonly="@load(vm.readonly)"/>
+              </row>
+              <row style="border:none;height:40px">
+                <label value="详细地址"/>
+                <textbox value="@bind(vm.selectedDistributor.address)"
+                         width="100%" tabindex="1" readonly="@load(vm.readonly)"/>
+              </row>
+              <row style="border:none;height:40px">
+              <label value="省份"/>
+              <textbox value="@bind(vm.selectedDistributor.provinceName)"
+                       width="100%" tabindex="1" readonly="@load(vm.readonly)"/>
+            </row>
+              <row>
+                <label value="重点商家"/>
+                <checkbox label="是否重点商家" checked="@bind(vm.selectedDistributor.isFocusMerchants)" tabindex="4" disabled="@load(vm.readonly)"/>
+              </row>
+            </rows>
+          </grid>
+        </groupbox>
+        <hlayout hflex="1" height="40px">
+          <div align="center" hflex="1" style="margin:10px">
+            <button iconSclass="" sclass="btn-default " tabindex="5" label="保存" disabled="@load(vm.readonly)"
+                    onClick="@command('submit')"/>
+            <space width="20px"/>
+            <button iconSclass="" sclass="btn-danger" label="关闭" tabindex="6"
+                    onClick="@command('abort',event=event)"/>
+          </div>
+        </hlayout>
+      </vlayout>
+    </center>
+  </borderlayout>
+</window>

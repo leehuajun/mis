@@ -1,0 +1,83 @@
+<!-- 系统配置 -->
+<borderlayout width="100%" height="100%"
+              viewModel="@id('vm') @init('com.sunjet.mis.vm.basic.vehicle_model.VehicleModelListVM')">
+  <center sclass="c-center">
+    <vlayout width="100%" height="100%">
+      <groupbox>
+        <grid oddRowSclass="none" sclass="form-grid" hflex="1">
+          <columns>
+            <column width="80px"></column>
+            <column hflex="1"></column>
+            <column width="80px"></column>
+            <column hflex="1"></column>
+            <column width="80px"></column>
+            <column hflex="1"></column>
+            <column width="60px"></column>
+            <column hflex="1"></column>
+            <column width="30px"></column>
+            <column width="50px"></column>
+            <column width="30px"></column>
+            <column width="40px"></column>
+          </columns>
+          <rows>
+            <row style="border:none;height:30px">
+
+              <div hflex="1" align="center">
+                <label value="车型" hflex="1"/>
+              </div>
+              <textbox value="@bind(vm.vehicleModelEntity.code)" hflex="1" tabindex="1"
+                       readonly="@load(vm.isDistributor())"/>
+              <div hflex="1" align="center">
+                <label value="车系" hflex="1"/>
+              </div>
+              <textbox value="@bind(vm.vehicleModelEntity.vehicleSeries)" hflex="1" tabindex="1"
+                       readonly="@load(vm.isDistributor())"/>
+
+            </row>
+          </rows>
+        </grid>
+      </groupbox>
+
+      <include src="/views/basic/vehicle_model/vehicle_model_form.zul"/>
+      <include src="/views/basic/vehicle_model/vehicle_model_import.zul"/>
+      <include src="/views/commons/list_report_toolbar.zul"/>
+      <listbox hflex="true" vflex="true" oddRowSclass="true"
+            model="@load(vm.pageResult.rows)" emptyMessage="@load(vm.emptyMessage)"
+      >
+        <listhead sizable="true">
+          <listheader width="40px" label="行号" align="center"/>
+          <listheader width="100px" label="车型编号" align="center"/>
+          <listheader width="100px" label="车型名称" align="center"/>
+          <listheader width="100px" label="车系" align="center"/>
+          <listheader width="100px" label="排放" align="center"/>
+          <listheader width="100px" label="排量" align="center"/>
+          <listheader hflex="1" label="描述" align="center"/>
+          <listheader width="66px" label="操作" align="center"/>
+        </listhead>
+        <template name="model">
+          <listitem>
+            <listcell label="${forEachStatus.index+1}" sclass="label-index"/>
+              <listcell label="@bind(each.code)" style="text-align:left"/>
+              <listcell label="@bind(each.name)" style="text-align:left"/>
+              <listcell label="@bind(each.vehicleSeries)" style="text-align:left"/>
+              <listcell label="@bind(each.effluent)" style="text-align:left"/>
+              <listcell label="@bind(each.displacement)" style="text-align:left"/>
+              <listcell label="@bind(each.comment)" style="text-align:left"/>
+            <listcell>
+              <include src="/views/commons/list_menubar.zul" style="background:transparent"/>
+            </listcell>
+          </listitem>
+        </template>
+      </listbox>
+      <paging
+              pageSize="@bind(vm.pageResult.pageSize)"
+              totalSize="@bind(vm.pageResult.total)"
+              pageIncrement="1"
+              detailed="true"
+              activePage="@bind(vm.pageResult.page)"
+              onPaging="@command('gotoPageNo',e=event)"
+              style="border:0px"
+      />
+    </vlayout>
+  </center>
+</borderlayout>

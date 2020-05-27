@@ -1,0 +1,104 @@
+<!-- 改装车月物料申报表 -->
+<borderlayout width="100%" height="100%"
+              viewModel="@id('vm') @init('com.sunjet.mis.vm.report.RefittingTruckMaterialVM')"
+              style="padding:0px;border:0px">
+    <center sclass="c-center">
+        <vlayout width="100%" height="100%" style="padding-bottom:0px">
+            <include src="/views/report/refitting_truck_material/refitting_truck_material_import.zul"/>
+            <groupbox>
+                <grid oddRowSclass="none" sclass="form-grid" hflex="1">
+                    <columns>
+                        <column width="80px"></column>
+                        <column hflex="1"></column>
+                        <column width="80px"></column>
+                        <column hflex="1"></column>
+                        <column width="120px"></column>
+                        <column hflex="2"></column>
+                        <column width="80px"></column>
+                        <column hflex="2"></column>
+
+                    </columns>
+                    <rows>
+                        <row style="border:none;height:30px">
+                            <div hflex="1" align="center">
+                                <label value="物料号"/>
+                            </div>
+
+                            <textbox value="@bind(vm.refittingTruckMaterialEntity.vsn)" hflex="1" tabindex="1"
+                                     readonly="@load(vm.isDistributor())"/>
+                            <div hflex="1" align="center">
+                                <label value="品种代码"/>
+                            </div>
+                            <textbox value="@bind(vm.refittingTruckMaterialEntity.brandCode)" hflex="1" tabindex="1"
+                                     readonly="@load(vm.isDistributor())"/>
+                            <label value="月物料申报日期从"/>
+                            <datebox hflex="1" format="medium" value="@bind(vm.refittingTruckMaterialEntity.startDate)"
+                                     readonly="true"/>
+                            <label value="至"/>
+                            <datebox hflex="1" format="medium" value="@bind(vm.refittingTruckMaterialEntity.endDate)"
+                                     readonly="true"/>
+                        </row>
+                    </rows>
+                </grid>
+            </groupbox>
+            <include src="/views/commons/list_report_toolbar.zul"/>
+            <listbox hflex="true" vflex="true" oddRowSclass="none"
+                     model="@load(vm.pageResult.rows)" emptyMessage="@load(vm.emptyMessage)">
+                <listhead sizable="true">
+                    <listheader width="40px" label="行号" align="center"/>
+                    <listheader width="140px" label="时间" align="center"/>
+                    <listheader width="180px" label="物料号" align="center"/>
+                    <listheader width="120px" label="品种代码" align="center"/>
+                    <listheader width="60px" label="平台" align="center"/>
+                    <listheader width="60px" label="车系(APP)" align="center"/>
+                    <listheader width="220px" label="车型(APP)" align="center"/>
+                    <listheader width="200px" label="车型" align="center"/>
+                    <listheader width="100px" label="车型名称-1" align="center"/>
+                    <listheader width="60px" label="发动机号" align="center"/>
+                    <listheader width="100px" label="颜色" align="center"/>
+                    <listheader width="80px" label="空调" align="center"/>
+                    <listheader width="80px" label="车型平台" align="center"/>
+                    <listheader width="80px" label="排放标准" align="center"/>
+                    <listheader width="80px" label="备注" align="center"/>
+                    <listheader width="80px" label="配置" align="center"/>
+                    <listheader width="80px" label="A价（ABS)" align="center"/>
+                    <listheader width="80px" label="物料号（对应非ABS代码）" align="center"/>
+                    <listheader width="80px" label="产地" align="center"/>
+                </listhead>
+                <template name="model">
+                    <listitem>
+                        <listcell label="${forEachStatus.index+1}" sclass="label-index"/>
+                        <listcell label="@load(each.dateYearMonth)"/>
+                        <listcell label="@load(each.vsn)"/>
+                        <listcell label="@load(each.brandCode)"/>
+                        <listcell label="@load(each.terrace)"/>
+                        <listcell label="@load(each.audiApp)"/>
+                        <listcell label="@load(each.vehicleTypeApp)"/>
+                        <listcell label="@load(each.vehicleType)"/>
+                        <listcell label="@load(each.vehicleTypeName)"/>
+                        <listcell label="@load(each.engineCode)"/>
+                        <listcell label="@load(each.color)"/>
+                        <listcell label="@load(each.airConditioner)"/>
+                        <listcell label="@load(each.vehiclePlatform)"/>
+                        <listcell label="@load(each.effluent)"/>
+                        <listcell label="@load(each.note)"/>
+                        <listcell label="@load(each.allocation)"/>
+                        <listcell label="@load(each.aprice)"/>
+                        <listcell label="@load(each.noabsvsn)"/>
+                        <listcell label="@load(each.production)"/>
+
+
+                    </listitem>
+                </template>
+            </listbox>
+            <paging
+                    pageSize="@bind(vm.pageResult.pageSize)"
+                    totalSize="@bind(vm.pageResult.total)"
+                    pageIncrement="1"
+                    detailed="true"
+                    activePage="@bind(vm.pageResult.page)"
+                    onPaging="@command('gotoPageNo',e=event)"
+            />
+        </vlayout>
+    </center>
+</borderlayout>

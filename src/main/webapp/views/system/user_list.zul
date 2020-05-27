@@ -1,0 +1,53 @@
+<!-- 用户列表 -->
+<!--<window xmlns:w="client">-->
+<borderlayout width="100%" height="100%"
+              viewModel="@id('vm') @init('com.sunjet.mis.vm.system.UserListVM')"
+              style="background-color:tr;padding:0px;"
+>
+  <center sclass="c-center">
+    <vlayout width="100%" height="100%" style="padding-bottom:0px">
+      <include src="/views/system/user_form.zul"/>
+      <include src="/views/commons/list_toolbar.zul"/>
+      <listbox hflex="true" vflex="true" oddRowSclass="true"
+               model="@load(vm.pageResult.rows)" emptyMessage="@load(vm.emptyMessage)"
+      >
+        <listhead sizable="true">
+          <listheader width="40px" label="行号" align="center"/>
+          <listheader width="200px" label="姓名" sort="auto(name)" align="center"/>
+          <listheader width="120px" label="登录名" sort="auto(logId)" align="center"/>
+          <listheader width="120px" label="电话" align="center" visible="false"/>
+          <listheader width="120px" label="E-mail" align="center"/>
+          <!--<listheader hflex="1" label="组织" align="center"/>-->
+          <listheader hflex="1" label="角色" align="center"/>
+          <listheader width="80px" label="状态" sort="auto(enabled)" align="center"/>
+          <listheader width="66px" label="操作" align="center"/>
+        </listhead>
+        <template name="model">
+          <listitem>
+            <listcell label="${forEachStatus.index+1}" sclass="label-index" style="text-align:center"/>
+            <!--<listcell label="@load(each.name)" sclass="label-distinct"/>-->
+            <listcell label="@load(each.name)"/>
+            <listcell label="@load(each.logId)"/>
+            <listcell label="@load(each.phone)" visible="false"/>
+            <listcell label="@load(each.email)"/>
+            <!--<listcell label="@load(vm.removeBrackets(each.orgs))" tooltiptext=""/>-->
+            <listcell hflex="1" label="@load(vm.removeBrackets(each.roles))" tooltiptext="" style="text-align:left"/>
+            <listcell hflex="1" label="@load(each.enabled eq true ? '启用':'禁用' )"
+                      style="@load(each.enabled eq true ? 'color:green':'color:red' )"/>
+            <listcell>
+              <include src="/views/commons/list_menubar.zul" style="background:transparent"/>
+            </listcell>
+          </listitem>
+        </template>
+      </listbox>
+      <paging
+              pageSize="@bind(vm.pageResult.pageSize)"
+              totalSize="@bind(vm.pageResult.total)"
+              pageIncrement="1"
+              detailed="true"
+              activePage="@bind(vm.pageResult.page)"
+              onPaging="@command('gotoPageNo',e=event)"
+      />
+    </vlayout>
+  </center>
+</borderlayout>

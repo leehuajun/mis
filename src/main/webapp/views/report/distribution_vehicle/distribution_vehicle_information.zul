@@ -1,0 +1,106 @@
+<!--
+基础管理 >>维修项目及定时金额表单
+-->
+<!--<window title="维修项目编辑" border="normal" width="500px" height="350px"-->
+<!--sizable="false"-->
+<!--style="margin:20px;padding-top:0px;padding-left:0px;" position="@load(vm.window_position)" closable="true"-->
+<!--onClose="spaceOwner.detach();"-->
+<!--viewModel="@id('vm') @init('com.sunjet.frontend.vm.basic.MaintainFormVM')"-->
+<!--validationMessages="@id('vmsgs')">-->
+<window visible="@load(vm.showImportWindow)" width="600px" height="500px" sclass="dialog-window"
+        sizable="false" mode="modal" closable="true" style="background:d9d9d9"
+        onClose="@command('abort',event=event)">
+    <!--onClose="self.visible = false;vm.showImportWindow = !vm.showImportWindow;event.stopPropagation();">-->
+    <caption label="导入库存信息" iconSclass="z-icon-windows"/>
+    <borderlayout hflex="1" vflex="1">
+        <north border="none">
+            <grid oddRowSclass="none" hflex="1" sclass="form-grid">
+                <columns>
+                    <column width="120px"></column>
+                    <column hflex="1"></column>
+                </columns>
+                <rows>
+                    <row>
+                        <button label="选择Excel文件..." hflex="1"
+                                sclass="btn-default"
+                                upload="true,maxsize=51200"
+                                onUpload="@command('doUploadFile',event=event)"/>
+                        <textbox hflex="1" value="@load(vm.uploadFilename)" readonly="true"/>
+                    </row>
+                </rows>
+            </grid>
+        </north>
+        <center sclass="c-center" hflex="1" vflex="1">
+            <vlayout width="100%" vflex="1">
+                <listbox hflex="true" vflex="true" model="@load(vm.importEntities)" mold="paging"
+                      pageSize="10">
+                    <listhead sizable="true">
+                        <listheader width="40px" label="行号" align="center"/>
+                        <listheader width="60px" label="订单号" align="center"/>
+                        <listheader width="180px" label="单位代码" align="center"/>
+                        <listheader width="100px" label="单位名称" align="center"/>
+                        <listheader width="40px" label="办事处" align="center"/>
+                        <listheader width="100px" label="收车单位" align="center"/>
+                        <listheader width="100px" label="收车地址" align="center"/>
+                        <listheader width="100px" label="VSN码" align="center"/>
+                        <listheader width="100px" label="车型" align="center"/>
+                        <listheader width="100px" label="数量" align="center"/>
+                        <listheader width="100px" label="发货凭证号" align="center"/>
+                        <listheader width="100px" label="分货日期" align="center"/>
+                        <listheader width="100px" label="发货日期" align="center"/>
+                        <listheader width="100px" label="出库仓库" align="center"/>
+                        <listheader width="100px" label="承运商" align="center"/>
+                        <listheader width="100px" label="发票号" align="center"/>
+                        <listheader width="100px" label="开票日期" align="center"/>
+                        <listheader width="100px" label="发票金额" align="center"/>
+                        <listheader width="100px" label="CUR" align="center"/>
+                        <listheader width="100px" label="分车单价" align="center"/>
+                        <listheader width="100px" label="分车金额" align="center"/>
+                        <listheader width="100px" label="分车月份" align="center"/>
+                        <!--<listheader width="100px" label="品种" align="center"/>-->
+                        <!--<listheader width="100px" label="批次号" align="center"/>-->
+                        <!--<listheader width="100px" label="颜色" align="center"/>-->
+                    </listhead>
+                    <template name="model">
+                        <listitem  style="@load(vm.genStyle(each))">
+                            <listcell label="${forEachStatus.index+1}" sclass="label-index"/>
+                            <listcell label="@load(each.orderNumber)" tooltiptext="@load(each.orderNumber)"/>
+                            <listcell label="@load(each.unitCode)" tooltiptext="@load(each.orderNumber)"/>
+                            <listcell label="@load(each.unitName)" tooltiptext="@load(each.orderNumber)"/>
+                            <listcell label="@load(each.office)" tooltiptext="@load(each.orderNumber)"/>
+                            <listcell label="@load(each.collectUnit)" tooltiptext="@load(each.orderNumber)"/>
+                            <listcell label="@load(each.collectAddress)" tooltiptext="@load(each.orderNumber)"/>
+                            <listcell label="@load(each.vsn)" tooltiptext="@load(each.orderNumber)"/>
+                            <listcell label="@load(each.vehicleModel)" tooltiptext="@load(each.orderNumber)"/>
+                            <listcell label="@load(each.amount)" tooltiptext="@load(each.orderNumber)"/>
+                            <listcell label="@load(each.deliveryProve)" tooltiptext="@load(each.orderNumber)"/>
+                            <listcell label="@load(each.cargoData)" tooltiptext="@load(each.orderNumber)"/>
+                            <listcell label="@load(each.deliveryData)" tooltiptext="@load(each.orderNumber)"/>
+                            <listcell label="@load(each.outboundWarehouse)" tooltiptext="@load(each.orderNumber)"/>
+                            <listcell label="@load(each.carriers)" tooltiptext="@load(each.orderNumber)"/>
+                            <listcell label="@load(each.invoiceNo)" tooltiptext="@load(each.orderNumber)"/>
+                            <listcell label="@load(each.invoiceData)" tooltiptext="@load(each.orderNumber)"/>
+                            <listcell label="@load(each.invoiceAmount)" tooltiptext="@load(each.orderNumber)"/>
+                            <listcell label="@load(each.cur)" tooltiptext="@load(each.orderNumber)"/>
+                            <listcell label="@load(each.pointsPrice)" tooltiptext="@load(each.orderNumber)"/>
+                            <listcell label="@load(each.pointsAmount)" tooltiptext="@load(each.orderNumber)"/>
+                            <listcell label="@load(each.pointsMonth)" tooltiptext="@load(each.orderNumber)"/>
+                            <!--<listcell label="@load(each.variety)" tooltiptext="@load(each.orderNumber)"/>-->
+                            <!--<listcell label="@load(each.batchNumber)" tooltiptext="@load(each.orderNumber)"/>-->
+                            <!--<listcell label="@load(each.color)" tooltiptext="@load(each.orderNumber)"/>-->
+                        </listitem>
+                    </template>
+                </listbox>
+                <hlayout hflex="1">
+                    <div align="center" hflex="1" style="margin:10px">
+                        <button iconSclass="" sclass="btn-default " label="保存"
+                                onClick="@command('importData')"/>
+                        <space width="20px"/>
+                        <button iconSclass="" sclass="btn-danger" label="关闭"
+                                onClick="@command('abort',event=event)"/>
+                    </div>
+                </hlayout>
+            </vlayout>
+        </center>
+    </borderlayout>
+</window>

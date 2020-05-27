@@ -1,0 +1,56 @@
+<div sclass="ctoolbars">
+    <div sclass="ctoolbar-left">
+        <hbox>
+            <button label="新增" sclass="btn-default" if="${vm.permissionStatus.canCreate}"
+                    onClick="@command('openForm',id=null,url=null,title=null,readonly=false)"/>
+            <!--<button label="查询" sclass="btn-success" onClick="@command('showSearchWindow')"/>-->
+            <button label="刷新" sclass="btn-success" onClick="@command('refreshList')"/>
+            <button label="导入" sclass="btn-danger" onClick="@command('showImportWindow')"
+                    if="${vm.permissionStatus.canImport}"/>
+            <button label="下载模板" sclass="btn-success" onClick="@command('downloadTemplate')"
+                    if="${vm.permissionStatus.canImport}"/>
+            <menubar width="100%" sclass="toolbar-menubar" if="${vm.permissionStatus.canExport}">
+                <menu label="导出">
+                    <menupopup>
+                        <menuitem iconSclass="z-icon-bolt" label="导出当前页"
+                                  onClick="@command('closeOne',tabNow=mytab.getSelectedTab())"/>
+                        <menuitem iconSclass="z-icon-ban" label="导出所有"
+                                  onClick="@command('closeOther',tabs=mytab.getTabs().getChildren(),tabNow=mytab.getSelectedTab())"/>
+                        <!--<menuitem iconSclass="z-icon-ban" label="关闭所有"-->
+                        <!--onClick="@command('closeAll',tabs=mytab.getTabs().getChildren())"/>-->
+                    </menupopup>
+                </menu>
+            </menubar>
+
+        </hbox>
+
+    </div>
+
+
+    <div sclass="ctoolbar-right" if="${vm.permissionStatus.canSearch}">
+        <hbox>
+            <label value="快速搜索" style="line-height:100%;text-align:center"/>
+            <bandbox placeholder="输入关键字..回车键搜索" sclass="input-prepend" buttonVisible="false"
+                     value="@bind(vm.keyword)" onOK="@command('simpleSearch')"/>
+
+            <!--<button label="查询" sclass="btn-default" onClick="@command('refreshData')"/>-->
+            <!--<button label="刷新" sclass="btn-success" onClick="@command('refreshData')"/>-->
+
+            <!--<button label="导出" sclass="btn-warn" onClick="@command('refreshData')"/>-->
+            <!--<button label="导出" sclass="btn-md" onClick="@command('refreshData')"/>-->
+            <!--<menubar width="100%" sclass="toolbar-menubar">-->
+            <!--<menu label="导出">-->
+            <!--<menupopup>-->
+            <!--<menuitem iconSclass="z-icon-bolt" label="导出当前页"-->
+            <!--onClick="@command('closeOne',tabNow=mytab.getSelectedTab())"/>-->
+            <!--<menuitem iconSclass="z-icon-ban" label="导出所有"-->
+            <!--onClick="@command('closeOther',tabs=mytab.getTabs().getChildren(),tabNow=mytab.getSelectedTab())"/>-->
+            <!--<menuitem iconSclass="z-icon-ban" label="关闭所有"-->
+            <!--onClick="@command('closeAll',tabs=mytab.getTabs().getChildren())"/>-->
+            <!--</menupopup>-->
+            <!--</menu>-->
+            <!--</menubar>-->
+            <!--</hlayout>-->
+        </hbox>
+    </div>
+</div>

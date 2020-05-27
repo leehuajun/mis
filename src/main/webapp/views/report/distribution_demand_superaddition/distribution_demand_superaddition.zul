@@ -1,0 +1,127 @@
+<!-- 经销商追加表 -->
+<borderlayout width="100%" height="100%"
+              viewModel="@id('vm') @init('com.sunjet.mis.vm.distributor.DistributionDemandSuperadditionVM')"
+              style="padding:0px;border:0px">
+    <center sclass="c-center">
+        <vlayout width="100%" height="100%" style="padding-bottom:0px">
+            <include
+                    src="/views/report/distribution_demand_superaddition/distribution_demand_superaddition_import.zul"/>
+            <groupbox>
+                <grid oddRowSclass="none" sclass="form-grid" hflex="1">
+                    <columns>
+                        <column width="80px"></column>
+                        <column hflex="1"></column>
+                        <column width="80px"></column>
+                        <column hflex="1"></column>
+                        <column width="80px"></column>
+                        <column hflex="1"></column>
+                        <column width="60px"></column>
+                        <column hflex="1"></column>
+                        <column width="60px"></column>
+                        <column hflex="1"></column>
+                    </columns>
+                    <rows>
+                        <row style="border:none;height:30px">
+                            <div hflex="1" align="center">
+                                <label value="VSN"/>
+                            </div>
+                            <textbox value="@bind(vm.distributionDemandSuperadditionEntity.vsn)" hflex="1" tabindex="1"
+                                     readonly="@load(vm.isDistributor())"/>
+                            <div hflex="1" align="center">
+                                <label value="经销商编码"/>
+                            </div>
+                            <textbox value="@bind(vm.distributionDemandSuperadditionEntity.distributorCode)" hflex="1"
+                                     tabindex="1"
+                                     readonly="@load(vm.isDistributor())"/>
+                            <div hflex="1" align="center">
+                                <label value="周次"/>
+                            </div>
+                            <textbox value="@bind(vm.distributionDemandSuperadditionEntity.cycle)" hflex="1"
+                                     tabindex="1"
+                                     readonly="@load(vm.isDistributor())"/>
+                            <label value="申请日期从"/>
+                            <datebox hflex="1" format="medium"
+                                     value="@bind(vm.distributionDemandSuperadditionEntity.startDate)" readonly="true"/>
+                            <label value="至"/>
+                            <datebox hflex="1" format="medium"
+                                     value="@bind(vm.distributionDemandSuperadditionEntity.endDate)" readonly="true"/>
+                        </row>
+                    </rows>
+                </grid>
+            </groupbox>
+            <include src="/views/commons/list_report_toolbar.zul"/>
+            <listbox hflex="true" vflex="true" oddRowSclass="none"
+                     model="@load(vm.pageResult.rows)" emptyMessage="@load(vm.emptyMessage)">
+                <listhead sizable="true">
+                    <listheader width="40px" label="行号" align="center"/>
+                    <listheader width="45px" label="ID" align="center"/>
+                    <listheader width="45px" label="年度" align="center"/>
+                    <listheader width="45px" label="月份" align="center"/>
+                    <listheader width="45px" label="周次" align="center"/>
+                    <listheader width="100px" label="经销商代码" align="center"/>
+                    <listheader width="180px" label="物料号" align="center"/>
+                    <listheader width="100px" label="车型" align="center"/>
+                    <listheader width="60px" label="颜色" align="center"/>
+                    <listheader width="80px" label="类型" align="center"/>
+                    <listheader width="100px" label="物料品种" align="center"/>
+                    <listheader width="80px" label="排放标准" align="center"/>
+                    <listheader width="60px" label="申报数" align="center"/>
+                    <listheader width="60px" label="满足数" align="center"/>
+                    <listheader width="80px" label="售达方" align="center"/>
+                    <listheader width="80px" label="送达方" align="center"/>
+                    <listheader width="80px" label="调整发起方" align="center"/>
+                    <listheader width="80px" label="申报原因" align="center"/>
+                    <listheader width="80px" label="申报备注" align="center"/>
+                    <listheader width="80px" label="平衡原因" align="center"/>
+                    <listheader width="80px" label="平衡备注" align="center"/>
+                    <listheader width="80px" label="是否瞒足" align="center"/>
+                    <listheader width="80px" label="状态" align="center"/>
+                    <listheader width="60px" label="平衡人" align="center"/>
+                    <listheader width="60px" label="平衡时间" align="center"/>
+                    <listheader width="80px" label="拆分后调整" align="center"/>
+                    <listheader width="140px" label="申请时间" align="center"/>
+                </listhead>
+                <template name="model">
+                    <listitem>
+                        <listcell label="${forEachStatus.index+1}" sclass="label-index"/>
+                        <listcell label="@load(each.tid)"/>
+                        <listcell label="@load(each.year)"/>
+                        <listcell label="@load(each.month)"/>
+                        <listcell label="@load(each.cycle)"/>
+                        <listcell label="@load(each.distributorCode)"/>
+                        <listcell label="@load(each.vsn)"/>
+                        <listcell label="@load(each.vehicleModel)"/>
+                        <listcell label="@load(each.color)"/>
+                        <listcell label="@load(each.type)"/>
+                        <listcell label="@load(each.materialVarieties)"/>
+                        <listcell label="@load(each.emissionStandard)"/>
+                        <listcell label="@load(each.declareNumber)"/>
+                        <listcell label="@load(each.satisfyNumber)"/>
+                        <listcell label="@load(each.soldToParty)"/>
+                        <listcell label="@load(each.shipToParty)"/>
+                        <listcell label="@load(each.adjustment)"/>
+                        <listcell label="@load(each.declareReasons)"/>
+                        <listcell label="@load(each.declareNote)"/>
+                        <listcell label="@load(each.balanceReason)"/>
+                        <listcell label="@load(each.balanceNote)"/>
+                        <listcell label="@load(each.whetherSatisfy)"/>
+                        <listcell label="@load(each.status)"/>
+                        <listcell label="@load(each.balancePeople)"/>
+                        <listcell label="@load(each.equilibriumTime)"/>
+                        <listcell label="@load(each.splitAdjustment)"/>
+                        <listcell label="@load(each.applicationTime)"/>
+
+                    </listitem>
+                </template>
+            </listbox>
+            <paging
+                    pageSize="@bind(vm.pageResult.pageSize)"
+                    totalSize="@bind(vm.pageResult.total)"
+                    pageIncrement="1"
+                    detailed="true"
+                    activePage="@bind(vm.pageResult.page)"
+                    onPaging="@command('gotoPageNo',e=event)"
+            />
+        </vlayout>
+    </center>
+</borderlayout>

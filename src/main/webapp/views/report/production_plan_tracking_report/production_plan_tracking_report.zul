@@ -1,0 +1,336 @@
+<!-- 用户列表 -->
+<!--<window xmlns:w="client">-->
+<borderlayout width="100%" height="100%"
+              viewModel="@id('vm') @init('com.sunjet.mis.vm.report.ProductionPlanTrackingReportVM')"
+              style="padding:0px;"
+>
+  <center  sclass="c-center">
+    <vlayout width="100%" height="100%" style="padding-bottom:0px">
+      <groupbox>
+        <grid oddRowSclass="none" sclass="form-grid" hflex="1">
+          <columns>
+            <column width="80px"></column>
+            <column hflex="1"></column>
+            <column width="80px"></column>
+            <column hflex="1"></column>
+            <column width="80px"></column>
+            <column hflex="1"></column>
+              <column width="80px"></column>
+              <column hflex="1"></column>
+            <column width="80px"></column>
+            <column hflex="1"></column>
+              <column width="60px"></column>
+              <column hflex="1"></column>
+          </columns>
+          <rows>
+            <row style="border:none;height:30px">
+                <div hflex="1" align="center">
+                    <label value="开始 :" hflex="1"/>
+                </div>
+                <datebox cols="12" hflex="1" format="yyyy-MM-dd" value="@bind(vm.beginDate)"/>
+                <div hflex="1" align="center">
+                    <label value="结束 :" hflex="1"/>
+                </div>
+                <datebox cols="12" hflex="1" format="yyyy-MM-dd"  value="@bind(vm.endDate)"/>
+              <div hflex="1" align="center">
+                <label value="型号" hflex="1"/>
+              </div>
+              <textbox value="@bind(vm.productionPlanTrackingReportView.vehicleModel)" hflex="1" tabindex="1"
+                       readonly="@load(vm.isDistributor())"/>
+
+              <div hflex="1" align="center">
+                <label value="VSN" hflex="1"/>
+              </div>
+              <textbox value="@bind(vm.productionPlanTrackingReportView.vsn)" hflex="1" tabindex="1"
+                       readonly="@load(vm.isDistributor())"/>
+              <div hflex="1" align="center">
+                <label value="年度" hflex="1"/>
+              </div>
+              <listbox hflex="1" mold="select" model="@load(vm.years)" selectedItem="@bind(vm.productionPlanTrackingReportView.year)" onClick="@command('updateTime')">
+                <template name="model">
+                  <listitem label="@load(each)" value="@load(each)"/>
+                </template>
+              </listbox>
+
+              <div hflex="1" align="center">
+                <label value="月份" hflex="1"/>
+              </div>
+              <listbox hflex="1" mold="select" model="@load(vm.months)" selectedItem="@bind(vm.productionPlanTrackingReportView.month)">
+                <template name="model">
+                  <listitem label="@load(each)" value="@load(each)"/>
+                </template>
+              </listbox>
+
+            </row>
+            <row>
+                <div hflex="1" align="center">
+                    <button hflex="1" iconSclass="" sclass="btn-default " tabindex="3" label="设置第一周" onClick="@command('setFirstWeek')"/>
+                </div>
+                <div hflex="1" align="center">
+                    <label value="@bind(vm.productionPlanTrackingReportView.firstWeek)" hflex="1"/>
+                </div>
+                <div hflex="1" align="center">
+                    <button hflex="1" iconSclass="" sclass="btn-default " tabindex="3" label="设置第二周" onClick="@command('setSecondWeek')"/>
+                </div>
+                <div hflex="1" align="center">
+                    <label value="@bind(vm.productionPlanTrackingReportView.secondWeek)" hflex="1"/>
+                </div>
+
+                <div hflex="1" align="center">
+                    <button hflex="1" iconSclass="" sclass="btn-default " tabindex="3" label="设置第三周" onClick="@command('setThirdWeek')"/>
+                </div>
+                <div hflex="1" align="center">
+                    <label value="@bind(vm.productionPlanTrackingReportView.thirdWeek)" hflex="1"/>
+                </div>
+
+                <div hflex="1" align="center">
+                    <button hflex="1" iconSclass="" sclass="btn-default " tabindex="3" label="设置第四周" onClick="@command('setFourthWeek')"/>
+                </div>
+                <div hflex="1" align="center">
+                    <label value="@bind(vm.productionPlanTrackingReportView.fourthWeek)" hflex="1"/>
+                </div>
+
+                <div hflex="1" align="center">
+                    <button hflex="1" iconSclass="" sclass="btn-default " tabindex="3" label="设置第五周" onClick="@command('setFifthWeek')"/>
+                </div>
+                <div hflex="1" align="center">
+                    <label value="@bind(vm.productionPlanTrackingReportView.fifthWeek)" hflex="1"/>
+                </div>
+             </row>
+          </rows>
+        </grid>
+      </groupbox>
+      <include src="/views/commons/list_report_toolbar.zul"/>
+
+        <!--<grid hflex="true" vflex="true" sclass="list-grid" model="@bind(vm.pageResult.rows)">-->
+            <!--<columns sizable="true">-->
+                <!--<column width="30px" label="行号" align="center"/>-->
+                <!--<column width="70px" label="产地" align="center"/>-->
+                <!--<column width="60px" label="车系" align="center"/>-->
+                <!--<column width="180px" label="产品名称" align="center"/>-->
+                <!--<column width="120px" label="型号" align="center"/>-->
+                <!--<column width="140px" label="VSN" align="center"/>-->
+                <!--<column width="60px" label="月度计划" align="center"/>-->
+                <!--<column width="50px" label="完成量" align="center"/>-->
+                <!--<column width="50px" label="完成率" align="center"/>-->
+                <!--<column width="50px" label="第1周计划" align="center"/>-->
+                <!--<column width="50px" label="第2周计划" align="center"/>-->
+                <!--<column width="50px" label="第3周计划" align="center"/>-->
+                <!--<column width="50px" label="第4周计划" align="center"/>-->
+                <!--<column width="50px" label="第5周计划" align="center"/>-->
+                <!--<column width="50px" label="第1周完成" align="center"/>-->
+                <!--<column width="50px" label="第2周完成" align="center"/>-->
+                <!--<column width="50px" label="第3周完成" align="center"/>-->
+                <!--<column width="50px" label="第4周完成" align="center"/>-->
+                <!--<column width="50px" label="第5周完成" align="center"/>-->
+                <!--<column width="30px" label="1日" align="center"/>-->
+                <!--<column width="30px" label="2日" align="center"/>-->
+                <!--<column width="30px" label="3日" align="center"/>-->
+                <!--<column width="30px" label="4日" align="center"/>-->
+                <!--<column width="30px" label="5日" align="center"/>-->
+                <!--<column width="30px" label="6日" align="center"/>-->
+                <!--<column width="30px" label="7日" align="center"/>-->
+                <!--<column width="30px" label="8日" align="center"/>-->
+                <!--<column width="30px" label="9日" align="center"/>-->
+                <!--<column width="30px" label="10日" align="center"/>-->
+                <!--<column width="30px" label="11日" align="center"/>-->
+                <!--<column width="30px" label="12日" align="center"/>-->
+                <!--<column width="30px" label="13日" align="center"/>-->
+                <!--<column width="30px" label="14日" align="center"/>-->
+                <!--<column width="30px" label="15日" align="center"/>-->
+                <!--<column width="30px" label="16日" align="center"/>-->
+                <!--<column width="30px" label="17日" align="center"/>-->
+                <!--<column width="30px" label="18日" align="center"/>-->
+                <!--<column width="30px" label="19日" align="center"/>-->
+                <!--<column width="30px" label="20日" align="center"/>-->
+                <!--<column width="30px" label="21日" align="center"/>-->
+                <!--<column width="30px" label="22日" align="center"/>-->
+                <!--<column width="30px" label="23日" align="center"/>-->
+                <!--<column width="30px" label="24日" align="center"/>-->
+                <!--<column width="30px" label="25日" align="center"/>-->
+                <!--<column width="30px" label="26日" align="center"/>-->
+                <!--<column width="30px" label="27日" align="center"/>-->
+                <!--<column width="30px" label="28日" align="center"/>-->
+                <!--<column width="30px" label="29日" align="center"/>-->
+                <!--<column width="30px" label="30日" align="center"/>-->
+                <!--<column width="30px" label="31日" align="center"/>-->
+            <!--</columns>-->
+            <!--<template name="model">-->
+                <!--<row>-->
+                    <!--<label value="${forEachStatus.index+1}" sclass="label-index"/>-->
+                    <!--<label value="@load(each.origin)"/>-->
+                    <!--<label value="@load(each.vehicleSeries)"/>-->
+                    <!--<label value="@load(each.vehicleName)"/>-->
+                    <!--<label value="@load(each.vehicleModel)"/>-->
+                    <!--<label value="@load(each.vsn)"/>-->
+                    <!--<label value="@load(each.monthPlan)"/>-->
+                    <!--&lt;!&ndash;<textbox onBlur="@command('calculate',vehicleModel=each.vehicleModel,vsn=each.vsn,month=self.value)" width="50px" value="@load(each.monthPlan)"></textbox>&ndash;&gt;-->
+                    <!--<label value="@load(each.completeNumber)"/>-->
+                    <!--<label value="@load(each.completion)"/>-->
+                    <!--<label value="@load(each.firstWeekPlan)"/>-->
+                    <!--<label value="@load(each.secondWeekPlan)"/>-->
+                    <!--<label value="@load(each.thirdWeekPlan)"/>-->
+                    <!--<label value="@load(each.fourthWeekPlan)"/>-->
+                    <!--<label value="@load(each.fifthWeekPlan)"/>-->
+                    <!--<label value="${each.firstWeekComplete eq 0 ? '':each.firstWeekComplete }"/>-->
+                    <!--<label value="${each.secondWeekComplete eq 0 ? '':each.secondWeekComplete }"/>-->
+                    <!--<label value="${each.thirdWeekComplete eq 0 ? '':each.thirdWeekComplete }"/>-->
+                    <!--<label value="${each.fourthWeekComplete eq 0 ? '':each.fourthWeekComplete }"/>-->
+                    <!--<label value="${each.fifthWeekComplete eq 0 ? '':each.fifthWeekComplete }"/>-->
+                    <!--<label value="${each.days.get(0) eq 0 ? '':each.days.get(0) }"/>-->
+                    <!--<label value="${each.days.get(1) eq 0 ? '':each.days.get(1) }"/>-->
+                    <!--<label value="${each.days.get(2) eq 0 ? '':each.days.get(2) }"/>-->
+                    <!--<label value="${each.days.get(3) eq 0 ? '':each.days.get(3) }"/>-->
+                    <!--<label value="${each.days.get(4) eq 0 ? '':each.days.get(4) }"/>-->
+                    <!--<label value="${each.days.get(5) eq 0 ? '':each.days.get(5) }"/>-->
+                    <!--<label value="${each.days.get(6) eq 0 ? '':each.days.get(6) }"/>-->
+                    <!--<label value="${each.days.get(7) eq 0 ? '':each.days.get(7) }"/>-->
+                    <!--<label value="${each.days.get(8) eq 0 ? '':each.days.get(8) }"/>-->
+                    <!--<label value="${each.days.get(9) eq 0 ? '':each.days.get(9) }"/>-->
+                    <!--<label value="${each.days.get(10) eq 0 ? '':each.days.get(10) }"/>-->
+                    <!--<label value="${each.days.get(11) eq 0 ? '':each.days.get(11) }"/>-->
+                    <!--<label value="${each.days.get(12) eq 0 ? '':each.days.get(12) }"/>-->
+                    <!--<label value="${each.days.get(13) eq 0 ? '':each.days.get(13) }"/>-->
+                    <!--<label value="${each.days.get(14) eq 0 ? '':each.days.get(14) }"/>-->
+                    <!--<label value="${each.days.get(15) eq 0 ? '':each.days.get(15) }"/>-->
+                    <!--<label value="${each.days.get(16) eq 0 ? '':each.days.get(16) }"/>-->
+                    <!--<label value="${each.days.get(17) eq 0 ? '':each.days.get(17) }"/>-->
+                    <!--<label value="${each.days.get(18) eq 0 ? '':each.days.get(18) }"/>-->
+                    <!--<label value="${each.days.get(19) eq 0 ? '':each.days.get(19) }"/>-->
+                    <!--<label value="${each.days.get(20) eq 0 ? '':each.days.get(20) }"/>-->
+                    <!--<label value="${each.days.get(21) eq 0 ? '':each.days.get(21) }"/>-->
+                    <!--<label value="${each.days.get(22) eq 0 ? '':each.days.get(22) }"/>-->
+                    <!--<label value="${each.days.get(23) eq 0 ? '':each.days.get(23) }"/>-->
+                    <!--<label value="${each.days.get(24) eq 0 ? '':each.days.get(24) }"/>-->
+                    <!--<label value="${each.days.get(25) eq 0 ? '':each.days.get(25) }"/>-->
+                    <!--<label value="${each.days.get(26) eq 0 ? '':each.days.get(26) }"/>-->
+                    <!--<label value="${each.days.get(27) eq 0 ? '':each.days.get(27) }"/>-->
+                    <!--<label value="${each.days.get(28) eq 0 ? '':each.days.get(28) }"/>-->
+                    <!--<label value="${each.days.get(29) eq 0 ? '':each.days.get(29) }"/>-->
+                    <!--<label value="${each.days.get(30) eq 0 ? '':each.days.get(30) }"/>-->
+                <!--</row>-->
+            <!--</template>-->
+        <!--</grid>-->
+
+      <listbox hflex="true" vflex="true" oddRowSclass="none"
+               model="@load(vm.pageResult.rows)" emptyMessage="@load(vm.emptyMessage)"
+      >
+        <listhead sizable="true">
+          <listheader width="30px" label="行号" align="center"/>
+          <listheader width="70px" label="产地" align="center"/>
+          <listheader width="60px" label="车系" align="center"/>
+          <listheader width="180px" label="产品名称" align="center"/>
+          <listheader width="120px" label="型号" align="center"/>
+          <listheader width="140px" label="VSN" align="center"/>
+          <listheader width="60px" label="月度计划" align="center"/>
+          <listheader width="50px" label="完成量" align="center"/>
+          <listheader width="50px" label="完成率" align="center"/>
+          <listheader width="50px" label="第1周计划" align="center"/>
+          <listheader width="50px" label="第2周计划" align="center"/>
+          <listheader width="50px" label="第3周计划" align="center"/>
+          <listheader width="50px" label="第4周计划" align="center"/>
+          <listheader width="50px" label="第5周计划" align="center"/>
+          <listheader width="50px" label="第1周完成" align="center"/>
+          <listheader width="50px" label="第2周完成" align="center"/>
+          <listheader width="50px" label="第3周完成" align="center"/>
+          <listheader width="50px" label="第4周完成" align="center"/>
+          <listheader width="50px" label="第5周完成" align="center"/>
+          <listheader width="30px" label="1日" align="center"/>
+          <listheader width="30px" label="2日" align="center"/>
+          <listheader width="30px" label="3日" align="center"/>
+          <listheader width="30px" label="4日" align="center"/>
+          <listheader width="30px" label="5日" align="center"/>
+          <listheader width="30px" label="6日" align="center"/>
+          <listheader width="30px" label="7日" align="center"/>
+          <listheader width="30px" label="8日" align="center"/>
+          <listheader width="30px" label="9日" align="center"/>
+          <listheader width="30px" label="10日" align="center"/>
+          <listheader width="30px" label="11日" align="center"/>
+          <listheader width="30px" label="12日" align="center"/>
+          <listheader width="30px" label="13日" align="center"/>
+          <listheader width="30px" label="14日" align="center"/>
+          <listheader width="30px" label="15日" align="center"/>
+          <listheader width="30px" label="16日" align="center"/>
+          <listheader width="30px" label="17日" align="center"/>
+          <listheader width="30px" label="18日" align="center"/>
+          <listheader width="30px" label="19日" align="center"/>
+          <listheader width="30px" label="20日" align="center"/>
+          <listheader width="30px" label="21日" align="center"/>
+          <listheader width="30px" label="22日" align="center"/>
+          <listheader width="30px" label="23日" align="center"/>
+          <listheader width="30px" label="24日" align="center"/>
+          <listheader width="30px" label="25日" align="center"/>
+          <listheader width="30px" label="26日" align="center"/>
+          <listheader width="30px" label="27日" align="center"/>
+          <listheader width="30px" label="28日" align="center"/>
+          <listheader width="30px" label="29日" align="center"/>
+          <listheader width="30px" label="30日" align="center"/>
+          <listheader width="30px" label="31日" align="center"/>
+
+        </listhead>
+        <template name="model">
+          <listitem onDoubleClick="@command('openPlanList',model=each)">
+            <listcell label="${forEachStatus.index+1}" sclass="label-index"/>
+            <listcell label="@load(each.origin)"/>
+            <listcell label="@load(each.vehicleSeries)"/>
+            <listcell label="@load(each.vehicleName)"/>
+            <listcell label="@load(each.vehicleModel)"/>
+            <listcell label="@load(each.vsn)"/>
+            <listcell label="@load(each.monthPlan)"/>
+            <listcell label="@load(each.completeNumber)"/>
+            <listcell label="@load(each.completion)"/>
+              <listcell label="${each.firstWeekPlan == 0 ? 0:each.firstWeekPlan }"/>
+              <listcell label="${each.secondWeekPlan == 0 ? 0:each.secondWeekPlan }"/>
+              <listcell label="${each.thirdWeekPlan == 0 ? 0:each.thirdWeekPlan }"/>
+              <listcell label="${each.fourthWeekPlan == 0 ? 0:each.fourthWeekPlan }"/>
+              <listcell label="${each.fifthWeekPlan == 0 ? 0:each.fifthWeekPlan }"/>
+              <listcell label="@load(each.firstWeekComplete)"/>
+              <listcell label="@load(each.secondWeekComplete)"/>
+              <listcell label="@load(each.thirdWeekComplete)"/>
+              <listcell label="@load(each.fourthWeekComplete)"/>
+              <listcell label="@load(each.fifthWeekComplete)"/>
+              <listcell label="${each.days.get(0)}"/>
+              <listcell label="${each.days.get(1)}"/>
+              <listcell label="${each.days.get(2)}"/>
+              <listcell label="${each.days.get(3)}"/>
+              <listcell label="${each.days.get(4)}"/>
+              <listcell label="${each.days.get(5)}"/>
+              <listcell label="${each.days.get(6)}"/>
+              <listcell label="${each.days.get(7)}"/>
+              <listcell label="${each.days.get(8)}"/>
+              <listcell label="${each.days.get(9)}"/>
+              <listcell label="${each.days.get(10)}"/>
+              <listcell label="${each.days.get(11)}"/>
+              <listcell label="${each.days.get(12)}"/>
+              <listcell label="${each.days.get(13)}"/>
+              <listcell label="${each.days.get(14)}"/>
+              <listcell label="${each.days.get(15)}"/>
+              <listcell label="${each.days.get(16)}"/>
+              <listcell label="${each.days.get(17)}"/>
+              <listcell label="${each.days.get(18)}"/>
+              <listcell label="${each.days.get(19)}"/>
+              <listcell label="${each.days.get(20)}"/>
+              <listcell label="${each.days.get(21)}"/>
+              <listcell label="${each.days.get(22)}"/>
+              <listcell label="${each.days.get(23)}"/>
+              <listcell label="${each.days.get(24)}"/>
+              <listcell label="${each.days.get(25)}"/>
+              <listcell label="${each.days.get(26)}"/>
+              <listcell label="${each.days.get(27)}"/>
+              <listcell label="${each.days.get(28)}"/>
+              <listcell label="${each.days.get(29)}"/>
+              <listcell label="${each.days.get(30)}"/>
+          </listitem>
+        </template>
+      </listbox>
+      <paging
+              pageSize="@bind(vm.pageResult.pageSize)"
+              totalSize="@bind(vm.pageResult.total)"
+              pageIncrement="1"
+              detailed="true"
+              activePage="@bind(vm.pageResult.page)"
+              onPaging="@command('gotoPageNo',e=event)"
+      />
+    </vlayout>
+  </center>
+</borderlayout>

@@ -1,0 +1,48 @@
+<!--
+ 错误提示页面
+
+ 通过在 WEB-INF/web.xml 文件内指定错误页面,你可以定制错误处理,如下。细节请参考
+ Java Servlet Specification。
+ web.xml
+<error-page>
+    <exception-type>java.lang.Throwable</exception-type>
+    <location>/WEB-INF/sys/error.zul</location>
+</error-page>
+那么,当加载页面时发生一个错误,Web 服务器会转向你指定的错误页面, /error/error.zul。
+转发之后(Upon forwarding),Web 服务器会立即将一套 请求属性传递到错误页面以描述发生了什么。
+这些属性如下:
+请求属性                                 类型
+javax.servlet.error.status_code         java.lang.Integer
+javax.servlet.error.exception_type      java.lang.Class
+javax.servlet.error.message             java.lang.String
+javax.servlet.error.exception           java.lang.Throwable
+javax.servlet.error.request_uri         java.lang.String
+javax.servlet.error.servlet_name        java.lang.String
+
+然后,在错误页面内,通过使用这些属性,你可以显示你的定制信息。例如,
+[提示]:错误页面可以为任何类型的 servlet。除了 ZUL,可以使用 JSP 或任何你喜 欢的页面。
+[提示]:转发之后, 错误页面会被作为主页面展示,所以你不需要指定主窗口指定模 态(modal)或
+      overlapped 模式(mode)(如果有的话)。
+-->
+<window width="450px" height="250px" mode="modal" sizable="true" sclass="dialog-window">
+  <caption label="系统异常!" iconSclass="z-icon-windows"/>
+  <vlayout hflex="1" vflex="1">
+    <hlayout hflex="1" vflex="1">
+      <div style="width: 80px; top: 10px;" align="center">
+        <span sclass="z-icon-times-circle"
+              style="font-size: 60px; color: red; font-weight: bold; width: 80px; top: 10px;"/>
+      </div>
+      <vlayout hflex="1" vflex="1" style="margin-top:10px;margin-bottom:10px">
+        <!--<div height="40px">-->
+        <!--<label style="color:red;font-weight:bold" value="错误代码: ${requestScope['javax.servlet.error.status_code']}"/>-->
+        <!--</div>-->
+        <div tooltiptext="${requestScope['javax.servlet.error.message']}" vflex="1" style="overflow-y:auto">
+          ${requestScope['javax.servlet.error.message']}
+        </div>
+      </vlayout>
+    </hlayout>
+    <div align="center" height="50px">
+      <button sclass="z-messagebox-button" label="确认" onClick="spaceOwner.detach()"/>
+    </div>
+  </vlayout>
+</window>

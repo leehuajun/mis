@@ -1,0 +1,51 @@
+@charset "utf-8";
+//必须设置了这个才能编译有中文的注释
+@import "variables";
+
+.z-a {
+  &:hover, &:visited, &:active, &:focus {
+    text-decoration: none;
+  }
+}
+
+a {
+  &:hover, &:visited, &:active, &:focus {
+    text-decoration: none;
+  }
+}
+
+
+
+.z-toolbar {
+  padding: 0px 1px;
+  line-height: 20px;
+  //padding: 0px 0px
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, .1);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, .3);
+}
+
+// 大大的 Warning 图标
+.warning-large {
+  color: #ff9600;
+  font-weight: 700;
+  font-size: 120px;
+  margin: 40px;
+}
+
+.warning-message {
+  font-size: 30px;
+  color: $default;
+  font-weight: bold;
+}
+

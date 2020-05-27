@@ -1,0 +1,116 @@
+<!--专用车月计划平衡详细表导入-->
+<window visible="@load(vm.showImportWindow)" width="600px" height="500px" sclass="dialog-window"
+        sizable="false" mode="modal" closable="true" style="background:d9d9d9"
+        onClose="@command('abort',event=event)">
+    <!--onClose="self.visible = false;vm.showImportWindow = !vm.showImportWindow;event.stopPropagation();">-->
+    <caption label="专用车月计划平衡详细表" iconSclass="z-icon-windows"/>
+    <borderlayout hflex="1" vflex="1">
+        <north border="none">
+            <grid oddRowSclass="none" hflex="1" sclass="form-grid">
+                <columns>
+                    <column width="120px"></column>
+                    <column hflex="1"></column>
+                </columns>
+                <rows>
+                    <row>
+                        <button label="选择Excel文件..." hflex="1"
+                                sclass="btn-default"
+                                upload="true,maxsize=51200"
+                                onUpload="@command('doUploadFile',event=event)"/>
+                        <textbox hflex="1" value="@load(vm.uploadFilename)" readonly="true"/>
+                    </row>
+                </rows>
+            </grid>
+        </north>
+        <center sclass="c-center" hflex="1" vflex="1">
+            <vlayout width="100%" vflex="1">
+                <listbox hflex="true" vflex="true" model="@load(vm.importEntities)" mold="paging"
+                         pageSize="10">
+                    <listhead sizable="true">
+                        <listheader width="40px" label="行号" align="center"/>
+                        <listheader width="60px" label="ID " align="center"/>
+                        <listheader width="60px" label="时间" align="center"/>
+                        <listheader width="80px" label="经销商代码" align="center"/>
+                        <listheader width="40px" label="申报类型" align="center"/>
+                        <listheader width="40px" label="类型" align="center"/>
+                        <listheader width="100px" label="物料号" align="center"/>
+                        <listheader width="120px" label="车型A" align="center"/>
+                        <listheader width="100px" label="品种代码" align="center"/>
+                        <listheader width="80px" label="颜色" align="center"/>
+                        <listheader width="80px" label="排放标准" align="center"/>
+                        <listheader width="80px" label="物料品种" align="center"/>
+                        <listheader width="80px" label="上报数" align="center"/>
+                        <listheader width="80px" label="SGMW大区满足数	" align="center"/>
+                        <listheader width="80px" label="SGMW总部满足数" align="center"/>
+                        <listheader width="80px" label="是否集团车" align="center"/>
+                        <listheader width="80px" label="是否异地配送" align="center"/>
+                        <listheader width="80px" label="是否套色" align="center"/>
+                        <listheader width="80px" label="考核第一周" align="center"/>
+                        <listheader width="80px" label="考核第二周" align="center"/>
+                        <listheader width="80px" label="考核第三周" align="center"/>
+                        <listheader width="80px" label="考核第四周" align="center"/>
+                        <listheader width="80px" label="考核第五周" align="center"/>
+                        <listheader width="80px" label="考核第六周" align="center"/>
+                        <listheader width="80px" label="备注" align="center"/>
+                        <listheader width="80px" label="备注2" align="center"/>
+                        <listheader width="180px" label="经销商" align="center"/>
+                        <listheader width="80px" label="所属省份" align="center"/>
+                        <listheader width="80px" label="所属区域" align="center"/>
+                        <listheader width="180px" label="可申报区域" align="center"/>
+                        <listheader width="180px" label="车型" align="center"/>
+                        <listheader width="80px" label="车型1" align="center"/>
+                        <listheader width="80px" label="车系" align="center"/>
+                        <listheader width="80px" label="排量" align="center"/>
+                    </listhead>
+                    <template name="model">
+                        <listitem style="@load(vm.genStyle(each))">
+                            <listcell label="${forEachStatus.index+1}" sclass="label-index"/>
+                            <listcell label="@load(each.ssid)"/>
+                            <listcell label="@load(each.dateYearMonth)"/>
+                            <listcell label="@load(each.distributorCode)"/>
+                            <listcell label="@load(each.planType)"/>
+                            <listcell label="@load(each.type)"/>
+                            <listcell label="@load(each.vsn)"/>
+                            <listcell label="@load(each.vehicleModel)"/>
+                            <listcell label="@load(each.brandCode)"/>
+                            <listcell label="@load(each.color)"/>
+                            <listcell label="@load(each.effluent)"/>
+                            <listcell label="@load(each.vehicleBreed)"/>
+                            <listcell label="@load(each.requiredAmount)"/>
+                            <listcell label="@load(each.regionNumber)"/>
+                            <listcell label="@load(each.headquartersNumber)"/>
+                            <listcell label="@load(each.isNoGroupCar)"/>
+                            <listcell label="@load(each.allopatryDelivery)"/>
+                            <listcell label="@load(each.colorRegister)"/>
+                            <listcell label="@load(each.firstWeekAssessment)"/>
+                            <listcell label="@load(each.secondWeekAssessment)"/>
+                            <listcell label="@load(each.thirdWeekAssessment)"/>
+                            <listcell label="@load(each.fourthWeekAssessment)"/>
+                            <listcell label="@load(each.fifthWeekAssessment)"/>
+                            <listcell label="@load(each.sixthWeekAssessment)"/>
+                            <listcell label="@load(each.remarks)"/>
+                            <listcell label="@load(each.remarks2)"/>
+                            <listcell label="@load(each.distributorName)"/>
+                            <listcell label="@load(each.province)"/>
+                            <listcell label="@load(each.region)"/>
+                            <listcell label="@load(each.declarableRegion)"/>
+                            <listcell label="@load(each.vehicleType)"/>
+                            <listcell label="@load(each.vehicleType1)"/>
+                            <listcell label="@load(each.vehicleSeries)"/>
+                            <listcell label="@load(each.displacement)"/>
+                        </listitem>
+                    </template>
+                </listbox>
+                <hlayout hflex="1">
+                    <div align="center" hflex="1" style="margin:10px">
+                        <button iconSclass="" sclass="btn-default " label="保存"
+                                onClick="@command('importData')"/>
+                        <space width="20px"/>
+                        <button iconSclass="" sclass="btn-danger" label="关闭"
+                                onClick="@command('abort',event=event)"/>
+                    </div>
+                </hlayout>
+            </vlayout>
+        </center>
+    </borderlayout>
+</window>

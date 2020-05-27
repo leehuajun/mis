@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zk>
+  <preference>
+    <name>org.zkoss.zul.Window.defaultActionOnShow</name>
+    <value></value>
+  </preference>
+
+  <library-property>
+    <name>org.zkoss.zul.Button.mold</name>
+    <value>trendy</value>
+  </library-property>
+
+  <library-property>
+    <name>org.zkoss.zul.progressbox.position</name>
+    <value>center</value>
+  </library-property>
+
+  <!-- disable js cache in browser -->
+  <library-property>
+    <name>org.zkoss.web.classWebResource.cache</name>
+    <value>false</value>
+  </library-property>
+
+  <library-property>
+    <name>org.zkoss.theme.preferred</name>
+    <value>iceblue_c</value>
+  </library-property>
+
+  <!--<library-property>-->
+    <!--<name>org.zkoss.zul.theme.fontSizeL</name>-->
+    <!--<value>12px</value>-->
+  <!--</library-property>-->
+  <!--<library-property>-->
+    <!--<name>org.zkoss.zul.theme.fontSizeM</name>-->
+    <!--<value>11px</value>-->
+  <!--</library-property>-->
+  <!--<library-property>-->
+    <!--<name>org.zkoss.zul.theme.fontSizeS</name>-->
+    <!--<value>10px</value>-->
+  <!--</library-property>-->
+  <!--<library-property>-->
+    <!--<name>org.zkoss.zul.theme.fontSizeXS</name>-->
+    <!--<value>9px</value>-->
+  <!--</library-property>-->
+  <!--<library-property>-->
+    <!--<name>org.zkoss.zul.theme.fontSizeMS</name>-->
+    <!--<value>10px</value>-->
+  <!--</library-property>-->
+
+  <client-config>
+    <debug-js>true</debug-js>
+    <disable-behind-modal>true</disable-behind-modal>
+  </client-config>
+
+  <!-- 下面的配置可以使progressbox进度框呈modal模态窗口模式，后面的页面被屏蔽 http://forum.zkoss.org/question/71292/progressbox-with-modal-effect-disabling-all-components/?answer=71551#post-id-71551 -->
+  <device-config>
+    <device-type>ajax</device-type>
+    <!-- Custom javascript snippets -->
+    <embed>
+      <![CDATA[
+            <script type="text/javascript">
+                zUtl.progressbox = function(id, msg, mask, icon) {
+                mask=true; //Ponemos este booleano a true para que el progressbox siempre aparezca como
+                			//una ventana modal (con todos los componentes de abajo deshabilitados)
+                    if (mask && zk.Page.contained.length) {
+                        for (var c = zk.Page.contained.length, e = zk.Page.contained[--c];                   e; e = zk.Page.contained[--c]) {
+                            if (!e._applyMask)
+                                e._applyMask = new zk.eff.Mask({
+                                    id: e.uuid + "-mask",
+                                    message: msg,
+                                    anchor: e.$n()
+                                });
+                        }
+                        return;
+                    }
+
+                    if (mask)
+                        zk.isBusy++;
+
+                    var x = jq.innerX(), y = jq.innerY(),
+                        style = ' style="left:'+x+'px;top:'+y+'px"',
+                        idtxt = id + '-t',
+                        idmsk = id + '-m',
+                        html = '<div id="'+id+'"';
+                    if (mask)
+                        html += '><div id="' + idmsk + '" class="z-modal-mask"'+style+'></div';
+                    html += '><div id="'+idtxt+'" class="z-loading"'+style
+                        +'><div class="z-loading-indicator"><span class="z-loading-icon"></span> '
+                        +msg+'</div></div>';
+                    if (icon)
+                        html += '<div class="' + icon + '"></div>';
+                    jq(document.body).append(html + '</div>');
+                    var $n = jq(id, zk),
+                        n = $n[0],
+                        $txt = jq(idtxt, zk);
+                    if (mask)
+                        n.z_mask = new zk.eff.FullMask({
+                            mask: jq(idmsk, zk)[0],
+                            zIndex: $txt.css('z-index') - 1
+                        });
+
+                    //center
+                    var txt = $txt[0],
+                        st = txt.style;
+                    st.left = jq.px((jq.innerWidth() - txt.offsetWidth) / 2 + x);
+                    st.top = jq.px((jq.innerHeight() - txt.offsetHeight) / 2 + y);
+
+                    $n.zk.cleanVisibility();
+                }
+            </script>]]>
+    </embed>
+  </device-config>
+  <!-- Configure the error page -->
+
+  <error-page>
+    <exception-type>java.lang.Throwable</exception-type>
+    <location>/error.zul</location>
+  </error-page>
+
+  <language-config>
+    <addon-uri>/WEB-INF/lang-addon.xml</addon-uri>
+  </language-config>
+  <device-config>
+    <device-type>ajax</device-type>
+    <timeout-uri>/logout.zul</timeout-uri>
+  </device-config>
+  <!--<session-config>-->
+  <!--<device-type>ajax</device-type>-->
+  <!--<timeout-uri>/timeout.zul</timeout-uri>-->
+  <!--</session-config>-->
+  <session-config>
+    <session-timeout>300</session-timeout>
+    <timer-keep-alive>true</timer-keep-alive>
+    <max-desktops-per-session>15</max-desktops-per-session>
+    <max-requests-per-session>5</max-requests-per-session>
+    <max-pushes-per-session>3</max-pushes-per-session>
+  </session-config>
+  <!--<system-config>-->
+  <!--<disable-event-thread>false</disable-event-thread>-->
+  <!--</system-config>-->
+
+
+  <!--* &lt;system-config&gt;<br />-->
+  <!--* &lt;disable-event-thread&gt;false&lt;/disable-event-thread&gt;<br />-->
+  <!--* &lt;/system-config&gt;-->
+</zk>

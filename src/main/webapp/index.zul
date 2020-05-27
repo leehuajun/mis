@@ -1,0 +1,61 @@
+<!--
+ 主页
+-->
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c" ?>
+<?page title="广西汽车集团 - 整车销售订单跟踪管理系统" contentType="text/html;charset=UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<?link rel="shortcut icon" type="image/x-icon" href="resource/images/favicon.ico"?>
+<!-- Load Bootstrap  -->
+<!--<?link href="resource/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"?>-->
+<!-- Google Open Sans font -->
+<!-- Load fonts from local -->
+<!--<?link href="resource/css/fonts.css" rel="stylesheet" type="text/css"?>-->
+<!-- Unmark if we want to use fonts from google server
+<?link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400' rel='stylesheet' type='text/css'?>
+-->
+<!--<?link href="resource/style/login.css.dsp" rel="stylesheet" type="text/css"?>-->
+<?link href="resource/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"?>
+<?link href="resource/style/style.css" rel="stylesheet" type="text/css"?>
+<!-- 使用 Awesome 5.5 的图标字体 -->
+<!--<?link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous"?>-->
+<zk>
+  <borderlayout width="100%" height="100%"
+                viewModel="@id('vm') @init('com.sunjet.mis.vm.IndexVM')"
+                style="margin:0px 0px;padding:0px 0px;"
+                onClientInfo="@command('showClientInfo',evt=event)">
+    <north sclass="navbar">
+      <include src="navbar.zul"/>
+    </north>
+    <west title="功能导航" collapsible="true" style="margin:0px 0px;padding:0px 0px" splittable="true" sclass="sidebar"
+          width="200px" minsize="100" maxsize="400" vflex="min">
+        <include src="sidebar.zul"/>
+    </west>
+    <center style="margin:0px 0px;padding:0px 0px;">
+      <div id="mainScreen" height="100%" width="100%">
+        <!-- atlantic 主题,使用 #198bc9   sapphire 使用 #8FB9D0  silvergray 使用 #CFCFCF-->
+        <!--style="background-color: #FFFFFF;margin:0px 0px;border:1px solid #198bc9">-->
+        <tabbox sclass="main-tabbox" id="mytab" height="100%">
+          <toolbar>
+            <menubar width="100%" sclass="tabbox-menubar">
+              <menu iconSclass="z-icon-reorder">
+                <menupopup>
+                  <menuitem iconSclass="z-icon-bolt" label="关闭当前"
+                            onClick="@command('closeOne',tabNow=mytab.getSelectedTab())"/>
+                  <menuitem iconSclass="z-icon-ban" label="关闭其他"
+                            onClick="@command('closeOther',tabs=mytab.getTabs().getChildren(),tabNow=mytab.getSelectedTab())"/>
+                  <menuitem iconSclass="z-icon-ban" label="关闭所有"
+                            onClick="@command('closeAll',tabs=mytab.getTabs().getChildren())"/>
+                </menupopup>
+              </menu>
+            </menubar>
+          </toolbar>
+          <tabs id="mainTabs">
+            <!--<tab label="${labels.homepage}" image="images/system/audit.png" closable="false"  style="height:16px" />-->
+          </tabs>
+          <tabpanels id="mainTabpanels">
+          </tabpanels>
+        </tabbox>
+      </div>
+    </center>
+  </borderlayout>
+</zk>

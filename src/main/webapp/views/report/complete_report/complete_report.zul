@@ -1,0 +1,180 @@
+<!-- 经销商销售指标完成情况汇总 -->
+<!--<window xmlns:w="client">-->
+<borderlayout width="100%" height="100%"
+              viewModel="@id('vm') @init('com.sunjet.mis.vm.report.CompleteReportVM')"
+              style="padding:0px;"
+>
+    <center sclass="c-center">
+        <vlayout width="100%" height="100%" style="padding-bottom:0px">
+            <groupbox>
+                <grid oddRowSclass="none" sclass="form-grid" hflex="1">
+                    <columns>
+                        <column width="80px"></column>
+                        <column hflex="1"></column>
+                        <column width="80px"></column>
+                        <column hflex="1"></column>
+                        <column width="80px"></column>
+                        <column hflex="1"></column>
+                        <column width="60px"></column>
+                        <column hflex="1"></column>
+                        <column width="60px"></column>
+                        <column hflex="1"></column>
+                    </columns>
+                    <rows>
+                        <row style="border:none;height:30px">
+                            <div hflex="1" align="center">
+                                <label value="经销商编码"/>
+                            </div>
+                            <textbox value="@bind(vm.distributorCompleteReportView.distributorCode)" hflex="1"
+                                     tabindex="1"
+                            />
+                            <div hflex="1" align="center">
+                                <label value="经销商名称"/>
+                            </div>
+                            <textbox value="@bind(vm.distributorCompleteReportView.distributorName)" hflex="1"
+                                     tabindex="1"
+                            />
+                            <div hflex="1" align="center">
+                                <label value="年度" hflex="1"/>
+                            </div>
+                            <listbox hflex="1" mold="select" model="@load(vm.years)"
+                                     selectedItem="@bind(vm.distributorCompleteReportView.year)">
+                                <template name="model">
+                                    <listitem label="@load(each)" value="@load(each)"/>
+                                </template>
+                            </listbox>
+
+                            <div hflex="1" align="center">
+                                <label value="月份" hflex="1"/>
+                            </div>
+                            <listbox hflex="1" mold="select" model="@load(vm.months)"
+                                     selectedItem="@bind(vm.distributorCompleteReportView.month)">
+                                <template name="model">
+                                    <listitem label="@load(each)" value="@load(each)"/>
+                                </template>
+                            </listbox>
+                        </row>
+                    </rows>
+                </grid>
+            </groupbox>
+            <include src="/views/commons/list_report_toolbar.zul"/>
+            <!--<include src="/views/report/plan/order_import.zul"/>-->
+            <listbox hflex="true" vflex="true" oddRowSclass="none"
+                     model="@load(vm.pageResult.rows)" emptyMessage="@load(vm.emptyMessage)"
+            >
+                <auxhead>
+                    <auxheader label="--" colspan="1" align="center"/>
+                    <!--<auxheader label="申报时间" colspan="2" align="center"/>-->
+                    <auxheader label="经销商信息" colspan="5" align="center"/>
+                    <auxheader label="年度目标(合并)" colspan="4" align="center"/>
+                    <auxheader label="年度目标(货改车)" colspan="4" align="center"/>
+                    <auxheader label="年度目标(客改车)" colspan="4" align="center"/>
+                    <auxheader label="月开票指标(合并)" colspan="5" align="center"/>
+                    <auxheader label="月开票指标(货改车)" colspan="5" align="center"/>
+                    <auxheader label="月开票指标(客改车)" colspan="5" align="center"/>
+                    <auxheader label="其他" colspan="2" align="center"/>
+                </auxhead>
+                <listhead sizable="true">
+                    <listheader forEach="${vm.tableHeaderList}" hflex="${each.hflex}" width="${each.width}"
+                                label="${each.label}"></listheader>
+                    <!--经销商信息-->
+                    <!--<listheader width="40px" label="行号" align="center"/>-->
+                    <!--<listheader width="60px" label="地区" sort="auto(regionName)" align="center"/>-->
+                    <!--<listheader width="60px" label="省份" align="center"/>-->
+                    <!--<listheader width="60px" label="级别" align="center"/>-->
+                    <!--<listheader width="100px" label="经销商代码(SGMW)" align="center"/>-->
+                    <!--<listheader width="120px" label="经销商名称" sort="auto(distributorName)" align="center"/>-->
+                    <!--&lt;!&ndash;年度目标(合并)-不含原型车&ndash;&gt;-->
+                    <!--<listheader width="70px" label="年度目标" align="center"/>-->
+                    <!--<listheader width="70px" label="年累开票" align="center"/>-->
+                    <!--<listheader width="70px" label="目标差距" align="center"/>-->
+                    <!--<listheader width="70px" label="完成率" align="center"/>-->
+                    <!--&lt;!&ndash;年度目标(货改车)&ndash;&gt;-->
+                    <!--<listheader width="70px" label="年度目标" align="center"/>-->
+                    <!--<listheader width="70px" label="年累开票" align="center"/>-->
+                    <!--<listheader width="70px" label="目标差距" align="center"/>-->
+                    <!--<listheader width="70px" label="完成率" align="center"/>-->
+                    <!--&lt;!&ndash;年度目标(客改车)&ndash;&gt;-->
+                    <!--<listheader width="70px" label="年度目标" align="center"/>-->
+                    <!--<listheader width="70px" label="年累开票" align="center"/>-->
+                    <!--<listheader width="70px" label="目标差距" align="center"/>-->
+                    <!--<listheader width="70px" label="完成率" align="center"/>-->
+                    <!--&lt;!&ndash;月度开票指标(合并)&ndash;&gt;-->
+                    <!--<listheader width="70px" label="开票目标" align="center"/>-->
+                    <!--<listheader width="70px" label="累计开票" align="center"/>-->
+                    <!--<listheader width="70px" label="目标差距" align="center"/>-->
+                    <!--<listheader width="70px" label="完成率" align="center"/>-->
+                    <!--<listheader width="70px" label="需求缺口" align="center"/>-->
+                    <!--&lt;!&ndash;月度开票指标(货改车)&ndash;&gt;-->
+                    <!--<listheader width="70px" label="开票指标" align="center"/>-->
+                    <!--<listheader width="70px" label="累计开票指标" align="center"/>-->
+                    <!--<listheader width="70px" label="目标差距" align="center"/>-->
+                    <!--<listheader width="70px" label="完成率" align="center"/>-->
+                    <!--<listheader width="70px" label="需求缺口" align="center"/>-->
+                    <!--&lt;!&ndash;月度开票指标(客改车)&ndash;&gt;-->
+                    <!--<listheader width="70px" label="开票指标" align="center"/>-->
+                    <!--<listheader width="70px" label="累计开票指标" align="center"/>-->
+                    <!--<listheader width="70px" label="目标差距" align="center"/>-->
+                    <!--<listheader width="70px" label="完成率" align="center"/>-->
+                    <!--<listheader width="70px" label="需求缺口" align="center"/>-->
+                    <!--<listheader width="80px" label="发车余额(含授信额度)" align="center"/>-->
+                    <!--<listheader width="70px" label="分车条件" align="center"/>-->
+                </listhead>
+                <template name="model">
+                    <listitem>
+                        <listcell label="${forEachStatus.index+1}" sclass="label-index"/>
+                        <!--经销商信息-->
+                        <listcell label="@load(each.regionName)"/>
+                        <listcell label="@load(each.provinceName)"/>
+                        <listcell label="@load(each.level)"/>
+                        <listcell label="@load(each.distributorCode)"/>
+                        <listcell label="@load(each.distributorName)"/>
+                        <!--年度目标(合并)-不含原型车-->
+                        <listcell label="@load(each.yearTotalTarget)"/>
+                        <listcell label="@load(each.yearTotalInvoice)"/>
+                        <listcell label="@load(each.yearTotalDifference)"/>
+                        <listcell label="@load(each.yearTotalCompletionRate)"/>
+                        <!--年度目标(货改车)-->
+                        <listcell label="@load(each.yearTotalTruckTarget)"/>
+                        <listcell label="@load(each.yearTotalTruckInvoice)"/>
+                        <listcell label="@load(each.yearTotalTruckDifference)"/>
+                        <listcell label="@load(each.yearTotalTruckCompletionRate)"/>
+                        <!--年度目标(客改车)-->
+                        <listcell label="@load(each.yearTotalBusTarget)"/>
+                        <listcell label="@load(each.yearTotalBusInvoice)"/>
+                        <listcell label="@load(each.yearTotalBusDifference)"/>
+                        <listcell label="@load(each.yearTotalBusCompletionRate)"/>
+                        <!--月度开票指标(合并)-->
+                        <listcell label="@load(each.monthTotalTarget)"/>
+                        <listcell label="@load(each.monthTotalInvoice)"/>
+                        <listcell label="@load(each.monthTotalDifference)"/>
+                        <listcell label="@load(each.monthTotalCompletionRate)"/>
+                        <listcell label="@load(each.monthSurplus)"/>
+                        <!--月度开票指标(货改车)-->
+                        <listcell label="@load(each.monthTotalTruckTarget)"/>
+                        <listcell label="@load(each.monthTotalTruckInvoice)"/>
+                        <listcell label="@load(each.monthTotalTruckDifference)"/>
+                        <listcell label="@load(each.monthTotalTruckCompletionRate)"/>
+                        <listcell label="@load(each.monthTruckSurplus)"/>
+                        <!--月度开票指标(客改车)-->
+                        <listcell label="@load(each.monthTotalBusTarget)"/>
+                        <listcell label="@load(each.monthTotalBusInvoice)"/>
+                        <listcell label="@load(each.monthTotalBusDifference)"/>
+                        <listcell label="@load(each.monthTotalBusCompletionRate)"/>
+                        <listcell label="@load(each.monthBusSurplus)"/>
+                        <listcell label="@load(each.creditBalance)"/>
+                        <listcell label="@load(each.distribution)"/>
+                    </listitem>
+                </template>
+            </listbox>
+            <paging
+                    pageSize="@bind(vm.pageResult.pageSize)"
+                    totalSize="@bind(vm.pageResult.total)"
+                    pageIncrement="1"
+                    detailed="true"
+                    activePage="@bind(vm.pageResult.page)"
+                    onPaging="@command('gotoPageNo',e=event)"
+            />
+        </vlayout>
+    </center>
+</borderlayout>

@@ -1,0 +1,149 @@
+<!--周产销平衡报表-->
+<borderlayout width="100%" height="100%"
+              viewModel="@id('vm') @init('com.sunjet.mis.vm.report.WeeklyBalancedStatementVM')"
+              style="padding:0px;border:0px">
+    <center sclass="c-center">
+        <vlayout width="100%" height="100%" style="padding-bottom:0px">
+           <!-- <include src="/views/report/modified_bus_transit_summary_sheet/modified_bus_transit_summary_import.zul"/>-->
+            <groupbox>
+                <grid oddRowSclass="none" sclass="form-grid" hflex="1">
+                    <columns>
+                        <column width="80px"></column>
+                        <column hflex="1"></column>
+                        <column width="80px"></column>
+                        <column hflex="1"></column>
+                        <column width="80px"></column>
+                        <column hflex="1"></column>
+                        <column width="60px"></column>
+                        <column hflex="1"></column>
+                    </columns>
+                    <rows>
+                        <row style="border:none;height:30px">
+
+                            <div hflex="1" align="center">
+                                <label value="车型" hflex="1"/>
+                            </div>
+                            <textbox value="@bind(vm.weeklyBalancedStatementView.vehicleType1)" hflex="1" tabindex="1"
+                                     readonly="@load(vm.isDistributor())"/>
+
+                            <div hflex="40px" align="center">
+                                <label value="完整VSN" hflex="1"/>
+                            </div>
+                            <textbox value="@bind(vm.weeklyBalancedStatementView.absVsn)" hflex="1" tabindex="1"
+                                     readonly="@load(vm.isDistributor())"/>
+                            <label value="生产计划日期"/>
+                            <datebox hflex="1" format="medium" value="@bind(vm.weeklyBalancedStatementView.startDate1)" readonly="true"/>
+                            <label value="至"/>
+                            <datebox hflex="1" format="medium" value="@bind(vm.weeklyBalancedStatementView.endDate1)" readonly="true"/>
+                        </row>
+                        <row style="border:none;height:30px">
+                            <label value="生产入库日期从"/>
+                            <datebox hflex="1" format="medium" value="@bind(vm.weeklyBalancedStatementView.startDate)" readonly="true"/>
+                            <label value="至"/>
+                            <datebox hflex="1" format="medium" value="@bind(vm.weeklyBalancedStatementView.endDate)" readonly="true"/>
+
+
+                           <label value="分车日期"/>
+                            <datebox hflex="1" format="medium" value="@bind(vm.weeklyBalancedStatementView.startDate2)" readonly="true"/>
+                            <label value="至"/>
+                            <datebox hflex="1" format="medium" value="@bind(vm.weeklyBalancedStatementView.endDate2)" readonly="true"/>
+                        </row>
+                    </rows>
+                </grid>
+            </groupbox>
+            <include src="/views/commons/list_report_toolbar.zul"/>
+            <listbox hflex="true" vflex="true" oddRowSclass="none"
+                     model="@load(vm.pageResult.rows)" emptyMessage="@load(vm.emptyMessage)">
+                <listhead sizable="true">
+                    <listheader width="40px"  label="序号" align="center"/>
+                    <listheader width="160px"  label="生产计划月份" align="center"/>
+                    <listheader width="160px"  label="生产入库时间" align="center"/>
+                    <listheader width="160px"  label="本月分车份时间" align="center"/>
+                    <listheader width="40px"  label="产地" align="center"/>
+                    <listheader width="100px" label="品种大类" align="center"/>
+                    <listheader width="120px" label="常规品种" align="center"/>
+                    <listheader width="120px" label="完整ABSVSN" align="center"/>
+                   <!-- <listheader width="120px" label="非完整ABSVSN" align="center"/>-->
+                    <listheader width="160px"  label="车型" align="center"/>
+                    <listheader width="100px" label="平衡后订单" align="center"/>
+                    <listheader width="100px" label="上月结余量" align="center"/>
+                    <listheader width="100px" label="月度生产计划量" align="center"/>
+                    <listheader width="100px" label="生产入库量" align="center"/>
+                    <listheader width="100px" label="厂内成品库存量" align="center"/>
+                    <listheader width="100px" label="本月已分车" align="center"/>
+
+                </listhead>
+                <template name="model">
+                    <listitem>
+                        <listcell label="${forEachStatus.index+1}" sclass="label-index"/>
+                        <listcell label="@load(each.scsj)"/>
+                        <listcell label="@load(each.inboundDate)"/>
+                        <listcell label="@load(each.fcsj)"/>
+                        <listcell label="@load(each.production)"/>
+                        <listcell label="@load(each.productCategory)"/>
+                        <listcell label="@load(each.productName)"/>
+                        <listcell label="@load(each.absVsn)"/>
+                        <listcell label="@load(each.vehicleType1)"/>
+                        <listcell label="@load(each.zycphs)"/>
+                        <listcell label="@load(each.syjys)"/>
+                        <listcell label="@load(each.scjh)"/>
+                        <listcell label="@load(each.scrus)"/>
+                        <listcell label="@load(each.cncpkc)"/>
+                        <listcell label="@load(each.fcs)"/>
+
+                    </listitem>
+                </template>
+            </listbox>
+            <paging
+                    pageSize="@bind(vm.pageResult.pageSize)"
+                    totalSize="@bind(vm.pageResult.total)"
+                    pageIncrement="1"
+                    detailed="true"
+                    activePage="@bind(vm.pageResult.page)"
+                    onPaging="@command('gotoPageNo',e=event)"
+            />
+        </vlayout>
+    </center>
+</borderlayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
